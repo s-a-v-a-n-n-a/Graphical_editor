@@ -1,1 +1,1 @@
-# Graphical_editor
+# Graphical Editor
