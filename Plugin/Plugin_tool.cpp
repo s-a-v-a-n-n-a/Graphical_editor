@@ -1,11 +1,13 @@
 #include "Plugin_tool.hpp"
 
-Plugin_tool::Plugin_tool(const PPluginInterface *par_plugin, const PAppInterface *interface, void *par_handle)
-: Tool(), Plugin(par_handle, par_plugin)
+Plugin_tool::Plugin_tool(const PPluginInterface *par_plugin, const PAppInterface *interface, void *par_handle, const char *name)
+: Tool(name), Plugin(par_handle, par_plugin)
 {
-	PPluginStatus result = plugin->general.init(interface);
-	if (result != PPS_OK)
-		printf("Could not initialize plugin tool\n");
+	// PPluginStatus result = plugin->general.init(interface);
+	// printf("[Application message]: initialization ended\n");	
+	// if (result != PPS_OK)
+	// 	printf("Could not initialize plugin tool\n");
+	;
 } 
 
 Plugin_tool::~Plugin_tool()

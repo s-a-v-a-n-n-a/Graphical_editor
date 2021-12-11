@@ -12,7 +12,7 @@ class Plugin_tool : public Plugin, public Tool
 private:
 
 public:
-	Plugin_tool(const PPluginInterface *par_plugin, const PAppInterface *interface, void *par_handle);
+	Plugin_tool(const PPluginInterface *par_plugin, const PAppInterface *interface, void *par_handle, const char *name = nullptr);
 	~Plugin_tool();
 
 	void on_mouse_move(const Vector_ll &from, const Vector_ll &to) override;

@@ -49,6 +49,8 @@ FILES   	= $(OBJ)main.o \
 			$(OBJ)Editor/Dialog_window.o \
 			$(OBJ)Editor/Tools_window.o \
 			$(OBJ)Editor/Search_box.o \
+			$(OBJ)Editor/Menu.o \
+			$(OBJ)Editor/Effects/Canvas_effects_manager.o \
 			$(OBJ)Plugin/Plugin_manager.o \
 			$(OBJ)Plugin/Plugin_tool.o \
 			$(OBJ)Plugin/Plugin_effect.o \

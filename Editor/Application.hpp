@@ -10,6 +10,7 @@
 
 // ?????????????
 #include "../Plugin/Plugin_manager.hpp"
+#include "Effects/Canvas_effects_manager.hpp"
 // #include "../Plugin/plugin_std.hpp"
 
 extern const size_t DEFAULT_SIZE;
@@ -34,6 +35,7 @@ private:
 	static Application_destroyer destroyer;
 
 	Plugin_manager *plugins;
+	Effect_manager *effects;
 	
 	Visual_object *current_main;
 	Visual_object *default_main;
@@ -51,7 +53,10 @@ public:
 	static Application *get_app();
 
 	void add_plugin(const char *plugin_name);
+	void add_effect(Effect<Canvas> *effect);
+	
 	Plugin_manager *get_plugins();
+	Effect_manager *get_effects();
 
 	size_t get_time();
 	

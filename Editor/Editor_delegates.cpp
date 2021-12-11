@@ -65,6 +65,48 @@ bool Canvas_keeper::on_mouse_click(const size_t par_x, const size_t par_y)
 
 // -----------------------------------------------------------------------------------------------------------------
 
+bool Effect_applier::on_mouse_click(const size_t par_x, const size_t par_y)
+{
+	printf("pressed\n");
+
+	pressed = true;
+	return true;
+}
+
+bool Effect_applier::on_mouse_release()
+{
+	if (pressed)
+	{
+		printf("applied\n");
+		effect->apply();
+	}
+
+	pressed = false;
+	return true;
+}
+
+// ----------------------------------------------------------------------------------------------------------------
+
+bool Animating_effect_applier::on_mouse_click(const size_t par_x, const size_t par_y)
+{
+	Effect_applier::on_mouse_click(par_x, par_y);
+	return Animating::on_mouse_click(par_x, par_y);
+}
+
+bool Animating_effect_applier::on_mouse_release()
+{
+	Effect_applier::on_mouse_release();
+	return Animating::on_mouse_release();
+}
+
+bool Animating_effect_applier::on_mouse_move(const Vector_ll from, const Vector_ll to)
+{
+	return Animating::on_mouse_move(from, to);
+}
+
+
+// ----------------------------------------------------------------------------------------------------------------
+
 bool Red_component_changer::on_mouse_click(const size_t par_x, const size_t par_y)
 {
 	// (Canvas*)to_change->set_red(par_x, par_y);

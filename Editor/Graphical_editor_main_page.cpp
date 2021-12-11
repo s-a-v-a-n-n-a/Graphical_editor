@@ -27,7 +27,7 @@ const size_t TOOLS_BAR_HEIGHT = 600;
 const size_t DEFAULT_CANVAS_POS_X = THICKNESS_WINDOW_WIDTH;
 const size_t DEFAULT_CANVAS_POS_Y = INCREASED_BUTTON_HEIGHT;
 
-const size_t DEFAULT_BUTTON_WIDTH = 200;
+// const size_t DEFAULT_BUTTON_WIDTH = 200;
 
 const size_t DEFAULT_TEXT_OFFSET = 20;
 
@@ -40,6 +40,7 @@ const char SLIDER_TEXT[]     = " SLIDER ";
 const char TOOLS_TEXT[]      = " TOOLS ";
 const char PLUGINS_TEXT[]    = " NEW PLUGIN ";
 const char OPEN_IMAGE[]		 = " OPEN IMAGE ";
+const char EFFECTS_TEXT[]	 = " EFFECTS ";
 
 Graphical_editor_main_page::Graphical_editor_main_page(const Visual_object::Config &par_base)
 : Visual_object(par_base)
@@ -101,6 +102,10 @@ Graphical_editor_main_page::Graphical_editor_main_page(const Visual_object::Conf
     current_button_size = get_text_length(GHOST_TYPE, OPEN_IMAGE, INCREASED_BUTTON_HEIGHT / 2);
     create_plugin_info_button(panel, OPEN_IMAGE, current_button_size + DEFAULT_TEXT_OFFSET * 2, INCREASED_BUTTON_HEIGHT);
 
+    current_button_size = get_text_length(GHOST_TYPE, EFFECTS_TEXT, INCREASED_BUTTON_HEIGHT / 2);
+    Menu *menu = create_menu({0, 0}, DEFAULT_BUTTON_WIDTH, 500);
+    Button *dc_button = create_double_click_restore_button(panel, menu, EFFECTS_TEXT, current_button_size + DEFAULT_TEXT_OFFSET * 2, INCREASED_BUTTON_HEIGHT);
+    menu->set_position(dc_button->get_position() + Vector_ll(0, dc_button->get_height()));
     // test
     // create_test_button(par_position + Vector_ll(0, 1000), "", 300, 300);
 
@@ -111,7 +116,7 @@ Button *Graphical_editor_main_page::create_plugin_info_button(Button_manager *pa
 {
 	Animating_texture *texture = Resources::get_instance()->create_texture(SIMPLE_BUTTON, width, height, SIMPLE_BUTTON_MOVE, nullptr);
 	
-	Button *button = panel->add_button(NULL, text, texture, width, height);
+	Button *button = panel->add_button(NULL, text, texture, TRANSPARENT, width, height);
 	Animating_plugin_input_creator *delegate = new Animating_plugin_input_creator({300, 300}, button);
 	button->set_delegate(delegate);
 
@@ -192,6 +197,33 @@ Brush_size_selection_window *Graphical_editor_main_page::create_size_vidget(cons
 	return tools_vidget;
 }
 
+Menu *Graphical_editor_main_page::create_menu(const Vector_ll &position, const size_t width, const size_t height)
+{
+	Menu *menu = new Menu({(size_t)Vidget_type::MENU, position, nullptr, TRANSPARENT, width, height});
+	add_visual_object(menu);
+
+	menu->set_visible(false);
+	menu->set_reactive(false);
+
+	return menu;
+}
+
+Button *Graphical_editor_main_page::create_double_click_restore_button(Button_manager *panel, Visual_object *to_restore, const char *text, const size_t width, const size_t height)
+{
+	// Animating_texture *texture = Resources::get_instance()->create_texture(SIMPLE_BUTTON, width, height, SIMPLE_BUTTON_MOVE, nullptr);
+	Animating_texture *texture = Resources::get_instance()->create_texture(SIMPLE_BUTTON, width, height, SIMPLE_BUTTON_MOVE, nullptr);
+
+	Animating_double_click_restore_delegate *restore = new Animating_double_click_restore_delegate(to_restore, NULL);
+    
+    Button *restore_button = panel->add_button(restore, text, texture, TRANSPARENT, width, height);
+    if (restore_button)
+    	restore->set_animating(restore_button);
+    else
+    	delete restore;
+
+    return restore_button;
+}
+
 Button *Graphical_editor_main_page::create_restore_button(Button_manager *panel, Visual_object *to_restore, const char *text, const size_t width, const size_t height)
 {
 	// Animating_texture *texture = Resources::get_instance()->create_texture(SIMPLE_BUTTON, width, height, SIMPLE_BUTTON_MOVE, nullptr);
@@ -199,7 +231,7 @@ Button *Graphical_editor_main_page::create_restore_button(Button_manager *panel,
 
 	Animating_restore_delegate *restore = new Animating_restore_delegate(to_restore, NULL);
     
-    Button *restore_button = panel->add_button(restore, text, texture, width, height);
+    Button *restore_button = panel->add_button(restore, text, texture, TRANSPARENT, width, height);
     if (restore_button)
     	restore->set_animating(restore_button);
     else
@@ -215,7 +247,7 @@ Button *Graphical_editor_main_page::create_canvas_creator(Button_manager *panel,
 
     Animating_create_canvas *canvas_creator = new Animating_create_canvas(canvas_manager, NULL);
 	
-	Button *canvas_controller = panel->add_button(canvas_creator, text, canvas_create_texture, width, height);
+	Button *canvas_controller = panel->add_button(canvas_creator, text, canvas_create_texture, TRANSPARENT, width, height);
 	if (canvas_controller)
 		canvas_creator->set_animating(canvas_controller);
 	else

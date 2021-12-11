@@ -48,6 +48,8 @@ public:
 	void set_animating(Visual_object *par_to_animate);
 };
 
+// -------------------------------------------------------------------------------------------------------------------------
+
 class Restore_delegate : virtual public Button_delegate
 {
 private:
@@ -57,6 +59,34 @@ public:
 	Restore_delegate(Visual_object *par_to_restore);
 
 	bool on_mouse_click(const size_t par_x, const size_t par_y) override;
+	bool on_mouse_release() override;
+};
+
+// -------------------------------------------------------------------------------------------------------------------------
+
+class Double_click_restore_delegate : virtual public Button_delegate
+{
+protected:
+	Visual_object *to_restore;
+
+	bool clicked_once;
+
+public:
+	Double_click_restore_delegate(Visual_object *par_to_restore);
+
+	bool on_mouse_click(const size_t par_x, const size_t par_y) override;
+	bool on_mouse_release() override;
+};
+
+// --------------------------------------------------------------------------------------------------------------------------
+
+class Animating_double_click_restore_delegate : public Double_click_restore_delegate, public Animating
+{
+public:
+	Animating_double_click_restore_delegate(Visual_object *par_to_restore, Visual_object *par_to_interact);
+
+	bool on_mouse_click(const size_t par_x, const size_t par_y) override;
+	bool on_mouse_move(const Vector_ll from, const Vector_ll to) override;
 	bool on_mouse_release() override;
 };
 

@@ -13,10 +13,10 @@ Window_control_panel::Window_control_panel(const Visual_object::Config &par_base
 	Drag_and_drop_delegate *drag_and_drop = new Drag_and_drop_delegate(whose);
 
 
-	panel->add_button(drag_and_drop, "", TRANSPARENT, get_width() - get_height(), get_height()); //  - roll_up_texture->get_width() 
+	panel->add_button(drag_and_drop, "", nullptr, TRANSPARENT, get_width() - get_height(), get_height()); //  - roll_up_texture->get_width() 
 
 	// Roll_up_delegate *rolling_up = new Roll_up_delegate(whose);
-	Button *roll = panel->add_button(nullptr, "", close_texture, get_height(), get_height());
+	Button *roll = panel->add_button(nullptr, "", close_texture, TRANSPARENT, get_height(), get_height());
 	Animating_roll_up_delegate *rolling_up = new Animating_roll_up_delegate(whose, roll);
 	if (roll)
 		roll->set_delegate(rolling_up);
@@ -55,9 +55,9 @@ Closing_window_control_panel::Closing_window_control_panel(const Visual_object::
 	Drag_and_drop_delegate *drag_and_drop = new Drag_and_drop_delegate(whose);
 
 
-	panel->add_button(drag_and_drop, "", TRANSPARENT, get_width() - get_height(), get_height()); //  - roll_up_texture->get_width() 
+	panel->add_button(drag_and_drop, "", nullptr, TRANSPARENT, get_width() - get_height(), get_height()); //  - roll_up_texture->get_width() 
 
-	Button *close = panel->add_button(nullptr, "", close_texture, get_height(), get_height());
+	Button *close = panel->add_button(nullptr, "", close_texture, TRANSPARENT, get_height(), get_height());
 	Animating_close_delegate *closing = new Animating_close_delegate(whose, close);
 	if (close)
 		close->set_delegate(closing);

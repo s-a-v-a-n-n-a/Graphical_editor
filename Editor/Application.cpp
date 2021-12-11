@@ -15,11 +15,13 @@ Application::Application()
 	current_main = default_main;
 
     plugins = new Plugin_manager();
+    effects = new Effect_manager();
 }
 
 Application::~Application()
 {
 	delete plugins;
+    delete effects;
 
     delete graphics_wrapper;
 	delete default_main;
@@ -66,9 +68,19 @@ void Application::add_plugin(const char *plugin_name)
     plugins->add_plugin(plugin_name);
 }
 
+void Application::add_effect(Effect<Canvas> *effect)
+{
+    effects->add_effect(effect);
+}
+
 Plugin_manager *Application::get_plugins()
 {
     return plugins;
+}
+
+Effect_manager *Application::get_effects()
+{
+    return effects;
 }
 
 void Application::add_visual_object(Visual_object *object)
@@ -107,7 +119,9 @@ void Application::tick()
 
 void Application::launch()
 {
-	Vector_ll click_place(0, 0);
+	plugins->load_from_dir("Plugins_self/");
+
+    Vector_ll click_place(0, 0);
 
 	bool open = true;
     Event result = { Event_type::NO_EVENT, 0, 0 };
@@ -119,7 +133,6 @@ void Application::launch()
         do
         {
             result = graphics_wrapper->event_handler.detect_event(graphics_wrapper->window, graphics_wrapper->event);
-        
 
             switch (result.type)
             {

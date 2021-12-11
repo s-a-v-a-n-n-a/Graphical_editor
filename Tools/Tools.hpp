@@ -24,8 +24,8 @@ protected:
 	char *name;
 
 public:
-	Tool();
 	Tool(const char *par_name);
+	Tool();
 	virtual ~Tool();
 
 	virtual void set_color(const Color &par_color) { color = par_color; }

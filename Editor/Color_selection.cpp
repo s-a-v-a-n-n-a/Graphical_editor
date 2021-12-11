@@ -3,7 +3,8 @@
 Color_selection_window::Color_selection_window(const Visual_object::Config &par_base, const Color &color)
 : Visual_object(par_base), chosen_color(color)
 {
-	size_t picker_size = (get_width() - 20) * 3 / 4;
+	size_t picker_size = (get_height() - 20); // * 3 / 4;
+	picker_size = get_width() < picker_size ? get_width() : picker_size;
 	HSV hsv = get_hsv(color);
     Color picker_color = RED;
     if (hsv.h != 0)
@@ -36,3 +37,11 @@ Color_selection_window::create_gradient_bar(const Vector_ll &position, const siz
 
 	return gradient;
 }
+
+bool Color_selection_window::on_mouse_click(const bool state, const size_t par_x, const size_t par_y)
+{
+	printf("[Color_selection_window] : clicked\n");
+
+	return Visual_object::on_mouse_click(state, par_x, par_y);
+}
+

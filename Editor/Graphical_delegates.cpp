@@ -199,6 +199,71 @@ bool Restore_delegate::on_mouse_release()
 	return true;
 }
 
+// Double click restore_delegate
+// ---------------------------------------------------------------------------------------------------------
+Double_click_restore_delegate::Double_click_restore_delegate(Visual_object *par_to_restore)
+: to_restore(par_to_restore), clicked_once(false)
+{
+	;
+}
+
+bool Double_click_restore_delegate::on_mouse_click(const size_t par_x, const size_t par_y)
+{
+	// to_restore->set_visible(true);
+	// to_restore->set_reactive(true);
+	if (!clicked_once)
+		clicked_once = true;
+	else
+		clicked_once = false;
+
+	return true;
+}
+
+bool Double_click_restore_delegate::on_mouse_release()
+{
+	if (clicked_once)
+	{
+		to_restore->set_visible(true);
+		to_restore->set_reactive(true);
+	}
+	else
+	{
+		to_restore->set_visible(false);
+		to_restore->set_reactive(false);
+	}
+
+	return true;
+}
+
+// ---------------------------------------------------------------------------------------------------------
+
+Animating_double_click_restore_delegate::Animating_double_click_restore_delegate(Visual_object *par_to_restore, Visual_object *par_to_interact)
+: Double_click_restore_delegate(par_to_restore), Animating(par_to_interact) {}
+
+bool Animating_double_click_restore_delegate::on_mouse_click(const size_t par_x, const size_t par_y)
+{
+	Double_click_restore_delegate::on_mouse_click(par_x, par_y);
+	return Animating::on_mouse_click(par_x, par_y);
+}
+
+bool Animating_double_click_restore_delegate::on_mouse_release()
+{
+	bool result = Double_click_restore_delegate::on_mouse_release();
+	if (clicked_once)
+		return Animating::on_mouse_release();
+	else
+		return result;
+}
+
+bool Animating_double_click_restore_delegate::on_mouse_move(const Vector_ll from, const Vector_ll to)
+{
+	bool result = false;
+	if (!clicked_once)
+		return Animating::on_mouse_move(from, to);
+	else
+		return result;
+}
+
 // ---------------------------------------------------------------------------------------------------------
 
 // Animating_restore_delegate

@@ -35,13 +35,13 @@ Canvas::Canvas(const Visual_object::Config &par_base) //, Pencil *par_pencil
 
 void Canvas::draw_point(const size_t par_x, const size_t par_y)
 {
-	set_applied(false);
+	// set_applied(false);
 
-	size_t width  = get_width();
-	size_t height = get_height();
+	// size_t width  = get_width();
+	// size_t height = get_height();
 
-	size_t position_x = get_position().get_x();
-	size_t position_y = get_position().get_y();
+	// size_t position_x = get_position().get_x();
+	// size_t position_y = get_position().get_y();
 
 	// size_t y_coord = position_y + get_height() - (par_y - position_y);
 
@@ -179,12 +179,16 @@ bool Canvas::on_mouse_click (const bool state, const size_t par_x, const size_t 
 		set_applied(false);
 		current_tool->on_mouse_press(get_drawing(), Vector_ll(get_width(), get_height()), Vector_ll(par_x, par_y) - get_position());
 		make_drawing();
+
+		set_drawing_state(true);
 	}
 	else if (!state)
 	{
 		set_applied(false);
 		current_tool->on_mouse_release(Vector_ll(par_x, par_y) - get_position());
 		make_drawing();
+
+		set_drawing_state(false);
 	}
 
 	return true;
@@ -193,7 +197,7 @@ bool Canvas::on_mouse_click (const bool state, const size_t par_x, const size_t 
 bool Canvas::on_mouse_move(const Vector_ll from, const Vector_ll to)
 {
 	Tool *current_tool = Toolbar::get_instance()->get_active_tool();
-	if (point_inside(to.get_x(), to.get_y()))
+	if (point_inside(to.get_x(), to.get_y()) && drawing_state)
 	{
 		set_applied(false);
 		current_tool->on_mouse_move(from - get_position(), to - get_position());
@@ -204,6 +208,7 @@ bool Canvas::on_mouse_move(const Vector_ll from, const Vector_ll to)
 	else
 	{
 		current_tool->on_mouse_release(from - get_position());
+		set_drawing_state(false);
 		return false;
 	}
 }

@@ -25,6 +25,8 @@ public:
 	Color_picker *get_color_picker() { return picker; }
 	Gradient_bar *get_gradient_bar() { return gradient_bar; }
 
+	bool on_mouse_click(const bool state, const size_t par_x, const size_t par_y) override; //const Mouse_event par_event,
+
 	Color get_color() { return chosen_color; }
 };
 

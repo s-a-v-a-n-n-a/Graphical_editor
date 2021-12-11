@@ -5,7 +5,7 @@
 Tools_window::Tools_window(const Visual_object::Config &par_base)
 : Window(par_base)
 {
-	text_size = 10;
+	text_size = 50;
 	icon_size = get_width()/3;
 	icons_in_line = 3;
 
@@ -21,13 +21,17 @@ Tools_window::Tools_window(const Visual_object::Config &par_base)
 			{
 				create_pick_button(get_position() + Vector_ll(icon_size * j, y_offset), icon_size, icon_size, TOOLS_BUTTONS[i + j], ACTIVE_TOOLS_BUTTONS[i + j], tools[i + j]);
 				// maybe create plugin name?
+				// if (tools[i]->get_name())
+				// {
+
+				// }
 			}
 		}
 
-		y_offset += icon_size;
+		y_offset += icon_size + text_size;
 	}
 	if (default_tools_amount % 3)
-		y_offset -= icon_size;	
+		y_offset -= icon_size + text_size;	
 
 	Animating_texture *color_texture = Resources::get_instance()->create_texture(COLOR_BUTTON, icon_size, icon_size, ACTIVE_COLOR_BUTTON, NULL);
 
@@ -50,6 +54,12 @@ Button *Tools_window::create_pick_button(const Vector_ll &position, const size_t
 
 	add_visual_object(pick_button);
 
+	if (tool->get_name())
+	{
+		Button *text_button = new Button({(size_t)Vidget_type::BUTTON, position + Vector_ll(0, height), nullptr, TRANSPARENT, width, text_size}, nullptr, tool->get_name());
+		add_visual_object(text_button);
+	}
+
 	return pick_button;
 }
 
@@ -57,13 +67,19 @@ void Tools_window::add_tool(Tool *tool)
 {
 	Animating_texture *texture = Resources::get_instance()->create_texture(UNKNOWN_TOOL, icon_size, icon_size, UNKNOWN_TOOL_ACTIVE, NULL);
 
-	Vector_ll position = get_position() + Vector_ll((tools_amount % icons_in_line) * icon_size, DEFAULT_BUTTON_HEIGHT + (tools_amount / icons_in_line) * icon_size);
+	Vector_ll position = get_position() + Vector_ll((tools_amount % icons_in_line) * icon_size, DEFAULT_BUTTON_HEIGHT + (tools_amount / icons_in_line) * (icon_size + text_size));
 
 	Button *pick_button = new Button({(size_t)Vidget_type::BUTTON, position, texture, TRANSPARENT, icon_size, icon_size}, NULL, "");
 	Animating_pick_tool *picker = new Animating_pick_tool(tool, pick_button); // &tools,
 	pick_button->set_delegate(picker); 
 
 	add_visual_object(pick_button);
+
+	if (tool->get_name())
+	{
+		Button *text_button = new Button({(size_t)Vidget_type::BUTTON, position + Vector_ll(0, icon_size), nullptr, TRANSPARENT, icon_size, text_size}, nullptr, tool->get_name());
+		add_visual_object(text_button);
+	}
 
 	tools_amount++;
 }

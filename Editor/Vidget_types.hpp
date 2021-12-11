@@ -24,6 +24,7 @@ enum class Vidget_type
 	MAGNETIC,
 	SEARCH_BOX,
 	DIALOG,
+	MENU,
 	MANAGER,
 	EDITOR
 };

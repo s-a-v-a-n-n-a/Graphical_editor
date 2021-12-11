@@ -9,6 +9,7 @@
 
 const Color DEFAULT_TEXT_COLOR = BLACK;
 extern const size_t DEFAULT_BUTTON_HEIGHT;
+extern const size_t DEFAULT_BUTTON_WIDTH;
 extern const size_t INCREASED_BUTTON_HEIGHT;
 
 class Button : public Visual_object

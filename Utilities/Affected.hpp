@@ -73,7 +73,8 @@ public:
 		size_t effects_amount = effects.get_length();
 		for (size_t i = 0; i < effects_amount; ++i)
 		{
-			effects.get_array()[i]->apply();
+			if (effects.get_array()[i]->get_appliable())
+				effects.get_array()[i]->apply();
 		}
 
 		set_applied(true);

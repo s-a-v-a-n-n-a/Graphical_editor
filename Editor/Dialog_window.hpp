@@ -3,8 +3,12 @@
 
 #include "Window.hpp"
 #include "Color_selection.hpp"
+// #include "Search_box.hpp"
 #include "../GUI/Input_string.hpp"
 #include "../GUI/Slider.hpp"
+
+extern const size_t MIN_INPUT_STRING_HEIGHT;
+extern const size_t MIN_SLIDER_HEIGHT;
 
 class Dialog : public Window
 {

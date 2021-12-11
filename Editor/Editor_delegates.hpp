@@ -11,6 +11,8 @@ class Canvas_keeper;
 #include "Effects/Canvas_effects.hpp"
 #include "Search_box.hpp"
 
+#include "../Utilities/Effect.hpp"
+
 class Create_canvas : virtual public Button_delegate
 {
 private:
@@ -60,7 +62,7 @@ public:
 
 // -------------------------------------------------------------------------------------------------
 
-class Effect_changer : public Button_delegate
+class Effect_changer : virtual public Button_delegate
 {
 protected:
 	// Canvas *to_change;
@@ -75,6 +77,41 @@ public:
 
 	bool on_mouse_click(const size_t par_x, const size_t par_y) override { return false; }
 	bool on_mouse_move(const Vector_ll from, const Vector_ll to) override { return false; }
+};
+
+// -------------------------------------------------------------------------------------------------
+
+class Effect_applier : public Effect_changer
+{
+private:
+	Effect<Canvas> *effect;
+
+	bool pressed;
+
+public:
+	Effect_applier(Affected<Canvas> *par_to_change, Effect<Canvas> *par_effect)
+	: Effect_changer(par_to_change), effect(par_effect), pressed(false)
+	{
+		to_change->add_effect(effect);
+	}	
+
+	bool on_mouse_click(const size_t par_x, const size_t par_y) override;
+	bool on_mouse_release() override;
+	// bool on_mouse_move(const Vector_ll from, const Vector_ll to) override;
+};
+
+class Animating_effect_applier : public Effect_applier, public Animating
+{
+public:
+	Animating_effect_applier(Affected<Canvas> *par_to_change, Effect<Canvas> *par_effect, Visual_object *par_to_interact)
+	: Effect_applier(par_to_change, par_effect), Animating(par_to_interact)
+	{
+		// to_change->add_effect(effect);
+	}	
+
+	bool on_mouse_click(const size_t par_x, const size_t par_y) override;
+	bool on_mouse_release() override;
+	bool on_mouse_move(const Vector_ll from, const Vector_ll to) override;
 };
 
 // -------------------------------------------------------------------------------------------------

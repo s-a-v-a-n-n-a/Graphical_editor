@@ -51,6 +51,8 @@ public:
 
 	void make_drawing();
 
+	void set_drawing_state(const bool state) { drawing_state = state; }
+
 	void draw(Screen_information *screen) override;
 	bool point_inside (const size_t par_x, const size_t par_y) override;
 	bool on_mouse_click(const bool state, const size_t par_x, const size_t par_y) override; // const Mouse_event par_event, 

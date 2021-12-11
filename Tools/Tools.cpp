@@ -10,11 +10,17 @@ Tool::Tool()
 Tool::Tool(const char *par_name)
 : pressed(false), data_params(0, 0), data(nullptr), name(nullptr)
 {
-	size_t name_size = strlen(par_name);
+	if (par_name)
+	{
+		size_t name_size = strlen(par_name);
+	
+		name = new char[name_size + 1];
+		strncpy(name, par_name, name_size);
+		name[name_size] = 0;
+	}
 
-	name = new char[name_size + 1];
-	strncpy(name, par_name, name_size);
-	name[name_size] = 0;
+	color = DEFAULT_TOOL_COLOR;
+	size = DEFAULT_TOOL_SIZE;
 }
 
 Tool::~Tool()

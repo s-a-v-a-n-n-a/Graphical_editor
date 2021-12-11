@@ -22,6 +22,8 @@ public:
 
 	void update_text(char *new_text);
 
+	char *get_message() { return field->get_message(); }
+
 	void draw(Screen_information *screen) override;
 	bool on_mouse_click(const bool state, const size_t par_x, const size_t par_y) override;
 };

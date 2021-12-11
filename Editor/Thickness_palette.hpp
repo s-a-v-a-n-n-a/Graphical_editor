@@ -24,16 +24,16 @@ public:
     	Full_texture *texture = Resources::get_instance()->create_texture(TEXT_TEXTURE, DEFAULT_BUTTON_HEIGHT, DEFAULT_BUTTON_HEIGHT);
     	// offset += texture->get_width();
 
-    	panel->add_button(change_thickness_1, "1", texture, get_width()/4, get_width()/4);
+    	panel->add_button(change_thickness_1, "1", texture, TRANSPARENT, get_width()/4, get_width()/4);
 
     	Change_thickness *change_thickness_5 = new Change_thickness(5);
-    	panel->add_button(change_thickness_5, "5", texture, get_width()/4, get_width()/4);
+    	panel->add_button(change_thickness_5, "5", texture, TRANSPARENT, get_width()/4, get_width()/4);
 
     	Change_thickness *change_thickness_10 = new Change_thickness(10);
-    	panel->add_button(change_thickness_10, "10", texture, get_width()/4, get_width()/4);
+    	panel->add_button(change_thickness_10, "10", texture, TRANSPARENT, get_width()/4, get_width()/4);
 
     	Change_thickness *change_thickness_20 = new Change_thickness(20);
-    	panel->add_button(change_thickness_20, "20", texture, get_width()/4, get_width()/4);
+    	panel->add_button(change_thickness_20, "20", texture, TRANSPARENT, get_width()/4, get_width()/4);
 		
 		add_visual_object(panel);
 	}

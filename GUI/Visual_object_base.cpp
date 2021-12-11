@@ -122,7 +122,7 @@ bool Visual_object::on_mouse_click(const bool state, const size_t par_x, const s
 			result = true;
 
 			// if (state)
-				break;
+			break;
 		}
 
 		set_active_state(false);

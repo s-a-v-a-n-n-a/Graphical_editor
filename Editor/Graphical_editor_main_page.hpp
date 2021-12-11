@@ -16,6 +16,7 @@
 #include "Effects_window.hpp"
 #include "Thickness_window.hpp"
 #include "Tools_window.hpp"
+#include "Menu.hpp"
 #include "../GUI/Input_string.hpp"
 
 #include "Test.hpp"
@@ -52,6 +53,8 @@ public:
 	Button_manager *create_button_panel(const Vector_ll &position, const size_t width, const size_t height);
 	Canvas_manager_manager *create_canvas_manager(const Vector_ll &position, const size_t width, const size_t height);
 	Button *create_restore_button(Button_manager *panel, Visual_object *to_restore, const char *text, const size_t width, const size_t height);
+	Menu *create_menu(const Vector_ll &position, const size_t width, const size_t height);
+	Button *create_double_click_restore_button(Button_manager *panel, Visual_object *to_restore, const char *text, const size_t width, const size_t height);
 	Button *create_canvas_creator(Button_manager *panel, Canvas_manager_manager *canvas_manager, const char *text, const size_t width, const size_t height);
 	Color_selection_window *create_color_vidget(const Vector_ll &position, const size_t width, const size_t height);
 	Brush_size_selection_window *create_size_vidget(const Vector_ll &position, const size_t width, const size_t height);
