@@ -16,7 +16,7 @@ Color_picker::Color_picker(const Visual_object::Config &par_base, const Color &p
     HSV hsv = get_hsv(*par_to_set);
 	current_position = Vector_ll(((double)(hsv.s))/255.0 * ((double)get_width()), (255.0 - (double)hsv.v)/255.0 * ((double)get_height()));
 
-	Visual_object::Config buttton_base = { (size_t)Vidget_type::BUTTON, get_position() + current_position - Vector_ll(circle_width, 0), circle, TRANSPARENT, circle_width, circle_height };
+	Visual_object::Config buttton_base = { this, (size_t)Vidget_type::BUTTON, get_position() + current_position - Vector_ll(circle_width, 0), circle, TRANSPARENT, circle_width, circle_height };
 	picker = new Magnetic(buttton_base, this, get_position(), get_position() + Vector_ll(get_width(), get_height()) - Vector_ll(circle_width, circle_height));
 	
 	add_visual_object(picker);

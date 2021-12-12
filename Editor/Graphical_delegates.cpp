@@ -225,6 +225,8 @@ bool Double_click_restore_delegate::on_mouse_release()
 	{
 		to_restore->set_visible(true);
 		to_restore->set_reactive(true);
+
+		to_restore->get_parent()->set_active(to_restore);
 	}
 	else
 	{

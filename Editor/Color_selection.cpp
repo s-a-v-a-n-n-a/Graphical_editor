@@ -11,14 +11,14 @@ Color_selection_window::Color_selection_window(const Visual_object::Config &par_
     	picker_color = get_rgb({hsv.h, 255, 255});
 
 
-	picker = create_color_picker(get_position() + Vector_ll(10, 20), get_width() - 20, picker_size, picker_color);// new Color_picker((size_t)Vidget_type::COLOR_PICKER, par_position + Vector_ll(10, (offset + 30)), TRANSPARENT, MAX_COLOR_VALUE, MAX_COLOR_VALUE, par_pencil);
+	picker = create_color_picker(get_position() + Vector_ll(10, 20), get_width() - 20, picker_size, picker_color);// new Color_picker(this, (size_t)Vidget_type::COLOR_PICKER, par_position + Vector_ll(10, (offset + 30)), TRANSPARENT, MAX_COLOR_VALUE, MAX_COLOR_VALUE, par_pencil);
     gradient_bar = create_gradient_bar(get_position() + Vector_ll(10, 0), get_width() - 20, 20, picker, hsv);// 
 }
 
 Color_picker *
 Color_selection_window::create_color_picker(const Vector_ll &position, const size_t width, const size_t height, const Color &color)
 {
-	Visual_object::Config picker_base = { (size_t)Vidget_type::COLOR_PICKER, position, nullptr, TRANSPARENT, width, height };
+	Visual_object::Config picker_base = { this, (size_t)Vidget_type::COLOR_PICKER, position, nullptr, TRANSPARENT, width, height };
 
 	Color_picker *picker = new Color_picker(picker_base, color, &chosen_color);
 	add_visual_object(picker);
@@ -30,7 +30,7 @@ Gradient_bar *
 Color_selection_window::create_gradient_bar(const Vector_ll &position, const size_t width, const size_t height, Color_picker *picker, const HSV &hsv)
 {
 	Full_texture *texture = Resources::get_instance()->create_texture(GRADIENT_BAR_TEXTURE, width, height);
-	Visual_object::Config gradient_base = { (size_t)Vidget_type::GRADIENT_BAR, position, texture, TRANSPARENT, width, height };
+	Visual_object::Config gradient_base = { this, (size_t)Vidget_type::GRADIENT_BAR, position, texture, TRANSPARENT, width, height };
 
     Gradient_bar *gradient = new Gradient_bar(gradient_base, picker, hsv);
 	add_visual_object(gradient);

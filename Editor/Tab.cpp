@@ -10,7 +10,7 @@ Tab::Tab(const Visual_object::Config &par_base, Visual_object *par_parent)
 
     Canvas_keeper *keep = new Canvas_keeper(parent);
     size_t button_width = get_text_length(GHOST_TYPE, " Canvas ", button_height/2);
-    Visual_object::Config keeper_base = { (size_t)Vidget_type::BUTTON,
+    Visual_object::Config keeper_base = { this, (size_t)Vidget_type::BUTTON,
                                             get_position() + Vector_ll(30, 0), // get_position() + Vector_ll(get_objects()->get_length() * 250, 0.0), 
                                             nullptr,
                                             TRANSPARENT, 
@@ -21,7 +21,7 @@ Tab::Tab(const Visual_object::Config &par_base, Visual_object *par_parent)
 
 
     Full_texture *texture = new Full_texture(CLOSE_TEXTURE, INCREASED_BUTTON_HEIGHT, INCREASED_BUTTON_HEIGHT);
-    Visual_object::Config closing_base = { (size_t)Vidget_type::BUTTON,
+    Visual_object::Config closing_base = { this, (size_t)Vidget_type::BUTTON,
                                             get_position() + Vector_ll(get_width(), 0) - Vector_ll(80, 0), // get_position() + Vector_ll(get_objects()->get_length() * 250, 0.0), 
                                             texture,
                                             TRANSPARENT, 

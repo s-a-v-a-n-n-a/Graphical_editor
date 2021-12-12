@@ -3,7 +3,7 @@
 Window_control_panel::Window_control_panel(const Visual_object::Config &par_base, Visual_object *whose)
 : Visual_object(par_base)
 {
-	Visual_object::Config panel_base = { (size_t)Vidget_type::BUTTON_MANAGER, get_position(), nullptr, TRANSPARENT, get_width(), DEFAULT_BUTTON_HEIGHT };
+	Visual_object::Config panel_base = { this, (size_t)Vidget_type::BUTTON_MANAGER, get_position(), nullptr, TRANSPARENT, get_width(), DEFAULT_BUTTON_HEIGHT };
 	Button_manager *panel = new Button_manager(panel_base);
 
 	// Full_texture *roll_up_texture = new Full_texture(ROLL_UP_TEXTURE);
@@ -47,7 +47,7 @@ Window_control_panel::~Window_control_panel()
 Closing_window_control_panel::Closing_window_control_panel(const Visual_object::Config &par_base, Visual_object *whose)
 : Visual_object(par_base)
 {
-	Visual_object::Config panel_base = { (size_t)Vidget_type::BUTTON_MANAGER, get_position(), nullptr, TRANSPARENT, get_width(), DEFAULT_BUTTON_HEIGHT };
+	Visual_object::Config panel_base = { this, (size_t)Vidget_type::BUTTON_MANAGER, get_position(), nullptr, TRANSPARENT, get_width(), DEFAULT_BUTTON_HEIGHT };
 	Button_manager *panel = new Button_manager(panel_base);
 
 	Animating_texture *close_texture = Resources::get_instance()->create_texture(CLOSE_TEXTURE, get_height(), get_height(), CLOSE_MOVE_TEXTURE, nullptr);

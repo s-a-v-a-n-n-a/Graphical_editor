@@ -28,7 +28,7 @@ public:
 
 	Spline *create_spline(const Vector_ll &position, const size_t width, const size_t height, const Color &color, Button_delegate *par_delegate, Vector_ll high_limit, Vector_ll low_limit)
 	{
-		Visual_object::Config spline_base = { (size_t)Vidget_type::SPLINE, 
+		Visual_object::Config spline_base = { this, (size_t)Vidget_type::SPLINE, 
 												position, 
 												nullptr, 
 												color,

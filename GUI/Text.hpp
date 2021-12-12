@@ -27,8 +27,8 @@ private:
 	bool centered;
 
 public:
-	Text(const size_t par_type, const char *par_text, const size_t par_font_size, const Vector_ll &par_position, const Color &par_color, const bool par_centered = true)
-	: Visual_object({par_type, par_position, nullptr, par_color, strlen(par_text), par_font_size}), centered(par_centered)
+	Text(Visual_object *parent, const size_t par_type, const char *par_text, const size_t par_font_size, const Vector_ll &par_position, const Color &par_color, const bool par_centered = true)
+	: Visual_object({parent, par_type, par_position, nullptr, par_color, strlen(par_text), par_font_size}), centered(par_centered)
 	{
 		set_color(par_color);
 

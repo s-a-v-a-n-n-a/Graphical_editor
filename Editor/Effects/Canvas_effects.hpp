@@ -21,7 +21,7 @@ public:
 		}
 	}
 
-	~Red_effect();
+	// ~Red_effect();
 
 	void set_red(const unsigned char from, const unsigned char to)
 	{
@@ -77,7 +77,7 @@ public:
 		}
 	}
 
-	~Green_effect();
+	// ~Green_effect();
 
 	void set_green(const unsigned char from, const unsigned char to)
 	{
@@ -133,7 +133,7 @@ public:
 		}
 	}
 
-	~Blue_effect();
+	// ~Blue_effect();
 
 	void set_blue(const unsigned char from, const unsigned char to)
 	{

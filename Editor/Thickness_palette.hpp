@@ -16,7 +16,7 @@ public:
 		// ATTENTION
 		// MAGIC
 		// ------------------------------------------------------------------------
-		Visual_object::Config panel_base = { (size_t)Vidget_type::BUTTON_MANAGER, get_position(), nullptr, TRANSPARENT, get_width(), DEFAULT_BUTTON_HEIGHT };
+		Visual_object::Config panel_base = { this, (size_t)Vidget_type::BUTTON_MANAGER, get_position(), nullptr, TRANSPARENT, get_width(), DEFAULT_BUTTON_HEIGHT };
 		Button_manager *panel = new Button_manager(panel_base);
 
 	    size_t offset = 0;

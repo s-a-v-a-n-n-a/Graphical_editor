@@ -12,14 +12,14 @@ Search_box::Search_box(const Visual_object::Config &par_base)
 	field = create_input_string(get_position() + Vector_ll(offset, DEFAULT_BUTTON_HEIGHT + vertical_offset), get_width() - offset * 2, DEFAULT_BUTTON_HEIGHT);
 
 	Popup_text_confirmation *delegate = new Popup_text_confirmation(this, &message);
-	ok_button = new Button({(size_t)Vidget_type::BUTTON, get_position() + Vector_ll(offset, (DEFAULT_BUTTON_HEIGHT + vertical_offset * 5 / 2)), nullptr, GREY, get_width() - offset * 2, (DEFAULT_BUTTON_HEIGHT * 2)}, delegate, "OK");
+	ok_button = new Button({this, (size_t)Vidget_type::BUTTON, get_position() + Vector_ll(offset, (DEFAULT_BUTTON_HEIGHT + vertical_offset * 5 / 2)), nullptr, GREY, get_width() - offset * 2, (DEFAULT_BUTTON_HEIGHT * 2)}, delegate, "OK");
 	
 	add_visual_object(ok_button);
 }
 
 Input_string *Search_box::create_input_string(const Vector_ll &position, const size_t width, const size_t height)
 {
-	Input_string *input = new Input_string({(size_t)Vidget_type::INPUT_STRING, position, nullptr, WHITE, width, height});
+	Input_string *input = new Input_string({this, (size_t)Vidget_type::INPUT_STRING, position, nullptr, WHITE, width, height});
 
 	add_visual_object(input);
 	return input;

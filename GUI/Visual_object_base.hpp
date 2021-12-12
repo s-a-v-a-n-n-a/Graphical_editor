@@ -19,6 +19,8 @@ class Visual_object
 protected:
 	struct Config
 	{
+		Visual_object *parent;
+
 		const size_t type;
 
 		Vector_ll position;
@@ -65,6 +67,7 @@ public:
 
 	virtual void tick(Screen_information *screen, const double delta_time);
 
+	Visual_object 		   *get_parent()                { return base.parent; }
 	List<Visual_object*>   *get_objects()        		{ return &objects; }
 	Vector_ll  				get_position() 		const 	{ return base.position; }
 	Color         		 	get_color()    		const 	{ return base.color; }
@@ -83,7 +86,7 @@ public:
 	virtual void set_width    		(const size_t par_width)            { base.width = par_width; }
 	virtual void set_height   		(const size_t par_height)           { base.height = par_height; }
 	virtual void set_active_state   (const bool par_active)             { active = par_active; }
-	virtual void set_active  		(Visual_object *par_current_active)	{ current_active = par_current_active; }
+	virtual void set_active  		(Visual_object *par_current_active);
 	virtual void set_visible		(const bool par_visible)			{ visible = par_visible; }
 	virtual void set_reactive		(const bool par_reactive)			{ reactive = par_reactive; }
 	virtual void set_alive			(const bool par_alive)				{ alive = par_alive; }

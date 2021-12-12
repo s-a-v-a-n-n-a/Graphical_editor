@@ -6,17 +6,17 @@ const size_t DEFAULT_DOT_SIZE = 20;
 Spline::Spline(const Visual_object::Config &par_base, Button_delegate *par_delegate, const Vector_ll &par_high_limit, const Vector_ll &par_low_limit)
 : Visual_object(par_base), first(nullptr), last(nullptr), points(get_width(), 0), delegate(par_delegate), high_limit(par_high_limit), low_limit(par_low_limit)
 {
-	// first = new Magnetic({(size_t)Vidget_type::BUTTON, get_position() + Vector_ll(0, get_height()) - Vector_ll(0, DEFAULT_DOT_SIZE), nullptr, BLACK, DEFAULT_DOT_SIZE, DEFAULT_DOT_SIZE}, get_position() - Vector_ll(0, DEFAULT_DOT_SIZE), get_position() + Vector_ll(0, get_height()) - Vector_ll(0, DEFAULT_DOT_SIZE), DEFAULT_DOT_SIZE/2);
+	// first = new Magnetic({this, (size_t)Vidget_type::BUTTON, get_position() + Vector_ll(0, get_height()) - Vector_ll(0, DEFAULT_DOT_SIZE), nullptr, BLACK, DEFAULT_DOT_SIZE, DEFAULT_DOT_SIZE}, get_position() - Vector_ll(0, DEFAULT_DOT_SIZE), get_position() + Vector_ll(0, get_height()) - Vector_ll(0, DEFAULT_DOT_SIZE), DEFAULT_DOT_SIZE/2);
 
-	first = new Button({(size_t)Vidget_type::BUTTON, get_position() + Vector_ll(0, get_height()) - Vector_ll(0, DEFAULT_DOT_SIZE), nullptr, BLACK, DEFAULT_DOT_SIZE, DEFAULT_DOT_SIZE}, NULL, "");
+	first = new Button({this, (size_t)Vidget_type::BUTTON, get_position() + Vector_ll(0, get_height()) - Vector_ll(0, DEFAULT_DOT_SIZE), nullptr, BLACK, DEFAULT_DOT_SIZE, DEFAULT_DOT_SIZE}, NULL, "");
 	One_dim_move *left_drag = new One_dim_move(first, false);
 	first->set_delegate(left_drag);
 
 	get_objects()->add_to_end(first);
 
 	// last = create_spline_dot(get_position() + Vector_ll(get_width(), 0) - Vector_ll(DEFAULT_DOT_SIZE, 0), DEFAULT_DOT_SIZE, DEFAULT_DOT_SIZE);
-	// last = new Magnetic({(size_t)Vidget_type::BUTTON, get_position() + Vector_ll(get_width(), 0) - Vector_ll(DEFAULT_DOT_SIZE, 0), nullptr, BLACK, DEFAULT_DOT_SIZE, DEFAULT_DOT_SIZE}, get_position() + Vector_ll(get_width(), 0) - Vector_ll(DEFAULT_DOT_SIZE, 0), get_position() + Vector_ll(get_width(), get_height()) - Vector_ll(DEFAULT_DOT_SIZE, 0), DEFAULT_DOT_SIZE/2);
-	last = new Button({(size_t)Vidget_type::BUTTON, get_position() + Vector_ll(get_width(), 0) - Vector_ll(DEFAULT_DOT_SIZE, 0), nullptr, BLACK, DEFAULT_DOT_SIZE, DEFAULT_DOT_SIZE}, NULL, "");
+	// last = new Magnetic({this, (size_t)Vidget_type::BUTTON, get_position() + Vector_ll(get_width(), 0) - Vector_ll(DEFAULT_DOT_SIZE, 0), nullptr, BLACK, DEFAULT_DOT_SIZE, DEFAULT_DOT_SIZE}, get_position() + Vector_ll(get_width(), 0) - Vector_ll(DEFAULT_DOT_SIZE, 0), get_position() + Vector_ll(get_width(), get_height()) - Vector_ll(DEFAULT_DOT_SIZE, 0), DEFAULT_DOT_SIZE/2);
+	last = new Button({this, (size_t)Vidget_type::BUTTON, get_position() + Vector_ll(get_width(), 0) - Vector_ll(DEFAULT_DOT_SIZE, 0), nullptr, BLACK, DEFAULT_DOT_SIZE, DEFAULT_DOT_SIZE}, NULL, "");
 	One_dim_move *right_drag = new One_dim_move(last, false);
 	last->set_delegate(right_drag);
 	
@@ -25,7 +25,7 @@ Spline::Spline(const Visual_object::Config &par_base, Button_delegate *par_deleg
 
 Button *Spline::create_spline_dot(const Vector_ll &position, const size_t width, const size_t height)
 {
-	Button *dot = new Button({(size_t)Vidget_type::BUTTON, position, nullptr, BLACK, width, height}, NULL, "");
+	Button *dot = new Button({this, (size_t)Vidget_type::BUTTON, position, nullptr, BLACK, width, height}, NULL, "");
 	Drag_and_drop_delegate *drag = new Drag_and_drop_delegate(dot);
 	dot->set_delegate(drag);
 

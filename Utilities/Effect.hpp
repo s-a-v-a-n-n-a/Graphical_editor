@@ -32,6 +32,12 @@ public:
 		}
 	}
 
+	virtual ~Effect() 
+	{
+		if (name)
+			delete [] name;
+	} 
+
 	void set_affected(T *other_object)
 	{
 		to_effect = other_object;

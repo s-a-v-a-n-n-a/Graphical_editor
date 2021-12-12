@@ -20,8 +20,8 @@ public:
 	Brush_size_selection_window(const Visual_object::Config &par_base)
 	: Window(par_base)
 	{
-		// Palette *palette = new Palette((size_t)Vidget_type::PALETTE, par_position + Vector_ll(0, DEFAULT_BUTTON_HEIGHT), WHITE, 300, 300, par_pencil);
-		Thickness_palette *thick_palette = new Thickness_palette({(size_t)Vidget_type::PALETTE, get_position() + Vector_ll(0, DEFAULT_BUTTON_HEIGHT), nullptr, TRANSPARENT, THICK_PALETTE_WIDTH, 40});
+		// Palette *palette = new Palette(this, (size_t)Vidget_type::PALETTE, par_position + Vector_ll(0, DEFAULT_BUTTON_HEIGHT), WHITE, 300, 300, par_pencil);
+		Thickness_palette *thick_palette = new Thickness_palette({this, (size_t)Vidget_type::PALETTE, get_position() + Vector_ll(0, DEFAULT_BUTTON_HEIGHT), nullptr, TRANSPARENT, THICK_PALETTE_WIDTH, 40});
 
 		add_visual_object(thick_palette);
 	}

@@ -88,8 +88,8 @@ bool Visual_object::point_inside(const size_t par_x, const size_t par_y)
 
 void Visual_object::move_to_end(Visual_object *child, size_t child_number)
 {
-	set_active(child);
-	child->set_active_state(true);
+	// set_active(child);
+	// child->set_active_state(true);
 	
 	// slow_delete
 	objects.extract(child_number);
@@ -117,6 +117,7 @@ bool Visual_object::on_mouse_click(const bool state, const size_t par_x, const s
 			// objects.extract(i);
 			// // push
 			// add_visual_object(get_active());
+			current_active = get_objects()->get_array()[i];
 			move_to_end(get_objects()->get_array()[i], i);
 			
 			result = true;
@@ -178,7 +179,8 @@ bool Visual_object::on_key_pressed(const bool pressed_state, const unsigned key_
 			// objects.extract(i);
 			// // push
 			// add_visual_object(get_active());
-			move_to_end(get_objects()->get_array()[i], i);
+			current_active = get_objects()->get_array()[i];
+			move_to_end(current_active, i);
 			
 			return true;
 		}
@@ -207,3 +209,29 @@ void Visual_object::tick(Screen_information *screen, const double delta_time)
 		objects_array[i]->tick(screen, delta_time);
 	}
 }
+
+void Visual_object::set_active(Visual_object *par_current_active)
+{
+	Visual_object **objects_array = objects.get_array();
+	size_t objects_amount = objects.get_length();
+
+	long long index = -1;
+
+	for (size_t i = 0; i < objects_amount; ++i)
+	{
+		if (objects_array[i] == par_current_active)
+		{
+			index = i;
+			break;
+		}
+	}
+
+	if (index == -1)
+		return;
+
+	current_active = par_current_active;
+	current_active->set_active_state(true);
+
+	move_to_end(par_current_active, index);
+}
+

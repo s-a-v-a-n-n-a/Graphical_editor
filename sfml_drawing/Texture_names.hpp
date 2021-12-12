@@ -17,6 +17,7 @@ const char WINDOW_BACKGROUND[] = "graphical_attributes/Textures/Window_backgroun
 
 const char SIMPLE_BUTTON[] = "graphical_attributes/Textures/Simple_button_texture.png";
 const char SIMPLE_BUTTON_MOVE[] = "graphical_attributes/Textures/Simple_button_move_texture.png";
+const char SIMPLE_BUTTON_PRESS[] = "graphical_attributes/Textures/Simple_button_pressed_texture.png";
 
 const char GRADIENT_BAR_TEXTURE[] = "graphical_attributes/Textures/Gradient_bar.png";
 const char GRADIENT_TEXTURE[] = "graphical_attributes/Textures/Other_gradient_bar.png";

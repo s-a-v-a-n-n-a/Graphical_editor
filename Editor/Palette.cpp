@@ -6,7 +6,7 @@ Palette::Palette(const Visual_object::Config &par_base, const Color &par_chosen_
 	chosen_color = par_chosen_color;
 	// create buttonы 
 	// ------------------------------------------------------------------------
-	// Visual_object::Config panel_base = { (size_t)Vidget_type::BUTTON_MANAGER, get_position(), nullptr, TRANSPARENT, get_width(), DEFAULT_BUTTON_HEIGHT };
+	// Visual_object::Config panel_base = { this, (size_t)Vidget_type::BUTTON_MANAGER, get_position(), nullptr, TRANSPARENT, get_width(), DEFAULT_BUTTON_HEIGHT };
 	// Button_manager *panel = new Button_manager(panel_base);
 
     size_t offset = DEFAULT_BUTTON_HEIGHT;
@@ -31,16 +31,16 @@ Palette::Palette(const Visual_object::Config &par_base, const Color &par_chosen_
 	size_t button_width = (get_width() - 20) / 4;
 	size_t buttin_height = get_height() / 6;
 
-	// picker = create_color_picker(get_position() + Vector_ll(10, (offset + 30)), picker_size, picker_size, picker_color);// new Color_picker((size_t)Vidget_type::COLOR_PICKER, par_position + Vector_ll(10, (offset + 30)), TRANSPARENT, MAX_COLOR_VALUE, MAX_COLOR_VALUE, par_pencil);
- //    gradient_bar = create_gradient_bar(get_position() + Vector_ll(10, offset + 10), picker_size, 20, picker, hsv);// new Gradient_bar((size_t)Vidget_type::GRADIENT_BAR, par_position + Vector_ll(10, offset + 10), texture, MAX_COLOR_VALUE, 20, par_pencil, picker);
+	// picker = create_color_picker(get_position() + Vector_ll(10, (offset + 30)), picker_size, picker_size, picker_color);// new Color_picker(this, (size_t)Vidget_type::COLOR_PICKER, par_position + Vector_ll(10, (offset + 30)), TRANSPARENT, MAX_COLOR_VALUE, MAX_COLOR_VALUE, par_pencil);
+ //    gradient_bar = create_gradient_bar(get_position() + Vector_ll(10, offset + 10), picker_size, 20, picker, hsv);// new Gradient_bar(this, (size_t)Vidget_type::GRADIENT_BAR, par_position + Vector_ll(10, offset + 10), texture, MAX_COLOR_VALUE, 20, par_pencil, picker);
    	
   color_picker = create_color_selection_widget(get_position() + Vector_ll(0, offset), (get_width()- 20) * 3 / 4, get_height() - DEFAULT_BUTTON_HEIGHT, picker_color);
    	// add_visual_object(panel);
-	old_color = new Button({(size_t)Vidget_type::BUTTON, get_position() + Vector_ll(picker_size + 20, (offset + 30)), nullptr, par_chosen_color, button_width, buttin_height}, NULL, "");
-	new_color = new Button({(size_t)Vidget_type::BUTTON, get_position() + Vector_ll(picker_size + 20, (offset + 30 + buttin_height)), nullptr, par_chosen_color, button_width, buttin_height}, NULL, "");
+	old_color = new Button({this, (size_t)Vidget_type::BUTTON, get_position() + Vector_ll(picker_size + 20, (offset + 30)), nullptr, par_chosen_color, button_width, buttin_height}, NULL, "");
+	new_color = new Button({this, (size_t)Vidget_type::BUTTON, get_position() + Vector_ll(picker_size + 20, (offset + 30 + buttin_height)), nullptr, par_chosen_color, button_width, buttin_height}, NULL, "");
 
 	Popup_color_confirmation *delegate = new Popup_color_confirmation(this, &chosen_color);
-	ok_button = new Button({(size_t)Vidget_type::BUTTON, get_position() + Vector_ll(picker_size + 20, (offset + 60 + buttin_height * 2)), nullptr, GREY, button_width, get_height()/5}, delegate, "OK");
+	ok_button = new Button({this, (size_t)Vidget_type::BUTTON, get_position() + Vector_ll(picker_size + 20, (offset + 60 + buttin_height * 2)), nullptr, GREY, button_width, get_height()/5}, delegate, "OK");
 
 	add_visual_object(old_color);
 	add_visual_object(new_color);
@@ -49,7 +49,7 @@ Palette::Palette(const Visual_object::Config &par_base, const Color &par_chosen_
 
 Color_selection_window *Palette::create_color_selection_widget(const Vector_ll &position, const size_t width, const size_t height, const Color &color)
 {
-	Visual_object::Config picker_base = { (size_t)Vidget_type::COLOR_SELECTION, position, NULL, TRANSPARENT, width, height};
+	Visual_object::Config picker_base = { this, (size_t)Vidget_type::COLOR_SELECTION, position, NULL, TRANSPARENT, width, height};
 
 	Color_selection_window *picker = new Color_selection_window(picker_base, color);
 	add_visual_object(picker);

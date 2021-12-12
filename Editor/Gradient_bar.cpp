@@ -10,7 +10,7 @@ Gradient_bar::Gradient_bar(const Visual_object::Config &par_base, Color_picker *
 	size_t width = get_width();
 	current_position = (size_t)((double)(255 - position_hsv.h) / 255.0 * (double)width);
 
-	Visual_object::Config buttton_base = { (size_t)Vidget_type::BUTTON, get_position() + Vector_ll(current_position, 0) - Vector_ll(5, 0), rect, TRANSPARENT, PICKER_SIZE, get_height() };
+	Visual_object::Config buttton_base = { this, (size_t)Vidget_type::BUTTON, get_position() + Vector_ll(current_position, 0) - Vector_ll(5, 0), rect, TRANSPARENT, PICKER_SIZE, get_height() };
 	picker = new Magnetic(buttton_base, this, get_position(), get_position() + Vector_ll(get_width() - PICKER_SIZE, 0), get_height());
 
 	add_visual_object(picker);

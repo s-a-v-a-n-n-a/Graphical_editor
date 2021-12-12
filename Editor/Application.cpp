@@ -16,7 +16,7 @@ Application::Application()
     plugins = new Plugin_manager();
     effects = new Effect_manager();
 
-    Graphical_editor_main_page *editor = new Graphical_editor_main_page({(size_t)Vidget_type::EDITOR, Vector_ll(0, 0), nullptr, DARK_GREY, DEFAULT_SIZE, DEFAULT_SIZE});
+    Graphical_editor_main_page *editor = new Graphical_editor_main_page({nullptr, (size_t)Vidget_type::EDITOR, Vector_ll(0, 0), nullptr, DARK_GREY, DEFAULT_SIZE, DEFAULT_SIZE});
     default_main = editor;
     current_main = default_main;
 

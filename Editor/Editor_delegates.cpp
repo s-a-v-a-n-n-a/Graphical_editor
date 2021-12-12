@@ -166,7 +166,7 @@ bool Color_picker_creator::on_mouse_click(const size_t par_x, const size_t par_y
 }
 bool Color_picker_creator::on_mouse_release()
 {
-	Palette *palette = new Palette({(size_t)Vidget_type::PALETTE, position, nullptr, DARK_GREY, 600, 600}, Application::get_app()->get_tools()->get_color());
+	Palette *palette = new Palette({nullptr, (size_t)Vidget_type::PALETTE, position, nullptr, DARK_GREY, 600, 600}, Application::get_app()->get_tools()->get_color());
 
 	Application::get_app()->set_main(palette);
 
@@ -185,7 +185,7 @@ bool Plugin_input_creator::on_mouse_click(const size_t par_x, const size_t par_y
 
 bool Plugin_input_creator::on_mouse_release()
 {
-	Search_box *input = new Search_box({(size_t)Vidget_type::SEARCH_BOX, position, nullptr, DARK_GREY, 600, 300});
+	Search_box *input = new Search_box({nullptr, (size_t)Vidget_type::SEARCH_BOX, position, nullptr, DARK_GREY, 600, 300});
 
 	Application::get_app()->set_main(input);
 

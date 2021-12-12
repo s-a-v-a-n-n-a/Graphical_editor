@@ -8,7 +8,7 @@ Application::Application()
 	resources = new Resources(); 
 	animation_manager = new Animation_manager();
 
-	editor = new Graphical_editor_main_page({(size_t)Vidget_type::EDITOR, Vector_ll(0, 0), nullptr, DARK_GREY, DEFAULT_SIZE, DEFAULT_SIZE});
+	editor = new Graphical_editor_main_page({this, (size_t)Vidget_type::EDITOR, Vector_ll(0, 0), nullptr, DARK_GREY, DEFAULT_SIZE, DEFAULT_SIZE});
 }
 Application::~Application()
 {

@@ -7,13 +7,13 @@ Canvas_manager_manager::Canvas_manager_manager(const Visual_object::Config &par_
     // ------------------------------------------------------------------------------
 	Window_control_panel *control = create_control_panel(this, get_position(), get_width(), DEFAULT_BUTTON_HEIGHT);
 
-	Button_manager *panel = new Button_manager({ (size_t)Vidget_type::BUTTON_MANAGER, get_position() + Vector_ll(0, DEFAULT_BUTTON_HEIGHT), nullptr, MEDIUM_GREY, get_width(), INCREASED_BUTTON_HEIGHT });
+	Button_manager *panel = new Button_manager({ this, (size_t)Vidget_type::BUTTON_MANAGER, get_position() + Vector_ll(0, DEFAULT_BUTTON_HEIGHT), nullptr, MEDIUM_GREY, get_width(), INCREASED_BUTTON_HEIGHT });
 	
-	// Button_manager *panel = new Button_manager((size_t)Vidget_type::BUTTON_MANAGER, par_position + Vector_ll(0, DEFAULT_BUTTON_HEIGHT), MEDIUM_GREY, par_width, INCREASED_BUTTON_HEIGHT);
+	// Button_manager *panel = new Button_manager(this, (size_t)Vidget_type::BUTTON_MANAGER, par_position + Vector_ll(0, DEFAULT_BUTTON_HEIGHT), MEDIUM_GREY, par_width, INCREASED_BUTTON_HEIGHT);
 
 	// создаёт начальный объект
 	// ------------------------------------------------------------------------------
-	Canvas_manager *canvas = new Canvas_manager({ (size_t)Vidget_type::CANVAS_MANAGER, get_position() + Vector_ll(0.0, DEFAULT_BUTTON_HEIGHT), nullptr, WHITE, get_width(), get_height() - DEFAULT_BUTTON_HEIGHT }, 0);
+	Canvas_manager *canvas = new Canvas_manager({ this, (size_t)Vidget_type::CANVAS_MANAGER, get_position() + Vector_ll(0.0, DEFAULT_BUTTON_HEIGHT), nullptr, WHITE, get_width(), get_height() - DEFAULT_BUTTON_HEIGHT }, 0);
 
 	active_canvas = canvas;
 
@@ -26,7 +26,7 @@ Window_control_panel *Canvas_manager_manager::create_control_panel(Visual_object
 {
 	Full_texture *texture = Resources::get_instance()->create_texture(WINDOW_HEADER, width, height);
 
-	Visual_object::Config panel_base = { (size_t)Vidget_type::WINDOW_CONTROL_PANEL, position, texture, TRANSPARENT, width, height };
+	Visual_object::Config panel_base = { this, (size_t)Vidget_type::WINDOW_CONTROL_PANEL, position, texture, TRANSPARENT, width, height };
 	Window_control_panel *control = new Window_control_panel(panel_base, parent);
 	add_visual_object(control);
 
@@ -41,7 +41,7 @@ void Canvas_manager_manager::add_canvas()
 		return;
 	}
 
-	Visual_object::Config canvas_base = { (size_t)Vidget_type::CANVAS_MANAGER, get_position() + Vector_ll(0.0, DEFAULT_BUTTON_HEIGHT), nullptr, WHITE, get_width(), get_height() - DEFAULT_BUTTON_HEIGHT };
+	Visual_object::Config canvas_base = { this, (size_t)Vidget_type::CANVAS_MANAGER, get_position() + Vector_ll(0.0, DEFAULT_BUTTON_HEIGHT), nullptr, WHITE, get_width(), get_height() - DEFAULT_BUTTON_HEIGHT };
 	Canvas_manager *canvas = new Canvas_manager(canvas_base, get_objects()->get_length() - 2);
 
 	active_canvas = canvas;
@@ -87,7 +87,7 @@ void Canvas_manager_manager::tick(Screen_information *screen, const double delta
 
 			continue;
 		}
-		// else if (objects_array[i]->get_type() == (size_t)Vidget_type::CANVAS_MANAGER && offset_coefficient)
+		// else if (objects_array[i]->get_type() == this, (size_t)Vidget_type::CANVAS_MANAGER && offset_coefficient)
 		// {
 		// 	((Canvas_manager*)objects_array[i])->set_offset(((Canvas_manager*)objects_array[i])->get_offset() - Vector_ll(DEFAULT_TAB_WIDTH, 0.0) * offset_coefficient);
 		// }

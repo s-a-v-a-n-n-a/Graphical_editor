@@ -55,7 +55,7 @@ Graphical_editor_main_page::Graphical_editor_main_page(const Visual_object::Conf
 	// canvas->set_visible(false);
 
 	// Animating_texture *text_field_texture = Resources::get_instance()->create_texture(TEXT_FIELD, 400, 40, TEXT_FIELD_ACTIVE, NULL);
-	// Input_string *text_field = new Input_string({ (size_t)Vidget_type::INPUT_STRING, par_position + Vector_ll(DEFAULT_COLOR_VIDGET_POS_X, DEFAULT_COLOR_VIDGET_POS_Y), text_field_texture, TRANSPARENT, 400, 40 });
+	// Input_string *text_field = new Input_string({ this, (size_t)Vidget_type::INPUT_STRING, par_position + Vector_ll(DEFAULT_COLOR_VIDGET_POS_X, DEFAULT_COLOR_VIDGET_POS_Y), text_field_texture, TRANSPARENT, 400, 40 });
 	// add_visual_object(text_field);
 	// Color_selection_window *tools_vidget = create_color_vidget(par_position + Vector_ll(DEFAULT_COLOR_VIDGET_POS_X, DEFAULT_COLOR_VIDGET_POS_Y), DEFAULT_COLOR_VIDGET_WIDTH, DEFAULT_COLOR_VIDGET_HEIGHT);
 	// tools_vidget->set_visible(false);
@@ -99,8 +99,8 @@ Graphical_editor_main_page::Graphical_editor_main_page(const Visual_object::Conf
     current_button_size = get_text_length(GHOST_TYPE, PLUGINS_TEXT, INCREASED_BUTTON_HEIGHT / 2);
     create_plugin_info_button(panel, PLUGINS_TEXT, current_button_size + DEFAULT_TEXT_OFFSET * 2, INCREASED_BUTTON_HEIGHT);
     
-    current_button_size = get_text_length(GHOST_TYPE, OPEN_IMAGE, INCREASED_BUTTON_HEIGHT / 2);
-    create_plugin_info_button(panel, OPEN_IMAGE, current_button_size + DEFAULT_TEXT_OFFSET * 2, INCREASED_BUTTON_HEIGHT);
+    // current_button_size = get_text_length(GHOST_TYPE, OPEN_IMAGE, INCREASED_BUTTON_HEIGHT / 2);
+    // create_plugin_info_button(panel, OPEN_IMAGE, current_button_size + DEFAULT_TEXT_OFFSET * 2, INCREASED_BUTTON_HEIGHT);
 
     current_button_size = get_text_length(GHOST_TYPE, EFFECTS_TEXT, INCREASED_BUTTON_HEIGHT / 2);
     Menu *menu = create_menu({0, 0}, 500, 1000);
@@ -128,7 +128,7 @@ Tools_window *Graphical_editor_main_page::create_tools_window(const Vector_ll &p
 {
 	Full_texture *background = Resources::get_instance()->create_texture(WINDOW_BACKGROUND, width, height);// new Full_texture(WINDOW_BACKGROUND, DEFAULT_COLOR_VIDGET_WIDTH, DEFAULT_COLOR_VIDGET_HEIGHT);
 
-	Tools_window *tools = new Tools_window({(size_t)Vidget_type::MANAGER, position, background, TRANSPARENT, width, height});
+	Tools_window *tools = new Tools_window({this, (size_t)Vidget_type::MANAGER, position, background, TRANSPARENT, width, height});
 	add_visual_object(tools);
 
 	return tools;
@@ -140,7 +140,7 @@ Thickness_window *Graphical_editor_main_page::create_thickness_slider(const Vect
 	// Full_texture *slider_background = Resources::get_instance()->create_texture(WINDOW_BACKGROUND, width, height);// new Full_texture(WINDOW_BACKGROUND, DEFAULT_COLOR_VIDGET_WIDTH, DEFAULT_COLOR_VIDGET_HEIGHT);
 	Full_texture *slider_background = Resources::get_instance()->create_texture(WINDOW_BACKGROUND, width, height);// new Full_texture(WINDOW_BACKGROUND, DEFAULT_COLOR_VIDGET_WIDTH, DEFAULT_COLOR_VIDGET_HEIGHT);
 
-	Thickness_window *slider = new Thickness_window({(size_t)Vidget_type::MANAGER, position, slider_background, TRANSPARENT, width, height});
+	Thickness_window *slider = new Thickness_window({this, (size_t)Vidget_type::MANAGER, position, slider_background, TRANSPARENT, width, height});
 	add_visual_object(slider);
 
 	return slider;
@@ -151,7 +151,7 @@ Effects_window *Graphical_editor_main_page::create_effects_window(const Vector_l
 	// Full_texture *spline_background = Resources::get_instance()->create_texture(WINDOW_BACKGROUND, width, height);// new Full_texture(WINDOW_BACKGROUND, DEFAULT_COLOR_VIDGET_WIDTH, DEFAULT_COLOR_VIDGET_HEIGHT);
 	Full_texture *spline_background = Resources::get_instance()->create_texture(WINDOW_BACKGROUND, width, height);// new Full_texture(WINDOW_BACKGROUND, DEFAULT_COLOR_VIDGET_WIDTH, DEFAULT_COLOR_VIDGET_HEIGHT);
 
-	Effects_window *spline = new Effects_window({(size_t)Vidget_type::EFFECTS_WINDOW, position, spline_background, TRANSPARENT, width, height}, active_canvas);
+	Effects_window *spline = new Effects_window({this, (size_t)Vidget_type::EFFECTS_WINDOW, position, spline_background, TRANSPARENT, width, height}, active_canvas);
 	add_visual_object(spline);
 
 	return spline;
@@ -159,7 +159,7 @@ Effects_window *Graphical_editor_main_page::create_effects_window(const Vector_l
 
 Button_manager *Graphical_editor_main_page::create_button_panel(const Vector_ll &position, const size_t width, const size_t height)
 {
-	Visual_object::Config panel_base = { (size_t)Vidget_type::BUTTON_MANAGER, position, nullptr, GREY, width, height };
+	Visual_object::Config panel_base = { this, (size_t)Vidget_type::BUTTON_MANAGER, position, nullptr, GREY, width, height };
 	Button_manager *panel = new Button_manager(panel_base);
 	add_visual_object(panel);
 
@@ -168,7 +168,7 @@ Button_manager *Graphical_editor_main_page::create_button_panel(const Vector_ll 
 
 Canvas_manager_manager *Graphical_editor_main_page::create_canvas_manager(const Vector_ll &position, const size_t width, const size_t height)
 {
-	Canvas_manager_manager *canvas = new Canvas_manager_manager({(size_t)Vidget_type::CANVAS_MANAGER_MANAGER, position, nullptr, TRANSPARENT, width, height});
+	Canvas_manager_manager *canvas = new Canvas_manager_manager({this, (size_t)Vidget_type::CANVAS_MANAGER_MANAGER, position, nullptr, TRANSPARENT, width, height});
 	add_visual_object(canvas);
 
 	return canvas;
@@ -179,7 +179,7 @@ Color_selection_window *Graphical_editor_main_page::create_color_vidget(const Ve
 	// Full_texture *tools_background = Resources::get_instance()->create_texture(WINDOW_BACKGROUND, width, height);// new Full_texture(WINDOW_BACKGROUND, DEFAULT_COLOR_VIDGET_WIDTH, DEFAULT_COLOR_VIDGET_HEIGHT);
 	Full_texture *tools_background = Resources::get_instance()->create_texture(WINDOW_BACKGROUND, width, height);// new Full_texture(WINDOW_BACKGROUND, DEFAULT_COLOR_VIDGET_WIDTH, DEFAULT_COLOR_VIDGET_HEIGHT);
 	
-	Color_selection_window *tools_vidget = new Color_selection_window({(size_t)Vidget_type::PALETTE, position, tools_background, TRANSPARENT, width, height});
+	Color_selection_window *tools_vidget = new Color_selection_window({this, (size_t)Vidget_type::PALETTE, position, tools_background, TRANSPARENT, width, height});
 	add_visual_object(tools_vidget);
 
 	return tools_vidget;
@@ -191,7 +191,7 @@ Brush_size_selection_window *Graphical_editor_main_page::create_size_vidget(cons
 	// Full_texture *brushes_background = Resources::get_instance()->create_texture(WINDOW_BACKGROUND, width, height);// new Full_texture(WINDOW_BACKGROUND, THICK_PALETTE_WIDTH, THICK_PALETTE_HEIGHT);
 	Full_texture *brushes_background = Resources::get_instance()->create_texture(WINDOW_BACKGROUND, width, height);// new Full_texture(WINDOW_BACKGROUND, THICK_PALETTE_WIDTH, THICK_PALETTE_HEIGHT);
 	
-	Brush_size_selection_window *tools_vidget = new Brush_size_selection_window({(size_t)Vidget_type::PALETTE, position, brushes_background, TRANSPARENT, width, height});
+	Brush_size_selection_window *tools_vidget = new Brush_size_selection_window({this, (size_t)Vidget_type::PALETTE, position, brushes_background, TRANSPARENT, width, height});
 	add_visual_object(tools_vidget);
 
 	return tools_vidget;
@@ -199,7 +199,7 @@ Brush_size_selection_window *Graphical_editor_main_page::create_size_vidget(cons
 
 Menu *Graphical_editor_main_page::create_menu(const Vector_ll &position, const size_t width, const size_t height)
 {
-	Menu *menu = new Menu({(size_t)Vidget_type::MENU, position, nullptr, TRANSPARENT, width, height});
+	Menu *menu = new Menu({this, (size_t)Vidget_type::MENU, position, nullptr, TRANSPARENT, width, height});
 	add_visual_object(menu);
 
 	menu->set_visible(false);
@@ -211,7 +211,7 @@ Menu *Graphical_editor_main_page::create_menu(const Vector_ll &position, const s
 Button *Graphical_editor_main_page::create_double_click_restore_button(Button_manager *panel, Visual_object *to_restore, const char *text, const size_t width, const size_t height)
 {
 	// Animating_texture *texture = Resources::get_instance()->create_texture(SIMPLE_BUTTON, width, height, SIMPLE_BUTTON_MOVE, nullptr);
-	Animating_texture *texture = Resources::get_instance()->create_texture(SIMPLE_BUTTON, width, height, SIMPLE_BUTTON_MOVE, nullptr);
+	Animating_texture *texture = Resources::get_instance()->create_texture(SIMPLE_BUTTON, width, height, SIMPLE_BUTTON_PRESS, nullptr);
 
 	Animating_double_click_restore_delegate *restore = new Animating_double_click_restore_delegate(to_restore, NULL);
     
@@ -262,7 +262,7 @@ Test_button *Graphical_editor_main_page::create_test_button(const Vector_ll &pos
 	// Full_texture *test_texture = Resources::get_instance()->create_texture(TEST_WINDOW, width, height);// new Full_texture(TEST_WINDOW, 300, 300);
 	Full_texture *test_texture = Resources::get_instance()->create_texture(TEST_WINDOW, width, height);// new Full_texture(TEST_WINDOW, 300, 300);
     
-    Test_button *test_button = new Test_button({(size_t)Vidget_type::BUTTON, position, test_texture, TRANSPARENT, width, height}, NULL, text);
+    Test_button *test_button = new Test_button({this, (size_t)Vidget_type::BUTTON, position, test_texture, TRANSPARENT, width, height}, NULL, text);
     Drag_and_drop_delegate *test_dnd = new Drag_and_drop_delegate(test_button);
     test_button->set_delegate(test_dnd); 
 

@@ -20,7 +20,7 @@ public:
 	Window_control_panel *create_control_panel(Visual_object *parent, const Vector_ll &position, const size_t width, const size_t height)
 	{
 		Full_texture *texture = Resources::get_instance()->create_texture(WINDOW_HEADER, width, height);
-		Visual_object::Config panel_base = { (size_t)Vidget_type::WINDOW_CONTROL_PANEL, 
+		Visual_object::Config panel_base = { this, (size_t)Vidget_type::WINDOW_CONTROL_PANEL, 
 												position, 
 												texture, 
 												TRANSPARENT,
@@ -48,7 +48,7 @@ public:
 	Closing_window_control_panel *create_control_panel(Visual_object *parent, const Vector_ll &position, const size_t width, const size_t height)
 	{
 		Full_texture *texture = Resources::get_instance()->create_texture(WINDOW_HEADER, width, height);
-		Visual_object::Config panel_base = { (size_t)Vidget_type::WINDOW_CONTROL_PANEL, 
+		Visual_object::Config panel_base = { this, (size_t)Vidget_type::WINDOW_CONTROL_PANEL, 
 												position, 
 												texture, 
 												TRANSPARENT,

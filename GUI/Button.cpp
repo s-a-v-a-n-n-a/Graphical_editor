@@ -14,7 +14,7 @@ Button::Button(const Visual_object::Config &base, Button_delegate *par_click, co
 	Text *text = nullptr;
 	if (centered)
 	{
-		text = new Text((size_t)Vidget_type::TEXT, 
+		text = new Text(this, (size_t)Vidget_type::TEXT, 
 							par_text, 
 							offset, 
 							get_position() + Vector_ll(get_width()/2, get_height()/2), //par_position + 
@@ -23,7 +23,7 @@ Button::Button(const Visual_object::Config &base, Button_delegate *par_click, co
 	}
 	else
 	{
-		text = new Text((size_t)Vidget_type::TEXT, 
+		text = new Text(this, (size_t)Vidget_type::TEXT, 
 							par_text, 
 							offset, 
 							get_position() + Vector_ll(10, get_height()/2), //par_position + 
