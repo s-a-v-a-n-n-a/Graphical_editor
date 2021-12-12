@@ -52,9 +52,9 @@ FILES   	= $(OBJ)main.o \
 			$(OBJ)Editor/Menu.o \
 			$(OBJ)Editor/Effects/Canvas_effects_manager.o \
 			$(OBJ)Editor/Thickness_window.o \
-			$(OBJ)Plugin/Plugin_manager.o \
-			$(OBJ)Plugin/Plugin_tool.o \
-			$(OBJ)Plugin/Plugin_effect.o \
+			$(OBJ)Plugin_support/Plugin_manager.o \
+			$(OBJ)Plugin_support/Plugin_tool.o \
+			$(OBJ)Plugin_support/Plugin_effect.o \
 
           # остальные файлы по правилу a.cpp -> $(OBJ)a.o (a может содержать путь)
  

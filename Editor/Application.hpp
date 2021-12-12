@@ -9,10 +9,10 @@
 #include "Graphical_editor_main_page.hpp"
 
 // ?????????????
-#include "../Plugin/Plugin_manager.hpp"
+#include "../Plugin_support/Plugin_manager.hpp"
 #include "../Tools/Toolbar.hpp"
 #include "Effects/Canvas_effects_manager.hpp"
-// #include "../Plugin/plugin_std.hpp"
+// #include "../Plugin_support/plugin_std.hpp"
 
 extern const size_t DEFAULT_SIZE;
 

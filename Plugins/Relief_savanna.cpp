@@ -21,6 +21,12 @@ const PPreviewLayerPolicy FLUSH_POLICY = PPLP_BLEND;
 
 // ============================================================================ Resources
 
+const long long DEFAULT_OFFSET = 20;
+const long long DEFAULT_AMOUNT = 2;
+
+void *offset_setting = nullptr;
+void *amount_setting = nullptr;
+
 // ============================================================================
 
 
@@ -45,7 +51,7 @@ static void *get_extension_func(const char *extension, const char *func);
 static void draw(PVec2f pos);
 
 
-const PPluginInterface PINTERFACE =
+const PPluginInterface Savanna_interface =
 {
     PSTDVERSION, // std_version
     nullptr,     // reserved
@@ -84,7 +90,7 @@ const PPluginInfo PINFO =
     PSTDVERSION, // std_version
     nullptr,     // reserved
 
-    &PINTERFACE,
+    &Savanna_interface,
 
     PNAME,
     PVERSION,
@@ -99,7 +105,7 @@ const PAppInterface *APPI = nullptr;
 
 extern "C" const PPluginInterface *get_plugin_interface() 
 {
-    return &PINTERFACE;
+    return &Savanna_interface;
 }
 
 static PPluginStatus init(const PAppInterface *app_interface) 
@@ -108,13 +114,31 @@ static PPluginStatus init(const PAppInterface *app_interface)
 
     APPI = app_interface;
 
-    APPI->general.log("<Relief effect> was successfully inited", PINFO.name);
+    if (APPI->general.feature_level & PFL_SETTINGS_SUPPORT) 
+    {
+        APPI->settings.create_surface(&Savanna_interface, 200, 200);
+        offset_setting = APPI->settings.add(&Savanna_interface, PST_TEXT_LINE, "Offset");
+        amount_setting = APPI->settings.add(&Savanna_interface, PST_TEXT_LINE, "Amount");
+
+        APPI->general.log("<Relief effect> knows you support setting, that's great.");
+    } 
+    else 
+    {
+        APPI->general.log("<Relief effect> knows you don't support setting, default offset is %lld, default amount is %lld.", DEFAULT_OFFSET, DEFAULT_AMOUNT);
+    }
+
+    APPI->general.log("<Relief effect> was successfully inited");
     return PPS_OK;
 }
 
 static PPluginStatus deinit() 
 {
-    APPI->general.log("<Relief effect> was successfully deinited", PINFO.name, PINFO.author);
+    if (APPI->general.feature_level & PFL_SETTINGS_SUPPORT) 
+    {
+        APPI->settings.destroy_surface(&Savanna_interface);
+    }
+
+    APPI->general.log("<Relief effect> was successfully deinited");
     return PPS_OK;
 }
 
@@ -149,7 +173,7 @@ static void on_mouse_move(PVec2f /*from*/, PVec2f to)
 
 static void on_mouse_up(PVec2f /*pos*/) {}
 
-void negative(PRGBA *to, long long width, long long height)
+void make_negative(PRGBA *to, long long width, long long height)
 {
     for (int y = 0; y < height; y++)
     {
@@ -205,17 +229,7 @@ void multiply(PRGBA *to, PRGBA *from, long long width, long long height, long lo
 
     int x_begin = 0;
     int y_begin = 0;
-    // if (offset > 0)
-    // {
-    //     x_begin = 0;
-    //     y_begin = 0;
-    // }
-    // else
-    // {
-    //     x_begin = width + offset;
-    //     y_begin = height + offset;
-    // }
-
+    
     for (int y_0 = 0; y_0 < height; y_0++)
     {
         for (int x_0 = x_begin; x_0 < offset; x_0++)
@@ -235,10 +249,55 @@ void multiply(PRGBA *to, PRGBA *from, long long width, long long height, long lo
     }
 }
 
+static void initialize_negative(PRGBA *positive, PRGBA *negative, long long width, long long height)
+{
+    for (int y = 0; y < height; y++)
+    {
+        for (int x = 0; x < width; x++)
+        {
+            PRGBA color = positive[width * y + x];
+            color.r = 255 - color.r;
+            color.g = 255 - color.g;
+            color.b = 255 - color.b;
+            
+            negative[width * y + x] = color;
+        }
+    }
+}
 
+static void make_relief(PRGBA *positive, PRGBA *negative, long long width, long long height, long long offset)
+{
+    initialize_negative(positive, negative, width, height);
+
+    multiply(positive, negative, width, height, offset);
+    make_negative(positive, width, height);
+}
 
 static void apply() 
 {
+    long long offset = DEFAULT_OFFSET;
+    if (offset_setting) 
+    {
+        PTextFieldSetting text;
+        APPI->settings.get(&Savanna_interface, offset_setting, &text);
+        long long wanted_offset = atoi(text.text);
+        if (wanted_offset) 
+        {
+            offset = wanted_offset;
+        }
+    }
+    long long amount = DEFAULT_AMOUNT;
+    if (amount_setting) 
+    {
+        PTextFieldSetting text;
+        APPI->settings.get(&Savanna_interface, amount_setting, &text);
+        long long wanted_amount = atoi(text.text);
+        if (wanted_amount) 
+        {
+            amount = wanted_amount;
+        }
+    }
+
     PRenderMode render_mode = { PPBM_COPY, PPDP_ACTIVE, nullptr };
 
     size_t width = 0;
@@ -248,36 +307,8 @@ static void apply()
     PRGBA *positive_pixels = APPI->target.get_pixels();
     PRGBA *negative_pixels = new PRGBA[width * height];
 
-    for (int y = 0; y < height; y++)
-    {
-        for (int x = 0; x < width; x++)
-        {
-            PRGBA color = positive_pixels[width * y + x];
-            color.r = 255 - color.r;
-            color.g = 255 - color.g;
-            color.b = 255 - color.b;
-            
-            negative_pixels[width * y + x] = color;
-        }
-    }
-
-    long long offset = 20;
-    multiply(positive_pixels, negative_pixels, width, height, offset);
-    negative(positive_pixels, width, height);
-    for (int y = 0; y < height; y++)
-    {
-        for (int x = 0; x < width; x++)
-        {
-            PRGBA color = positive_pixels[width * y + x];
-            color.r = 255 - color.r;
-            color.g = 255 - color.g;
-            color.b = 255 - color.b;
-
-            negative_pixels[width * y + x] = color;
-        }
-    }
-    multiply(positive_pixels, negative_pixels, width, height, offset);
-    negative(positive_pixels, width, height);
+    for (long long i = 0; i < amount; ++i)
+        make_relief(positive_pixels, negative_pixels, width, height, offset);
 
     APPI->render.pixels(PVec2f(0, 0), positive_pixels, width, height, &render_mode);
     delete [] negative_pixels;

@@ -5,7 +5,7 @@ Canvas_manager::Canvas_manager(const Visual_object::Config &par_base, const size
 {
 	// create Canvas
 	// ------------------------------------------------------------------------------
-	Full_texture *canvas_texture = Resources::get_instance()->create_texture(CAT_TEXTURE, get_width(), (size_t)(get_height() - INCREASED_BUTTON_HEIGHT));
+	Full_texture *canvas_texture = Resources::get_instance()->create_texture(MAXIM_TEXTURE, get_width(), (size_t)(get_height() - INCREASED_BUTTON_HEIGHT));
 	Visual_object::Config canvas_base = { this, (size_t)Vidget_type::CANVAS, get_position() + Vector_ll(0.0, INCREASED_BUTTON_HEIGHT), canvas_texture, TRANSPARENT, get_width(), get_height() - INCREASED_BUTTON_HEIGHT };
 	canvas = new Canvas(canvas_base); // , par_pencil
 

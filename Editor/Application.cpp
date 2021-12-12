@@ -130,7 +130,7 @@ void Application::tick()
 
 void Application::launch()
 {
-    plugins->load_from_dir("Plugins_self/");
+    plugins->load_from_dir("Plugins/");
 
     Vector_ll click_place(0, 0);
 
