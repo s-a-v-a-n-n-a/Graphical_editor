@@ -35,15 +35,15 @@ void Color_picker::set_main_color(const Color &par_main)
 
 	size_t width = get_width();
 	size_t height = get_height();
-	for (size_t i = 0; i < width; ++i)
+	for (size_t i = 0; i < height; ++i)
 	{
-		int value = (int)(255.0 - ((double)i / (double)height) * 255.0);
-		for (size_t j = 0; j < height; ++j)
+		int saturation = (int)(255.0 - ((double)i / (double)height) * 255.0);
+		for (size_t j = 0; j < width; ++j)
 		{
-			int saturation = (int)(((double)j / (double)width) * 255.0);
-
-			Color pixel_color = get_rgb({ hsv.h, saturation, value });
-			color_array[i * height + j] = pixel_color;
+			int value = (int)(((double)j / (double)width) * 255.0);
+			
+			Color pixel_color = get_rgb({ hsv.h, value, saturation });
+			color_array[i * width + j] = pixel_color;
 		}
 	}
 }
@@ -53,7 +53,7 @@ void Color_picker::set_color()
 	// pencil->set_color(color_array[current_position.get_y() * MAX_COLOR_VALUE + current_position.get_x()]);
 	// Application::get_app()->get_tools()->get_tools()->get_array()[0]->set_color(color_array[current_position.get_y() * MAX_COLOR_VALUE + current_position.get_x()]);
 	// Application::get_app()->get_tools()->set_color(color_array[current_position.get_y() * get_height() + current_position.get_x()]);
-	(*to_set) = color_array[current_position.get_y() * get_height() + current_position.get_x()];
+	(*to_set) = color_array[current_position.get_y() * get_width() + current_position.get_x()];
 }
 
 Color Color_picker::get_color()

@@ -11,8 +11,8 @@ Color_selection_window::Color_selection_window(const Visual_object::Config &par_
     	picker_color = get_rgb({hsv.h, 255, 255});
 
 
-	picker = create_color_picker(get_position() + Vector_ll(10, 20), picker_size, picker_size, picker_color);// new Color_picker((size_t)Vidget_type::COLOR_PICKER, par_position + Vector_ll(10, (offset + 30)), TRANSPARENT, MAX_COLOR_VALUE, MAX_COLOR_VALUE, par_pencil);
-    gradient_bar = create_gradient_bar(get_position() + Vector_ll(10, 0), picker_size, 20, picker, hsv);// 
+	picker = create_color_picker(get_position() + Vector_ll(10, 20), get_width() - 20, picker_size, picker_color);// new Color_picker((size_t)Vidget_type::COLOR_PICKER, par_position + Vector_ll(10, (offset + 30)), TRANSPARENT, MAX_COLOR_VALUE, MAX_COLOR_VALUE, par_pencil);
+    gradient_bar = create_gradient_bar(get_position() + Vector_ll(10, 0), get_width() - 20, 20, picker, hsv);// 
 }
 
 Color_picker *

@@ -98,5 +98,5 @@ void Input_string::draw(Screen_information *screen)
 	Visual_object::draw(screen);
 
 	Vector_ll position = get_position() + Vector_ll(20, 5);
-	screen->draw_text(string.get_string(), position, BLACK, get_height() - 10, false);
+	screen->draw_text(string.get_string(), position + Vector_ll(0, get_height()/2), BLACK, get_height() - 10, false);
 }
