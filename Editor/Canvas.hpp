@@ -25,6 +25,7 @@ protected:
 	// RGBA_effect effect[MAX_COLOR_VALUE + 1];
 
 	bool drawing_state;
+	bool ready;
 
 public:
 	Canvas() = delete;
@@ -47,7 +48,7 @@ public:
 	// void set_green (const unsigned char from, const unsigned char to);
 	// void set_blue (const unsigned char from, const unsigned char to);
 
-	Color *get_drawing() { return original_drawing; }
+	Color *get_drawing();
 
 	void make_drawing();
 

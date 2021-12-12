@@ -421,7 +421,7 @@ void Gradient_bar::draw(Screen_information *screen)
 
 void Gradient_bar::tick(Screen_information *screen, const double delta_time)
 {
-	// Tool *current_tool = Toolbar::get_instance()->get_active_tool();
+	// Tool *current_tool = Application::get_app()->get_tools()->get_active_tool();
 	// Color tool_color = current_tool->get_color();
 
 	// // Color main_color = get_rgb(get_hsv(tool_color));

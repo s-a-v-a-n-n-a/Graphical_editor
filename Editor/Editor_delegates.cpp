@@ -67,8 +67,6 @@ bool Canvas_keeper::on_mouse_click(const size_t par_x, const size_t par_y)
 
 bool Effect_applier::on_mouse_click(const size_t par_x, const size_t par_y)
 {
-	printf("pressed\n");
-
 	pressed = true;
 	return true;
 }
@@ -77,7 +75,6 @@ bool Effect_applier::on_mouse_release()
 {
 	if (pressed)
 	{
-		printf("applied\n");
 		effect->apply();
 	}
 
@@ -169,7 +166,7 @@ bool Color_picker_creator::on_mouse_click(const size_t par_x, const size_t par_y
 }
 bool Color_picker_creator::on_mouse_release()
 {
-	Palette *palette = new Palette({(size_t)Vidget_type::PALETTE, position, nullptr, DARK_GREY, 600, 600}, Toolbar::get_instance()->get_color());
+	Palette *palette = new Palette({(size_t)Vidget_type::PALETTE, position, nullptr, DARK_GREY, 600, 600}, Application::get_app()->get_tools()->get_color());
 
 	Application::get_app()->set_main(palette);
 

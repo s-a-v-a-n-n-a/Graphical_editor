@@ -432,7 +432,7 @@ Change_color::Change_color(const Color &par_color)
 bool Change_color::on_mouse_click(const size_t par_x, const size_t par_y)
 {
 	// pencil->set_color(color);
-	Tool *current_tool = Toolbar::get_instance()->get_active_tool();
+	Tool *current_tool = Application::get_app()->get_tools()->get_active_tool();
 	current_tool->set_color(color);
 
 	return true;
@@ -450,7 +450,7 @@ Change_thickness::Change_thickness(const size_t par_size)
 bool Change_thickness::on_mouse_click(const size_t par_x, const size_t par_y)
 {
 	// pencil->set_size(size);
-	Tool *current_tool = Toolbar::get_instance()->get_active_tool();
+	Tool *current_tool = Application::get_app()->get_tools()->get_active_tool();
 	current_tool->set_size(size);
 
 	return true;
@@ -471,7 +471,7 @@ bool Change_thickness_non_fixedly::on_mouse_click(const size_t par_x, const size
 	current_size = par_x + par_y;
 
 	// // pencil->set_size(current_size);
-	Tool *current_tool = Toolbar::get_instance()->get_active_tool();
+	Tool *current_tool = Application::get_app()->get_tools()->get_active_tool();
 	current_tool->set_size(current_size);
 
 	return true;
@@ -482,7 +482,7 @@ bool Change_thickness_non_fixedly::on_mouse_release()
 	// may be a mistake in future
 
 	// pencil->set_size(current_size);
-	// Tool *current_tool = Toolbar::get_instance()->get_active_tool();
+	// Tool *current_tool = Application::get_app()->get_tools()->get_active_tool();
 	// printf("current_tool %p\n", current_tool);
 	// current_tool->set_size(current_size);
 
@@ -692,7 +692,7 @@ bool Pick_tool::on_mouse_click(const size_t par_x, const size_t par_y)
 bool Pick_tool::on_mouse_release()
 {
 	// toolbar->set_active_tool(tool);
-	Toolbar::get_instance()->set_active_tool(tool);
+	Application::get_app()->get_tools()->set_active_tool(tool);
 
 	return true;
 }
@@ -758,6 +758,26 @@ bool Popup_text_confirmation::on_mouse_release()
 {
 	Roll_up_confirmation::on_mouse_release();
 	Application::get_app()->add_plugin(*text);
+	
+	return true;
+}
+
+// --------------------------------------------------------------------------------------------------------------------------
+
+Popup_color_confirmation::Popup_color_confirmation(Visual_object *par_roll_up, Color *to_set)
+: Roll_up_confirmation(par_roll_up), color(to_set)
+{}
+
+bool Popup_color_confirmation::on_mouse_click(const size_t par_x, const size_t par_y)
+{
+	Roll_up_confirmation::on_mouse_click(par_x, par_y);
+
+	return true;
+}
+bool Popup_color_confirmation::on_mouse_release()
+{
+	Roll_up_confirmation::on_mouse_release();
+	Application::get_app()->get_tools()->set_color(*color);
 	
 	return true;
 }

@@ -22,7 +22,7 @@ const size_t THICKNESS_WINDOW_POS_X = 0;
 const size_t THICKNESS_WINDOW_POS_Y = INCREASED_BUTTON_HEIGHT;
 
 const size_t TOOLS_BAR_WIDTH = 300;
-const size_t TOOLS_BAR_HEIGHT = 600;
+const size_t TOOLS_BAR_HEIGHT = 1000;
 
 const size_t DEFAULT_CANVAS_POS_X = THICKNESS_WINDOW_WIDTH;
 const size_t DEFAULT_CANVAS_POS_Y = INCREASED_BUTTON_HEIGHT;
@@ -71,7 +71,7 @@ Graphical_editor_main_page::Graphical_editor_main_page(const Visual_object::Conf
 
 	Thickness_window *slider = create_thickness_slider(par_position + Vector_ll(THICKNESS_WINDOW_POS_X, THICKNESS_WINDOW_POS_Y), THICKNESS_WINDOW_WIDTH, THICKNESS_WINDOW_HEIGHT);
 
-	Tools_window *tools = create_tools_window(par_position + Vector_ll(par_width - 300, INCREASED_BUTTON_HEIGHT), TOOLS_BAR_WIDTH, TOOLS_BAR_HEIGHT);
+	Tools_window *tools = create_tools_window(par_position + Vector_ll(par_width - 300, INCREASED_BUTTON_HEIGHT), TOOLS_BAR_WIDTH, get_height() - panel->get_height());
 
 	size_t current_button_size = get_text_length(GHOST_TYPE, CANVAS_TEXT, INCREASED_BUTTON_HEIGHT / 2);
 	create_restore_button(panel, canvas, CANVAS_TEXT, current_button_size + DEFAULT_TEXT_OFFSET * 2, INCREASED_BUTTON_HEIGHT);
@@ -103,7 +103,7 @@ Graphical_editor_main_page::Graphical_editor_main_page(const Visual_object::Conf
     create_plugin_info_button(panel, OPEN_IMAGE, current_button_size + DEFAULT_TEXT_OFFSET * 2, INCREASED_BUTTON_HEIGHT);
 
     current_button_size = get_text_length(GHOST_TYPE, EFFECTS_TEXT, INCREASED_BUTTON_HEIGHT / 2);
-    Menu *menu = create_menu({0, 0}, DEFAULT_BUTTON_WIDTH, 500);
+    Menu *menu = create_menu({0, 0}, 500, 1000);
     Button *dc_button = create_double_click_restore_button(panel, menu, EFFECTS_TEXT, current_button_size + DEFAULT_TEXT_OFFSET * 2, INCREASED_BUTTON_HEIGHT);
     menu->set_position(dc_button->get_position() + Vector_ll(0, dc_button->get_height()));
     // test
@@ -291,30 +291,35 @@ bool Graphical_editor_main_page::on_key_pressed(const bool pressed_state, const 
 {
 	Visual_object::on_key_pressed(pressed_state, key_mask);
 
-	if (key_mask == (unsigned)Key::U)
-	{
-		// pencil.set_color(BLACK);
-		Toolbar::get_instance()->set_color(BLACK);
-		return true;
-	}
-	else if (key_mask == (unsigned)Key::R)
-	{
-		// pencil.set_color(RED);
-		Toolbar::get_instance()->set_color(RED);
-		return true;
-	}
-	else if (key_mask == (unsigned)Key::G)
-	{
-		// pencil.set_color(GREEN);
-		Toolbar::get_instance()->set_color(GREEN);
-		return true;
-	}
-	else if (key_mask == (unsigned)Key::B)
-	{
-		// pencil.set_color(BLUE);
-		Toolbar::get_instance()->set_color(BLUE);
-		return true;
-	}
+	// if (key_mask == (unsigned)Key::U)
+	// {
+	// 	// pencil.set_color(BLACK);
+	// 	Application::get_app()->get_tools()->set_color(BLACK);
+	// 	return true;
+	// }
+	// else if (key_mask == (unsigned)Key::R)
+	// {
+	// 	// pencil.set_color(RED);
+	// 	Application::get_app()->get_tools()->set_color(RED);
+	// 	return true;
+	// }
+	// else if (key_mask == (unsigned)Key::G)
+	// {
+	// 	// pencil.set_color(GREEN);
+	// 	Application::get_app()->get_tools()->set_color(GREEN);
+	// 	return true;
+	// }
+	// else if (key_mask == (unsigned)Key::B)
+	// {
+	// 	// pencil.set_color(BLUE);
+	// 	Application::get_app()->get_tools()->set_color(BLUE);
+	// 	return true;
+	// }
 
 	return false;
+}
+
+void Graphical_editor_main_page::set_pencil_color(const Color &par_color) 
+{ 
+	// Application::get_app()->get_tools()->set_color(par_color); 
 }

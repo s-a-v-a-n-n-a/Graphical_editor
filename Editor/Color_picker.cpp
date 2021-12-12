@@ -51,8 +51,8 @@ void Color_picker::set_main_color(const Color &par_main)
 void Color_picker::set_color()
 {
 	// pencil->set_color(color_array[current_position.get_y() * MAX_COLOR_VALUE + current_position.get_x()]);
-	// Toolbar::get_instance()->get_tools()->get_array()[0]->set_color(color_array[current_position.get_y() * MAX_COLOR_VALUE + current_position.get_x()]);
-	// Toolbar::get_instance()->set_color(color_array[current_position.get_y() * get_height() + current_position.get_x()]);
+	// Application::get_app()->get_tools()->get_tools()->get_array()[0]->set_color(color_array[current_position.get_y() * MAX_COLOR_VALUE + current_position.get_x()]);
+	// Application::get_app()->get_tools()->set_color(color_array[current_position.get_y() * get_height() + current_position.get_x()]);
 	(*to_set) = color_array[current_position.get_y() * get_height() + current_position.get_x()];
 }
 

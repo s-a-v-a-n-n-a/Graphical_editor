@@ -24,9 +24,11 @@ private:
 
 	char *text;
 
+	bool centered;
+
 public:
-	Text(const size_t par_type, const char *par_text, const size_t par_font_size, const Vector_ll &par_position, const Color &par_color)
-	: Visual_object({par_type, par_position, nullptr, par_color, strlen(par_text), par_font_size})
+	Text(const size_t par_type, const char *par_text, const size_t par_font_size, const Vector_ll &par_position, const Color &par_color, const bool par_centered = true)
+	: Visual_object({par_type, par_position, nullptr, par_color, strlen(par_text), par_font_size}), centered(par_centered)
 	{
 		set_color(par_color);
 
@@ -52,7 +54,7 @@ public:
 
 	void draw(Screen_information *screen) override
 	{
-		screen->draw_text(text, get_position(), get_color(), font_size);
+		screen->draw_text(text, get_position(), get_color(), font_size, centered);
 	}
 };
 

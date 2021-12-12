@@ -190,8 +190,13 @@ void Screen_information::draw_text(const char *par_text, const Vector_ll &par_po
 	if (centered)
 	{
 		x -= drawable_text.getGlobalBounds().width / 2;
-		y -= drawable_text.getGlobalBounds().height;
 	}
+	y -= drawable_text.getGlobalBounds().height;
+	// else
+	// {
+	// 	x -= drawable_text.getGlobalBounds().width;
+	// 	y -= drawable_text.getGlobalBounds().height;
+	// }
 
 	drawable_text.setPosition(x, y);
 

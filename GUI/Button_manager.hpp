@@ -18,10 +18,10 @@ public:
 
 	void set_position(const Vector_ll &par_position) override { current_end_position += (par_position - get_position()); Visual_object::set_position(par_position); }
 
-	Button *add_button_x(Button_delegate *par_delegate, const char *par_text, Texture *par_texture, const Color par_color, const size_t par_width, const size_t par_height);
-	Button *add_button_y(Button_delegate *par_delegate, const char *par_text, Texture *par_texture, const Color par_color, const size_t par_width, const size_t par_height);
+	Button *add_button_x(Button_delegate *par_delegate, const char *par_text, const bool centered, Texture *par_texture, const Color par_color, const size_t par_width, const size_t par_height);
+	Button *add_button_y(Button_delegate *par_delegate, const char *par_text, const bool centered, Texture *par_texture, const Color par_color, const size_t par_width, const size_t par_height);
 	// Button *add_button(Button_delegate *par_delegate, const char *par_text, const Color par_color, const size_t par_width, const size_t par_height = DEFAULT_BUTTON_HEIGHT);
-	Button *add_button(Button_delegate *par_delegate, const char *par_text, Texture *par_texture, const Color par_color, const size_t par_width = 0, const size_t par_height = 0);
+	Button *add_button(Button_delegate *par_delegate, const char *par_text, Texture *par_texture, const Color par_color, const size_t par_width = 0, const size_t par_height = 0, const bool centered = true);
 
 	// void draw(Screen_information *screen) override;
 };

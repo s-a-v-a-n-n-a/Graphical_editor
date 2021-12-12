@@ -1,11 +1,12 @@
 #include "Canvas.hpp"
 
-#include "../Tools/Toolbar.hpp"
+#include "Application.hpp"
+// #include "../Tools/Toolbar.hpp"
 
 const Color DEFAULT_BACKGROUND_COLOR = WHITE;
 
 Canvas::Canvas(const Visual_object::Config &par_base) //, Pencil *par_pencil
-: Visual_object(par_base), Affected(), current_drawing_color(BLACK), drawing_state(false) // pencil(par_pencil),
+: Visual_object(par_base), Affected(), current_drawing_color(BLACK), drawing_state(false), ready(true) // pencil(par_pencil),
 {
 	preview          = new Color[get_width() * get_height()];
 
@@ -23,7 +24,7 @@ Canvas::Canvas(const Visual_object::Config &par_base) //, Pencil *par_pencil
 
 	delete [] array;
 
-	Tool *current_tool = Toolbar::get_instance()->get_active_tool();
+	Tool *current_tool = Application::get_app()->get_tools()->get_active_tool();
 	if (!current_tool->get_pixels())
 		current_tool->set_data(get_drawing(), Vector_ll(get_width(), get_height()));
 	
@@ -45,7 +46,7 @@ void Canvas::draw_point(const size_t par_x, const size_t par_y)
 
 	// size_t y_coord = position_y + get_height() - (par_y - position_y);
 
-	// Tool *current_tool = Toolbar::get_instance()->get_active_tool();
+	// Tool *current_tool = Application::get_app()->get_tools()->get_active_tool();
 	// size_t tool_size = current_tool->get_size() / 2;
 	
 	// current_tool->apply(get_drawing(), Vector_ll(get_width(), get_height()), Vector_ll(par_x, par_y) - get_position());
@@ -80,6 +81,12 @@ void Canvas::draw_point(const size_t par_x, const size_t par_y)
 
 void Canvas::draw(Screen_information *screen)
 {
+	if (!ready)
+	{
+		make_drawing();
+		ready = true;
+	}
+
 	Visual_object::draw(screen);
 
 	// size_t width = get_width();
@@ -153,6 +160,12 @@ bool Canvas::point_inside (const size_t par_x, const size_t par_y)
 
 // 	get_texture()->set_texture(drawing, get_width(), get_height());
 // }
+Color *Canvas::get_drawing() 
+{ 
+	ready = false; 
+	return original_drawing; 
+}
+
 void Canvas::make_drawing()
 {
 	for (size_t i = 0; i < get_width() * get_height(); ++i)
@@ -169,7 +182,7 @@ bool Canvas::on_mouse_click (const bool state, const size_t par_x, const size_t 
 	if (!point_inside(par_x, par_y))
 		return false;
 
-	Tool *current_tool = Toolbar::get_instance()->get_active_tool();
+	Tool *current_tool = Application::get_app()->get_tools()->get_active_tool();
 
 	if (current_tool->get_color() != current_drawing_color)
 		current_drawing_color = current_tool->get_color();
@@ -196,7 +209,7 @@ bool Canvas::on_mouse_click (const bool state, const size_t par_x, const size_t 
 
 bool Canvas::on_mouse_move(const Vector_ll from, const Vector_ll to)
 {
-	Tool *current_tool = Toolbar::get_instance()->get_active_tool();
+	Tool *current_tool = Application::get_app()->get_tools()->get_active_tool();
 	if (point_inside(to.get_x(), to.get_y()) && drawing_state)
 	{
 		set_applied(false);

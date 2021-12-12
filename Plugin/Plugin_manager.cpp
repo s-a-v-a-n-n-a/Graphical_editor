@@ -23,8 +23,9 @@ Blend_mode app_translate_mode(PBlendMode mode)
 
 PRGBA *app_get_pixels()
 {
-	Vector_ll params = Toolbar::get_instance()->get_active_tool()->get_params();
-	Color *data = Toolbar::get_instance()->get_active_tool()->get_pixels();
+	Vector_ll params = Application::get_app()->get_tools()->get_active_tool()->get_params();
+	// Color *data = Application::get_app()->get_tools()->get_active_tool()->get_pixels();
+	Color *data = ((Graphical_editor_main_page*)Application::get_app()->get_default())->get_active_canvas()->get_drawing();
 
 	PRGBA *pixels = new	PRGBA[params.get_x() * params.get_y()];
 	for (size_t i = 0; i < params.get_x() * params.get_y(); ++i)
@@ -35,7 +36,7 @@ PRGBA *app_get_pixels()
 
 void app_get_size(size_t *width, size_t *height)
 {
-	Vector_ll params = Toolbar::get_instance()->get_active_tool()->get_params();
+	Vector_ll params = Application::get_app()->get_tools()->get_active_tool()->get_params();
 
 	(*width) = (size_t)params.get_x(); 
 	(*height) = (size_t)params.get_y(); 
@@ -59,8 +60,8 @@ void app_log(const char *fmt, ...)
 
 void app_release_pixels(PRGBA *pixels)
 {
-	Vector_ll params = Toolbar::get_instance()->get_active_tool()->get_params();
-	Color *data = Toolbar::get_instance()->get_active_tool()->get_pixels();
+	Vector_ll params = Application::get_app()->get_tools()->get_active_tool()->get_params();
+	Color *data = Application::get_app()->get_tools()->get_active_tool()->get_pixels();
 
 	for (size_t i = 0; i < params.get_x() * params.get_y(); ++i)
 		data[i] = *((Color*)&(pixels[i]));
@@ -70,14 +71,14 @@ void app_release_pixels(PRGBA *pixels)
 
 PRGBA app_get_current_color()
 {
-	Color color = Toolbar::get_instance()->get_color();
+	Color color = Application::get_app()->get_tools()->get_color();
 
 	return *((PRGBA*)&(color));
 }
 
 float app_get_current_size()
 {
-	return (float)Toolbar::get_instance()->get_active_tool()->get_size();
+	return (float)Application::get_app()->get_tools()->get_active_tool()->get_size();
 }
 
 void app_circle(PVec2f position, float radius, PRGBA color, const PRenderMode *render_mode)
@@ -85,22 +86,22 @@ void app_circle(PVec2f position, float radius, PRGBA color, const PRenderMode *r
 	Vector_ll pos = Vector_ll((long long)position.x, (long long)position.y);
 	Color app_color = { color.r, color.g, color.b, color.a };
 
-	size_t pencil_size = Toolbar::get_instance()->get_active_tool()->get_size() / 2;
-	// Color pencil_color = Toolbar::get_instance()->get_color();
+	size_t pencil_size = Application::get_app()->get_tools()->get_active_tool()->get_size() / 2;
+	// Color pencil_color = Application::get_app()->get_tools()->get_color();
 
 	Blend_mode mode = app_translate_mode(render_mode->blend);
 
 	size_t begin_x = (pos.get_x() - radius) > 0 ? (pos.get_x() - radius) : 0;
 	size_t begin_y = (pos.get_y() - radius) > 0 ? (pos.get_y() - radius) : 0;
 
-	size_t width = Toolbar::get_instance()->get_active_tool()->get_params().get_x();
-	size_t height = Toolbar::get_instance()->get_active_tool()->get_params().get_y();
+	size_t width = Application::get_app()->get_tools()->get_active_tool()->get_params().get_x();
+	size_t height = Application::get_app()->get_tools()->get_active_tool()->get_params().get_y();
 
 	size_t end_x = (pos.get_x() + radius) < width ? (pos.get_x() + radius) : width;
 	size_t end_y = (pos.get_y() + radius) < height ? (pos.get_y() + radius) : height;
 
 	Vector_ll center = pos;
-	Color *to_apply = Toolbar::get_instance()->get_active_tool()->get_pixels();
+	Color *to_apply = Application::get_app()->get_tools()->get_active_tool()->get_pixels();
 
 	for (size_t i = begin_y; i < end_y; ++i)
 		for (size_t j = begin_x; j < end_x; ++j)
@@ -123,8 +124,8 @@ void app_rectangle(PVec2f p1, PVec2f p2, PRGBA color, const PRenderMode *render_
 	Vector_ll position = Vector_ll(x_pos, y_pos);
 	Color local_color = { color.r, color.g, color.b, color.a };
 
-	size_t pencil_size = Toolbar::get_instance()->get_active_tool()->get_size() / 2;
-	Color pencil_color = Toolbar::get_instance()->get_color();
+	size_t pencil_size = Application::get_app()->get_tools()->get_active_tool()->get_size() / 2;
+	Color pencil_color = Application::get_app()->get_tools()->get_color();
 
 	size_t width = (size_t)((fabs)(p2.x - p1.x));
 	size_t height = (size_t)((fabs)(p2.y - p1.y));
@@ -135,7 +136,7 @@ void app_rectangle(PVec2f p1, PVec2f p2, PRGBA color, const PRenderMode *render_
 	size_t end_x = x_pos + pencil_size < width ? x_pos + pencil_size : x_pos;
 	size_t end_y = y_pos + pencil_size < height ? y_pos + pencil_size : y_pos;
 
-	Color *to_apply = Toolbar::get_instance()->get_active_tool()->get_pixels();
+	Color *to_apply = Application::get_app()->get_tools()->get_active_tool()->get_pixels();
 
 	for (size_t i = begin_y; i < end_y; ++i)
 		for (size_t j = begin_x; j < end_x; ++j)
@@ -163,9 +164,9 @@ void app_triangle(PVec2f p1, PVec2f p2, PVec2f p3, PRGBA color, const PRenderMod
 	size_t end_x = p1.x > p2.x ? (p1.x > p3.x ? p1.x : p3.x) : (p2.x > p3.x ? p2.x : p3.x);
 	size_t end_y = p1.y > p2.y ? (p1.y > p3.y ? p1.y : p3.y) : (p2.y > p3.y ? p2.y : p3.y);
 
-	size_t width = Toolbar::get_instance()->get_active_tool()->get_params().get_x();
-	size_t height = Toolbar::get_instance()->get_active_tool()->get_params().get_y();
-	Color *to_apply = Toolbar::get_instance()->get_active_tool()->get_pixels();
+	size_t width = Application::get_app()->get_tools()->get_active_tool()->get_params().get_x();
+	size_t height = Application::get_app()->get_tools()->get_active_tool()->get_params().get_y();
+	Color *to_apply = Application::get_app()->get_tools()->get_active_tool()->get_pixels();
 
 	for (size_t i = begin_y; i < end_y; ++i)
 	{
@@ -335,6 +336,13 @@ Plugin_manager::Plugin_manager()
 
 Plugin_manager::~Plugin_manager()
 {
+	size_t plugins_amount = plugins.size();
+
+	for (long long i = plugins_amount - 1; i >= 0; --i)
+	{
+		plugins.pop_back();
+	}
+
 	delete app_interface;
 }
 
@@ -431,7 +439,7 @@ void Plugin_manager::load_from_dir(const char *path)
 void Plugin_manager::add_plugin(const char *filename, bool is_path)
 {
 	PAppInterface *app_interface = create_app_interface();
-
+	
 	void *handle = nullptr;
 	if (!is_path)
 	{
@@ -475,14 +483,14 @@ void Plugin_manager::add_tool(const PPluginInterface *plugin, const PAppInterfac
 	else
 		tool = new Plugin_tool(plugin, app_interface, par_handle);
 	// printf("[Application message]: need to push at list\n");
-	plugins.add_to_end(tool);
+	plugins.push_back(tool);
 
 	PPluginStatus result = plugin->general.init(app_interface);
 	// printf("[Application message]: initialization ended\n");	
 	if (result != PPS_OK)
 		printf("Could not initialize plugin tool\n");
 
-	Toolbar::get_instance()->add_tool(tool);
+	Application::get_app()->get_tools()->add_tool(tool);
 }
 
 void Plugin_manager::add_effect(const PPluginInterface *plugin, const PAppInterface *app_interface, void *par_handle)
@@ -494,7 +502,8 @@ void Plugin_manager::add_effect(const PPluginInterface *plugin, const PAppInterf
 	else
 		effect = new Plugin_effect(plugin, app_interface, par_handle, ((Graphical_editor_main_page*)(Application::get_app()->get_default()))->get_active_canvas());
 
-	plugins.add_to_end(effect);
+	plugins.push_back(effect);
+	
 	PPluginStatus result = plugin->general.init(app_interface);
 	if (result != PPS_OK)
 		printf("Could not initialize plugin effect\n");
@@ -507,14 +516,13 @@ void Plugin_manager::add_effect(const PPluginInterface *plugin, const PAppInterf
 
 Plugin *Plugin_manager::get_plugin(const PPluginInterface *self)
 {
-	size_t plugins_amount = plugins.get_length();
-	Plugin **plugins_array = plugins.get_array();
+	size_t plugins_amount = plugins.size();
 
 	for (size_t i = 0; i < plugins_amount; ++i)
 	{
-		if (plugins_array[i]->get_plugin() == self)
+		if (plugins[i]->get_plugin() == self)
 		{
-			return plugins_array[i];
+			return plugins[i];
 		}
 	}
 

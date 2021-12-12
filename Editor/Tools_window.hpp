@@ -4,7 +4,7 @@
 #include "../GUI/Visual_object_base.hpp"
 #include "../GUI/Button.hpp"
 
-#include "../Tools/Toolbar.hpp"
+// #include "../Tools/Toolbar.hpp"
 
 #include "Window.hpp"
 #include "Editor_delegates.hpp"
@@ -16,12 +16,7 @@ public:
 	Color_button(const Visual_object::Config &par_base, Button_delegate *par_click, const char *par_text)
 	: Button(par_base, par_click, par_text) {}
 
-	void tick(Screen_information *screen, const double delta_time) override
-	{
-		set_color(Toolbar::get_instance()->get_color());
-		
-		Button::tick(screen, delta_time);
-	}
+	void tick(Screen_information *screen, const double delta_time) override;
 };
 
 class Tools_window : public Window

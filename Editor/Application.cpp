@@ -8,20 +8,26 @@ Application_destroyer Application::destroyer;
 Application::Application()
 : graphics_wrapper(nullptr), default_main(nullptr), current_main(nullptr), timer()
 {
+    app = this;
+
     graphics_wrapper = new Screen_information(DEFAULT_SIZE, DEFAULT_SIZE);
 
-	Graphical_editor_main_page *editor = new Graphical_editor_main_page({(size_t)Vidget_type::EDITOR, Vector_ll(0, 0), nullptr, DARK_GREY, DEFAULT_SIZE, DEFAULT_SIZE});
-	default_main = editor;
-	current_main = default_main;
-
+    tools = new Toolbar();
     plugins = new Plugin_manager();
     effects = new Effect_manager();
+
+    Graphical_editor_main_page *editor = new Graphical_editor_main_page({(size_t)Vidget_type::EDITOR, Vector_ll(0, 0), nullptr, DARK_GREY, DEFAULT_SIZE, DEFAULT_SIZE});
+    default_main = editor;
+    current_main = default_main;
+
+    printf("[Application] : end of initialization\n");
 }
 
 Application::~Application()
 {
-	delete plugins;
+    delete tools;
     delete effects;
+	delete plugins;
 
     delete graphics_wrapper;
 	delete default_main;
@@ -31,7 +37,7 @@ Application *Application::get_app()
 {
 	if (app == nullptr)
 	{
-		app = new Application();
+		new Application();
 		destroyer.initialize(app);
 	}
 
@@ -83,6 +89,11 @@ Effect_manager *Application::get_effects()
     return effects;
 }
 
+Toolbar *Application::get_tools()
+{
+    return tools;   
+}
+
 void Application::add_visual_object(Visual_object *object)
 {
     default_main->add_visual_object(object);
@@ -119,7 +130,7 @@ void Application::tick()
 
 void Application::launch()
 {
-	plugins->load_from_dir("Plugins_self/");
+    plugins->load_from_dir("Plugins_self/");
 
     Vector_ll click_place(0, 0);
 

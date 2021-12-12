@@ -26,10 +26,11 @@ public:
 		size_t position_y = position.get_y();
 		
 		// Tools::set_color(position_y * width + position_y);
-		Toolbar::get_instance()->set_color(to_apply[position_y * width + position_x]);
+		// Application::get_app()->get_tools()->set_color(to_apply[position_y * width + position_x]);
+		set_color(to_apply[position_y * width + position_x]);
 	}
 
-	void set_color(const Color &par_color) override { ; }
+	// void set_color(const Color &par_color) override { ; }
 };
 
 

@@ -71,7 +71,7 @@ class Plugin_manager
 private:
 	// Visual_object *surface;
 
-	List<Plugin*> plugins; // надо ли? надо
+	std::vector<Plugin*> plugins; // надо ли? надо
 	// List<Plugin_tool*> tools; // надо ли? надо
 	// List<Plugin_effect*> effects; // надо ли? надо
 	PAppInterface *app_interface;

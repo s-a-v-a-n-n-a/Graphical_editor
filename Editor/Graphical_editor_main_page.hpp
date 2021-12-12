@@ -40,7 +40,7 @@ public:
 
 	// Color get_pencil_color() { return pencil.get_color(); }
 	
-	void set_pencil_color(const Color &par_color) { Toolbar::get_instance()->set_color(par_color); }
+	void set_pencil_color(const Color &par_color);
 
 	// void draw(Screen_information *screen) override;
 	// bool on_mouse(const double par_x, const double par_y) override;

@@ -2,8 +2,8 @@
 
 #include "Pipette.hpp"
 
-Toolbar *Toolbar::toolbar = nullptr;
-Toolbar_destroyer Toolbar::destroyer;
+// Toolbar *Toolbar::toolbar = nullptr;
+// Toolbar_destroyer Toolbar::destroyer;
 
 Toolbar::Toolbar()
 : tools(), active_tool(nullptr), current_color(DEFAULT_TOOL_COLOR) 
@@ -19,6 +19,8 @@ Toolbar::Toolbar()
 
 	tools_amount = tools.size();
 	set_active_tool(pencil);
+
+	set_color(current_color);
 }
 
 Toolbar::~Toolbar()
@@ -29,16 +31,16 @@ Toolbar::~Toolbar()
 	}
 }
 
-Toolbar *Toolbar::get_instance()
-{
-	if (toolbar == nullptr)
-	{
-		toolbar = new Toolbar();
-		destroyer.initialize(toolbar);
-	}
+// Toolbar *Application::get_app()->get_tools()
+// {
+// 	if (toolbar == nullptr)
+// 	{
+// 		toolbar = new Toolbar();
+// 		destroyer.initialize(toolbar);
+// 	}
 
-	return toolbar;
-}
+// 	return toolbar;
+// }
 
 void Toolbar::add_tool(Tool *tool)
 {
@@ -71,8 +73,10 @@ void Toolbar::set_color(const Color &color)
 	}
 }
 
-Color Toolbar::get_color() const
+Color Toolbar::get_color()
 {
+	if (current_color != active_tool->get_color())
+		set_color(active_tool->get_color());
 	return current_color;
 }
 
@@ -83,12 +87,12 @@ size_t Toolbar::get_tools_amount() const
 
 
 
-Toolbar_destroyer::~Toolbar_destroyer() 
-{ 
-	delete toolbar; 
-}
+// Toolbar_destroyer::~Toolbar_destroyer() 
+// { 
+// 	delete toolbar; 
+// }
 
-void Toolbar_destroyer::initialize(Toolbar *par_toolbar) 
-{ 
-	toolbar = par_toolbar; 
-}
+// void Toolbar_destroyer::initialize(Toolbar *par_toolbar) 
+// { 
+// 	toolbar = par_toolbar; 
+// }

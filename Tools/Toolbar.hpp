@@ -6,25 +6,25 @@
 #include "Pencil.hpp"
 #include "Eraser.hpp"
 
-class Toolbar;
+// class Toolbar;
 
-class Toolbar_destroyer
-{
-private:
-	Toolbar *toolbar;
+// class Toolbar_destroyer
+// {
+// private:
+// 	Toolbar *toolbar;
 
 
-public:
-	~Toolbar_destroyer();
+// public:
+// 	~Toolbar_destroyer();
 
-	void initialize(Toolbar *par_toolbar);
-};
+// 	void initialize(Toolbar *par_toolbar);
+// };
 
 class Toolbar
 {
 private:
-	static Toolbar *toolbar;
-	static Toolbar_destroyer destroyer;
+	// static Toolbar *toolbar;
+	// static Toolbar_destroyer destroyer;
 
 	// List<Tool*> tools;
 	std::vector<Tool*> tools;
@@ -34,14 +34,14 @@ private:
 
 	Color current_color;
 
-protected:
-// public:
-	Toolbar();
-	friend class Toolbar_destroyer;
-
+// protected:
 public:
+	Toolbar();
+	// friend class Toolbar_destroyer;
+
+// public:
 	~Toolbar();
-	static Toolbar *get_instance();
+	// static Toolbar *get_instance();
 
 	void add_tool(Tool *tool);
 
@@ -52,7 +52,7 @@ public:
 	const std::vector<Tool*> &get_tools();
 
 	void set_color(const Color &color);
-	Color get_color() const;
+	Color get_color();
 };
 
 #endif // TOOLBAR_H

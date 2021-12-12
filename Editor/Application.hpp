@@ -10,6 +10,7 @@
 
 // ?????????????
 #include "../Plugin/Plugin_manager.hpp"
+#include "../Tools/Toolbar.hpp"
 #include "Effects/Canvas_effects_manager.hpp"
 // #include "../Plugin/plugin_std.hpp"
 
@@ -36,6 +37,7 @@ private:
 
 	Plugin_manager *plugins;
 	Effect_manager *effects;
+	Toolbar *tools;
 	
 	Visual_object *current_main;
 	Visual_object *default_main;
@@ -54,9 +56,11 @@ public:
 
 	void add_plugin(const char *plugin_name);
 	void add_effect(Effect<Canvas> *effect);
+	void add_tool(Tool *tool);
 	
 	Plugin_manager *get_plugins();
 	Effect_manager *get_effects();
+	Toolbar *get_tools();
 
 	size_t get_time();
 	

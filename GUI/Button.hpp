@@ -21,7 +21,8 @@ private:
 
 public:
 	Button() = delete;
-	Button(const Visual_object::Config &base, Button_delegate *par_click, const char *par_text);
+	Button(const Visual_object::Config &base, Button_delegate *par_click);
+	Button(const Visual_object::Config &base, Button_delegate *par_click, const char *par_text, const bool centered = true);
 	// Button(const size_t par_type, const Vector_ll &par_position, const Color &par_color, const size_t par_width, const size_t par_height, Button_delegate *par_click, const char *par_text);
 	// Button(const size_t par_type, const Vector_ll &par_position, Texture *par_texture, const size_t par_width, const size_t par_height, Button_delegate *par_click, const char *par_text);
 	~Button();

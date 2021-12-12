@@ -4,18 +4,33 @@ const size_t DEFAULT_BUTTON_HEIGHT = 50;
 const size_t INCREASED_BUTTON_HEIGHT = 70;
 const size_t DEFAULT_BUTTON_WIDTH = 200;
 
-Button::Button(const Visual_object::Config &base, Button_delegate *par_click, const char *par_text)
-: Visual_object(base), pressed(false)
+Button::Button(const Visual_object::Config &base, Button_delegate *par_click)
+: Visual_object(base), pressed(false), click(par_click) {}
+
+Button::Button(const Visual_object::Config &base, Button_delegate *par_click, const char *par_text, const bool centered)
+: Visual_object(base), pressed(false), click(par_click)
 {
 	size_t offset = get_height() / 2;
-	Text *text = new Text((size_t)Vidget_type::TEXT, 
+	Text *text = nullptr;
+	if (centered)
+	{
+		text = new Text((size_t)Vidget_type::TEXT, 
 							par_text, 
 							offset, 
-							get_position() + Vector_ll(get_width()/2.0, get_height()/2.0), //par_position + 
-							DEFAULT_TEXT_COLOR);
+							get_position() + Vector_ll(get_width()/2, get_height()/2), //par_position + 
+							DEFAULT_TEXT_COLOR,
+							centered);
+	}
+	else
+	{
+		text = new Text((size_t)Vidget_type::TEXT, 
+							par_text, 
+							offset, 
+							get_position() + Vector_ll(10, get_height()/2), //par_position + 
+							DEFAULT_TEXT_COLOR,
+							centered);
+	}
 	add_visual_object(text);
-
-	click = par_click;
 }
 
 Button::~Button()

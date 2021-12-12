@@ -51,6 +51,7 @@ FILES   	= $(OBJ)main.o \
 			$(OBJ)Editor/Search_box.o \
 			$(OBJ)Editor/Menu.o \
 			$(OBJ)Editor/Effects/Canvas_effects_manager.o \
+			$(OBJ)Editor/Thickness_window.o \
 			$(OBJ)Plugin/Plugin_manager.o \
 			$(OBJ)Plugin/Plugin_tool.o \
 			$(OBJ)Plugin/Plugin_effect.o \

@@ -1,16 +1,24 @@
 #include "Tools_window.hpp"
 
+#include "Application.hpp"
 #include "../GUI/Text.hpp"
+
+void Color_button::tick(Screen_information *screen, const double delta_time)
+{
+	set_color(Application::get_app()->get_tools()->get_color());
+	
+	Button::tick(screen, delta_time);
+}
 
 Tools_window::Tools_window(const Visual_object::Config &par_base)
 : Window(par_base)
 {
 	text_size = 50;
-	icon_size = get_width()/3;
-	icons_in_line = 3;
+	icon_size = get_width()/2;
+	icons_in_line = 2;
 
-	size_t default_tools_amount = Toolbar::get_instance()->get_tools_amount();
-	std::vector<Tool*> tools = Toolbar::get_instance()->get_tools();
+	size_t default_tools_amount = Application::get_app()->get_tools()->get_tools_amount();
+	std::vector<Tool*> tools = Application::get_app()->get_tools()->get_tools();
 
 	size_t y_offset = DEFAULT_BUTTON_HEIGHT;
 	for (size_t i = 0; i < default_tools_amount; i += icons_in_line)
@@ -30,12 +38,12 @@ Tools_window::Tools_window(const Visual_object::Config &par_base)
 
 		y_offset += icon_size + text_size;
 	}
-	if (default_tools_amount % 3)
+	if (default_tools_amount % icons_in_line)
 		y_offset -= icon_size + text_size;	
 
 	Animating_texture *color_texture = Resources::get_instance()->create_texture(COLOR_BUTTON, icon_size, icon_size, ACTIVE_COLOR_BUTTON, NULL);
 
-	Color_button *color_button = new Color_button({(size_t)Vidget_type::BUTTON, get_position() + Vector_ll((default_tools_amount % icons_in_line) * icon_size, y_offset), color_texture, Toolbar::get_instance()->get_color(), icon_size, icon_size}, NULL, "");
+	Color_button *color_button = new Color_button({(size_t)Vidget_type::BUTTON, get_position() + Vector_ll((default_tools_amount % icons_in_line) * icon_size, y_offset), color_texture, Application::get_app()->get_tools()->get_color(), icon_size, icon_size}, NULL, "");
 	Animating_color_picker_creator *color_creator = new Animating_color_picker_creator({300, 300}, color_button);
 	color_button->set_delegate(color_creator);
 	add_visual_object(color_button);
@@ -88,12 +96,12 @@ void Tools_window::tick(Screen_information *screen, const double delta_time)
 {
 	Visual_object::tick(screen, delta_time);
 
-	size_t current_tools_amount = Toolbar::get_instance()->get_tools_amount();
+	size_t current_tools_amount = Application::get_app()->get_tools()->get_tools_amount();
 	if (current_tools_amount != (tools_amount - 1))
 	{
 		for (size_t i = tools_amount - 1; i < current_tools_amount; ++i)
 		{
-			Tool *add = Toolbar::get_instance()->get_tools()[i];
+			Tool *add = Application::get_app()->get_tools()->get_tools()[i];
 			add_tool(add);
 		}
 	}

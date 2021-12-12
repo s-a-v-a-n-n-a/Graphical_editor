@@ -384,23 +384,10 @@ private:
 	Color *color;
 
 public:
-	Popup_color_confirmation(Visual_object *par_roll_up, Color *to_set)
-	: Roll_up_confirmation(par_roll_up), color(to_set)
-	{}
+	Popup_color_confirmation(Visual_object *par_roll_up, Color *to_set);
 
-	bool on_mouse_click(const size_t par_x, const size_t par_y) override
-	{
-		Roll_up_confirmation::on_mouse_click(par_x, par_y);
-
-		return true;
-	}
-	bool on_mouse_release() override
-	{
-		Roll_up_confirmation::on_mouse_release();
-		Toolbar::get_instance()->set_color(*color);
-		
-		return true;
-	}
+	bool on_mouse_click(const size_t par_x, const size_t par_y) override;
+	bool on_mouse_release() override;
 };
 
 // --------------------------------------------------------------------------------------------------------------------------
