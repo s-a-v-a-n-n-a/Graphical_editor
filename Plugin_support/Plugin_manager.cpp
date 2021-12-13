@@ -23,11 +23,16 @@ Blend_mode app_translate_mode(PBlendMode mode)
 
 PRGBA *app_get_pixels()
 {
-	Vector_ll params = Application::get_app()->get_tools()->get_active_tool()->get_params();
+	if (!((Graphical_editor_main_page*)Application::get_app()->get_default())->get_active_canvas())
+		return nullptr;
+
+	size_t width = ((Graphical_editor_main_page*)Application::get_app()->get_default())->get_active_canvas()->get_width();
+	size_t height = ((Graphical_editor_main_page*)Application::get_app()->get_default())->get_active_canvas()->get_height();
+
 	Color *data = ((Graphical_editor_main_page*)Application::get_app()->get_default())->get_active_canvas()->get_drawing();
 
-	PRGBA *pixels = new	PRGBA[params.get_x() * params.get_y()];
-	for (size_t i = 0; i < params.get_x() * params.get_y(); ++i)
+	PRGBA *pixels = new	PRGBA[width * height];
+	for (size_t i = 0; i < width * height; ++i)
 		pixels[i] = *((PRGBA*)&(data[i]));
 
 	return pixels;
@@ -59,12 +64,6 @@ void app_log(const char *fmt, ...)
 
 void app_release_pixels(PRGBA *pixels)
 {
-	Vector_ll params = Application::get_app()->get_tools()->get_active_tool()->get_params();
-	Color *data = Application::get_app()->get_tools()->get_active_tool()->get_pixels();
-
-	for (size_t i = 0; i < params.get_x() * params.get_y(); ++i)
-		data[i] = *((Color*)&(pixels[i]));
-
 	delete [] pixels;
 }
 
@@ -200,7 +199,7 @@ void app_pixels(PVec2f position, const PRGBA *data, size_t width, size_t height,
 	Vector_ll pos = Vector_ll(position.x, position.y);
 
 	Blend_mode mode = app_translate_mode(render_mode->blend);
-	Application::get_app()->graphics_wrapper->draw_image((Color*)data, pos, (size_t)width, (size_t)height, mode);
+	((Graphical_editor_main_page*)Application::get_app()->get_default())->get_active_canvas()->apply((Color*)data, mode);
 }
 
 void app_create_surface(const PPluginInterface *self, size_t width, size_t height)
@@ -261,7 +260,6 @@ void app_get(const PPluginInterface *self, void *handle, void *answer)
 	if (((Visual_object*)handle)->get_type() == (size_t)Vidget_type::INPUT_STRING)
 	{
 		((PTextFieldSetting*)answer)->text = ((Dialog*)plugin->get_surface())->get_text((Input_string*)handle);
-		// printf("I sent %s\n", *(char**)(answer));
 		return;
 	}
 }
@@ -420,10 +418,10 @@ void Plugin_manager::load_from_dir(const char *path)
     {
         size_t dir_name_length = strlen(to_read->d_name);
  
-        printf("%s\n", to_read->d_name);
+        // printf("%s\n", to_read->d_name);
         if (strcmp(extension, to_read->d_name + dir_name_length - extension_length) != 0) 
         	continue;
-        printf("%s\n", to_read->d_name);
+        // printf("%s\n", to_read->d_name);
 
         char *libname = new char[path_length + dir_name_length + 1];
         sprintf(libname, "%s%s", path, to_read->d_name);

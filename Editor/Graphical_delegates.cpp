@@ -88,7 +88,7 @@ bool Animating::on_mouse_click(const size_t par_x, const size_t par_y)
 
 bool Animating::on_mouse_move(const Vector_ll from, const Vector_ll to)
 {
-	if (to_animate->point_inside(to.get_x(), to.get_y()))
+	if (to_animate->point_inside(to.get_x(), to.get_y()) && !to_animate->point_inside(from.get_x(), from.get_y()))
 	{
 		if (!move_in)
 		{

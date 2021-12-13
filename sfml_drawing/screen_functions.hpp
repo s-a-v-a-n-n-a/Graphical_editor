@@ -34,6 +34,8 @@ enum class Blend_mode
 	COPY
 };
 
+sf::BlendMode blending_mode(const Blend_mode mode);
+
 extern const char *screen_state_text[];
 
 class Screen_information 
@@ -75,7 +77,7 @@ public:
 	void set_mouse_state(const bool par_state) { mouse_clicked = par_state; }
 	// ---------------------------------------------------------------------
 	
-	sf::BlendMode blending_mode(const Blend_mode mode);
+	// sf::BlendMode blending_mode(const Blend_mode mode);
 
 	// drawings
 	// ---------------------------------------------------------------------

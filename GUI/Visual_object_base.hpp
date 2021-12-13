@@ -33,13 +33,14 @@ protected:
 		size_t height;
 	};
 
+	Visual_object *current_active;
+
 private:
 	
 	Config base;
 
 	// Visual_object *parent;
 	List<Visual_object*> objects;
-	Visual_object *current_active;
 
 	bool active;
 	bool visible;

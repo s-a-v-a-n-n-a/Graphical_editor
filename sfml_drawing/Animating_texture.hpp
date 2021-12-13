@@ -21,6 +21,17 @@ public:
 		move_texture = nullptr;
 		inactive_texture = nullptr;
 	}
+
+	Animating_texture(const char *par_texture_name)
+	: Full_texture(par_texture_name), default_texture(nullptr), move_texture(nullptr), inactive_texture(nullptr) 
+	{ 
+		default_texture = new Full_texture(par_texture_name, get_width(), get_height());
+
+		// current_texture = default_texture; 
+		move_texture = nullptr;
+		inactive_texture = nullptr;
+	}
+
 	~Animating_texture()
 	{
 		if (inactive_texture)

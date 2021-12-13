@@ -8,6 +8,9 @@ Menu::Menu(const Visual_object::Config &par_base)
 {
 	buttons = new Button_manager(par_base, false);
 	add_visual_object(buttons);
+
+	set_reactive(false);
+	set_visible(false);
 }
 
 Menu::~Menu()

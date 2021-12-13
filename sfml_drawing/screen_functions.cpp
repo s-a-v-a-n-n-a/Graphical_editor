@@ -56,7 +56,7 @@ size_t Screen_information::get_height()
 	return height;
 }
 
-sf::BlendMode Screen_information::blending_mode(const Blend_mode mode)
+sf::BlendMode blending_mode(const Blend_mode mode)
 {
 	switch (mode)
 	{

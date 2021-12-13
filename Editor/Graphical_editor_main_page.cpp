@@ -169,7 +169,9 @@ Button_manager *Graphical_editor_main_page::create_button_panel(const Vector_ll 
 
 Canvas_manager_manager *Graphical_editor_main_page::create_canvas_manager(const Vector_ll &position, const size_t width, const size_t height)
 {
-	Canvas_manager_manager *canvas = new Canvas_manager_manager({this, (size_t)Vidget_type::CANVAS_MANAGER_MANAGER, position, nullptr, TRANSPARENT, width, height});
+	Full_texture *texture = Application::get_app()->get_rescrs()->create_texture(WINDOW_BACKGROUND, width, height);
+
+	Canvas_manager_manager *canvas = new Canvas_manager_manager({this, (size_t)Vidget_type::CANVAS_MANAGER_MANAGER, position, texture, TRANSPARENT, width, height});
 	add_visual_object(canvas);
 
 	return canvas;

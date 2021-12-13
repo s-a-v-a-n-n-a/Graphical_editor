@@ -30,6 +30,7 @@ const char BRUSHES_BACKGROUND_TEXTURE[] = "graphical_attributes/Textures/Brush_s
 const char WINDOW_CONTROL_TEXTURE[] = "graphical_attributes/Textures/Window_control.png";
 const char TEXT_TEXTURE[] = "graphical_attributes/Textures/Text_button.png";
 const char CANVAS_TEXTURE[] = "graphical_attributes/Textures/Canvas.png";
+const char CANVAS_BCKGRND[] = "graphical_attributes/Textures/Canvas_background.jpg";
 
 const char SLIDER_LINE_HOR[] = "graphical_attributes/Textures/Line.png";
 const char SLIDER_LEFT[] = "graphical_attributes/Textures/Arrow_left.png";

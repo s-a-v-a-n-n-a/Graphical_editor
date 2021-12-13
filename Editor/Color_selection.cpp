@@ -41,8 +41,6 @@ Color_selection_window::create_gradient_bar(const Vector_ll &position, const siz
 
 bool Color_selection_window::on_mouse_click(const bool state, const size_t par_x, const size_t par_y)
 {
-	printf("[Color_selection_window] : clicked\n");
-
 	return Visual_object::on_mouse_click(state, par_x, par_y);
 }
 

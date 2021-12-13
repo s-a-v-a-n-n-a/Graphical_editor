@@ -17,7 +17,7 @@ private:
 
 public:
 	// поэтому получает информацию о главном
-	Canvas_manager(const Visual_object::Config &par_base, const size_t predecessors_amount);
+	Canvas_manager(const Visual_object::Config &par_base, const size_t predecessors_amount, Texture *par_texture = nullptr);
 	~Canvas_manager();
 
 	void draw(Screen_information *screen) override;

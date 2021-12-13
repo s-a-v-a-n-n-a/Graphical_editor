@@ -89,9 +89,6 @@ bool Visual_object::point_inside(const size_t par_x, const size_t par_y)
 
 void Visual_object::move_to_end(Visual_object *child, size_t child_number)
 {
-	// set_active(child);
-	// child->set_active_state(true);
-	
 	// slow_delete
 	objects.extract(child_number);
 	// push
@@ -109,7 +106,7 @@ bool Visual_object::on_mouse_click(const bool state, const size_t par_x, const s
 	
 	for (long long i = (long long)objects_amount - 1; i >= 0; --i)
 	{
-		if ((get_objects()->get_array()[i])->on_mouse_click(state, par_x, par_y))//(((get_objects()->get_array()[i])->get_reactive() || state == Mouse_state::MOVED) && (get_objects()->get_array()[i])->on_mouse(state, par_x, par_y)) // ??????
+		if ((get_objects()->get_array()[i])->get_reactive() && (get_objects()->get_array()[i])->on_mouse_click(state, par_x, par_y))//(((get_objects()->get_array()[i])->get_reactive() || state == Mouse_state::MOVED) && (get_objects()->get_array()[i])->on_mouse(state, par_x, par_y)) // ??????
 		{
 			// set_active(get_objects()->get_array()[i]);
 			// (get_objects()->get_array()[i])->set_active_state(true);

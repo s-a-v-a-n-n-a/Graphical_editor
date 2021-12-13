@@ -4,15 +4,15 @@ DFLT    = @echo "\033[0;m";
 ifeq ($(ASAN), 1)
 ASAN =-fsanitize=address
 else
-ASAN = 
+ASAN =
 endif
- 
+
 COMPILATOR  = clang++# g++ -std=c++17
 INC     	= 
 SFML    	= -lsfml-graphics -lsfml-window -lsfml-system
 OPT     	= -O3
 DEF     	= -DNDEBUG
-CFLAGS  	= $(OPT) $(DEF) $(ASAN) -g $(INC)
+CFLAGS  	= $(OPT) $(DEF) $(ASAN) -g $(INC) 
 DLL			= -ldl -lm -lpthread -pthread
 OBJ     	= obj/
 EXE     	= main
@@ -22,6 +22,7 @@ FILES   	= $(OBJ)main.o \
 			$(OBJ)sfml_drawing/colors.o \
 			$(OBJ)sfml_drawing/Texture_names.o \
 			$(OBJ)sfml_drawing/Text.o \
+			$(OBJ)sfml_drawing/Texture.o \
 			$(OBJ)math_structures/Interpolator.o \
 			$(OBJ)GUI/Visual_object_base.o \
 			$(OBJ)GUI/Button.o \

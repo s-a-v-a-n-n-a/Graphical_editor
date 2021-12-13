@@ -14,6 +14,14 @@ Canvas::Canvas(const Visual_object::Config &par_base) //, Pencil *par_pencil
 	original_drawing = new Color[get_width() * get_height()];
 	
 	Color *array = ((Full_texture*)get_texture())->get_pixels();
+	// else
+	// {
+	// 	array = new Color[get_width() * get_height()];
+	// 	for (size_t i = 0; i < get_width() * get_height(); ++i)
+	// 	{
+	// 		array[i] = get_color();
+	// 	}
+	// }
 
 	for (size_t i = 0; i < get_width() * get_height(); ++i)
 	{
@@ -224,4 +232,13 @@ bool Canvas::on_mouse_move(const Vector_ll from, const Vector_ll to)
 		set_drawing_state(false);
 		return false;
 	}
+}
+
+void Canvas::apply(Color *data, const Blend_mode &mode)
+{
+	make_drawing();
+
+	((Full_texture*)get_texture())->add_picture(data, get_width(), get_height(), blending_mode(mode));
+	delete [] original_drawing;
+	original_drawing = ((Full_texture*)get_texture())->get_pixels();
 }

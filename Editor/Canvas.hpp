@@ -62,6 +62,8 @@ public:
 	{ 
 		Affected::tick(); 
 	}
+
+	void apply(Color *data, const Blend_mode &mode);
 };
 
 #endif // CANVAS_H
