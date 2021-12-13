@@ -260,7 +260,8 @@ void app_get(const PPluginInterface *self, void *handle, void *answer)
 
 	if (((Visual_object*)handle)->get_type() == (size_t)Vidget_type::INPUT_STRING)
 	{
-		*((char**)answer) = ((Dialog*)plugin->get_surface())->get_text((Input_string*)handle);
+		((PTextFieldSetting*)answer)->text = ((Dialog*)plugin->get_surface())->get_text((Input_string*)handle);
+		// printf("I sent %s\n", *(char**)(answer));
 		return;
 	}
 }

@@ -73,10 +73,10 @@ public:
 
 		set_size(Vector_ll(width, height));
 		// render_texture.draw(texture);
-		// if (scale_x > 1 || scale_y > 1)
-		// {
-		// 	tmp_texture.setSmooth(true);
-		// }
+		if (scale_x > 1 || scale_y > 1)
+		{
+			tmp_texture.setSmooth(true);
+		}
 
 		sprite.setTexture(tmp_texture);
 		sprite.setScale(scale_x, scale_y);
