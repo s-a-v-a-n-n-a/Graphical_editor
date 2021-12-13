@@ -27,7 +27,7 @@ Application::~Application()
 {
     delete tools;
     delete effects;
-	delete plugins;
+    delete plugins;
 
     delete graphics_wrapper;
 	delete default_main;

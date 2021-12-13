@@ -16,18 +16,20 @@ private:
 	size_t offset;
 
 public:
-	Dialog(const Visual_object::Config &par_base);
+	Dialog(const Visual_object::Config &par_base, const char *name = nullptr);
 	
-	Slider *create_slider();
-	Color_selection_window *create_color_picker();
-	Input_string *create_input_string();
+	Button *create_sign_button(const char *assignment);
+
+	Slider *create_slider(const char *assignment = nullptr);
+	Color_selection_window *create_color_picker(const char *assignment = nullptr);
+	Input_string *create_input_string(const char *assignment = nullptr);
 
 	double get_fraction(Slider *slider);
 	Color get_color(Color_selection_window *color_picker);
 	char *get_text(Input_string *input);
 };
 
-Dialog *create_dialog_window(const size_t width, const size_t height);
+Dialog *create_dialog_window(const size_t width, const size_t height, const char *name = nullptr);
 void destroy_dialog_window(Dialog *dialog_window);
 
 #endif // DIALOG_WINDOW_H

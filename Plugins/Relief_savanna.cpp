@@ -1,10 +1,14 @@
-#include "../Plugin/plugin_std.hpp"
+#include "../Plugin_support/plugin_std.hpp"
 
 #include <cstdlib>
 #include <ctime>
 #include <cmath>
 
 #include <cstdio>
+
+// ============================================================================ How to compile
+
+// g++ -fPIC -shared Plugins/Relief_savanna.cpp -o relief.so
 
 // ============================================================================ Info
 
@@ -116,7 +120,7 @@ static PPluginStatus init(const PAppInterface *app_interface)
 
     if (APPI->general.feature_level & PFL_SETTINGS_SUPPORT) 
     {
-        APPI->settings.create_surface(&Savanna_interface, 200, 200);
+        APPI->settings.create_surface(&Savanna_interface, 200, 100);
         offset_setting = APPI->settings.add(&Savanna_interface, PST_TEXT_LINE, "Offset");
         amount_setting = APPI->settings.add(&Savanna_interface, PST_TEXT_LINE, "Amount");
 
@@ -127,7 +131,7 @@ static PPluginStatus init(const PAppInterface *app_interface)
         APPI->general.log("<Relief effect> knows you don't support setting, default offset is %lld, default amount is %lld.", DEFAULT_OFFSET, DEFAULT_AMOUNT);
     }
 
-    APPI->general.log("<Relief effect> was successfully inited");
+    APPI->general.log("<Relief effect> was successfully inited.");
     return PPS_OK;
 }
 
@@ -138,13 +142,13 @@ static PPluginStatus deinit()
         APPI->settings.destroy_surface(&Savanna_interface);
     }
 
-    APPI->general.log("<Relief effect> was successfully deinited");
+    APPI->general.log("<Relief effect> was successfully deinited.");
     return PPS_OK;
 }
 
 static void dump() 
 {
-    APPI->general.log("<Relief effect> is active", PINFO.name);
+    APPI->general.log("<Relief effect> is active.", PINFO.name);
 }
 
 static const PPluginInfo *get_info() 

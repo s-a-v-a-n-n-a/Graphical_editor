@@ -13,7 +13,7 @@ class Window_control_panel : public Visual_object
 private:
 
 public:
-	Window_control_panel(const Visual_object::Config &par_base, Visual_object *whose);
+	Window_control_panel(const Visual_object::Config &par_base, Visual_object *whose, const char *name = nullptr);
 	// Window_control_panel(const size_t par_type, const Vector_ll &par_position, const Color &par_color, const size_t par_width, const size_t par_height, Visual_object *whose);
 	// Window_control_panel(const size_t par_type, const Vector_ll &par_position, Texture *par_texture, const size_t par_width, const size_t par_height, Visual_object *whose);
 	~Window_control_panel();
@@ -25,7 +25,7 @@ public:
 class Closing_window_control_panel : public Visual_object
 {
 public:
-	Closing_window_control_panel(const Visual_object::Config &par_base, Visual_object *whose);
+	Closing_window_control_panel(const Visual_object::Config &par_base, Visual_object *whose, const char *name = nullptr);
 	~Closing_window_control_panel();
 };
 

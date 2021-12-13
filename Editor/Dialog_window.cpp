@@ -5,7 +5,7 @@
 const size_t MIN_INPUT_STRING_HEIGHT = 50;
 const size_t MIN_SLIDER_HEIGHT = 30;
 
-Dialog *create_dialog_window(const size_t width, const size_t height)
+Dialog *create_dialog_window(const size_t width, const size_t height, const char *name)
 {
 	Visual_object *editor = Application::get_app()->get_default();
 
@@ -24,7 +24,7 @@ Dialog *create_dialog_window(const size_t width, const size_t height)
 	Vector_ll position = Vector_ll(x_pos, y_pos);
 
 	Full_texture *background = Resources::get_instance()->create_texture(WINDOW_BACKGROUND, (size_t)dialog_size.get_x(), (size_t)dialog_size.get_y());// new Full_texture(WINDOW_BACKGROUND, DEFAULT_COLOR_VIDGET_WIDTH, DEFAULT_COLOR_VIDGET_HEIGHT);
-	Dialog *dialog_window = new Dialog({editor, (size_t)Vidget_type::DIALOG, position, background, TRANSPARENT, (size_t)dialog_size.get_x(), (size_t)dialog_size.get_y()});
+	Dialog *dialog_window = new Dialog({editor, (size_t)Vidget_type::DIALOG, position, background, TRANSPARENT, (size_t)dialog_size.get_x(), (size_t)dialog_size.get_y()}, name);
 	editor->add_visual_object(dialog_window);
 
 	return dialog_window;
@@ -37,16 +37,36 @@ void destroy_dialog_window(Dialog *dialog_window)
 	editor->very_slow_delete_visual_object(dialog_window);
 }
 
-Dialog::Dialog(const Visual_object::Config &par_base)
-: Window(par_base), offset(DEFAULT_BUTTON_HEIGHT)
+Dialog::Dialog(const Visual_object::Config &par_base, const char *name)
+: Window(par_base, name), offset(DEFAULT_BUTTON_HEIGHT)
 {
 	;
 }
 
-Slider *Dialog::create_slider()
+Button *Dialog::create_sign_button(const char *assignment)
 {
-	size_t height = MIN_SLIDER_HEIGHT < (get_height() - offset) ? MIN_SLIDER_HEIGHT : get_height() - offset; 
-	Slider *slider = new Slider({this, (size_t)Vidget_type::SLIDER, get_position() + Vector_ll(0, offset), NULL, TRANSPARENT, get_width(), height}, NULL, 0, 1, true);
+	Button *sign = new Button({this, (size_t)Vidget_type::BUTTON, get_position() + Vector_ll(0, offset), nullptr, TRANSPARENT, get_width(), DEFAULT_BUTTON_HEIGHT}, nullptr, assignment, false);
+	add_visual_object(sign);
+
+	offset += DEFAULT_BUTTON_HEIGHT;
+
+	return sign;
+}
+
+Slider *Dialog::create_slider(const char *assignment)
+{
+	if (assignment)
+	{
+		create_sign_button(assignment);
+	}
+
+	long long height = MIN_SLIDER_HEIGHT < (get_height() - offset) ? MIN_SLIDER_HEIGHT : get_height() - offset; 
+	if (height <= 0)
+	{
+		set_height(get_height() + MIN_SLIDER_HEIGHT);
+		height = MIN_SLIDER_HEIGHT;
+	}
+	Slider *slider = new Slider({this, (size_t)Vidget_type::SLIDER, get_position() + Vector_ll(0, offset), NULL, TRANSPARENT, get_width(), (size_t)height}, NULL, 0, 1, true);
 
 	offset += height;
 
@@ -55,11 +75,21 @@ Slider *Dialog::create_slider()
 	return slider;
 }
 
-Color_selection_window *Dialog::create_color_picker()
+Color_selection_window *Dialog::create_color_picker(const char *assignment)
 {
 	size_t width = get_width();
-	size_t height = width < (get_height() - offset) ? width : get_height() - offset; 
-	Visual_object::Config picker_base = { this, (size_t)Vidget_type::COLOR_SELECTION, get_position() + Vector_ll(0, offset), NULL, TRANSPARENT, width, height};
+	if (assignment)
+	{
+		create_sign_button(assignment);
+	}
+
+	long long height = width < (get_height() - offset) ? width : get_height() - offset; 
+	if (height <= 0)
+	{
+		set_height(get_height() + width);
+		height = width;
+	}
+	Visual_object::Config picker_base = { this, (size_t)Vidget_type::COLOR_SELECTION, get_position() + Vector_ll(0, offset), NULL, TRANSPARENT, width, (size_t)height};
 
 	Color_selection_window *picker = new Color_selection_window(picker_base, RED);
 
@@ -70,11 +100,22 @@ Color_selection_window *Dialog::create_color_picker()
 	return picker;
 }
 
-Input_string *Dialog::create_input_string()
+Input_string *Dialog::create_input_string(const char *assignment)
 {
-	size_t height = MIN_INPUT_STRING_HEIGHT < (get_height() - offset) ? MIN_INPUT_STRING_HEIGHT : get_height() - offset; 
-	Animating_texture *text_field_texture = Resources::get_instance()->create_texture(TEXT_FIELD, get_width(), height, TEXT_FIELD_ACTIVE, NULL);
-	Input_string *input = new Input_string({this, (size_t)Vidget_type::INPUT_STRING, get_position() + Vector_ll(0, offset), text_field_texture, TRANSPARENT, get_width(), height});
+	if (assignment)
+	{
+		create_sign_button(assignment);
+	}
+
+	long long height = MIN_INPUT_STRING_HEIGHT < (get_height() - offset) ? MIN_INPUT_STRING_HEIGHT : get_height() - offset; 
+	if (height <= 0)
+	{
+		set_height(get_height() + MIN_INPUT_STRING_HEIGHT);
+		height = MIN_INPUT_STRING_HEIGHT;
+	}
+
+	Animating_texture *text_field_texture = Resources::get_instance()->create_texture(TEXT_FIELD, get_width(), (size_t)height, TEXT_FIELD_ACTIVE, NULL);
+	Input_string *input = new Input_string({this, (size_t)Vidget_type::INPUT_STRING, get_position() + Vector_ll(0, offset), text_field_texture, TRANSPARENT, get_width(), (size_t)height});
 	
 	offset += height;
 

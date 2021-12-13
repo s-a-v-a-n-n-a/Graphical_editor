@@ -3,6 +3,16 @@
 Effect_manager::Effect_manager()
 : effects_amount(0) {}
 
+Effect_manager::~Effect_manager()
+{
+	long long effects_amount = effects.size();
+	for (long long i = effects_amount - 1; i >= 0; --i)
+	{
+		delete effects[i];
+		effects.pop_back();
+	}
+}
+
 void Effect_manager::add_effect(Effect<Canvas> *effect)
 {
 	effects.push_back(effect);

@@ -33,7 +33,7 @@ public:
 	Effect_manager();
 	// friend class Effects_manager_destroyer;
 
-	// ~Effects_manager();
+	~Effect_manager();
 	// static Effects_manager *get_instance();
 
 	void add_effect(Effect<Canvas> *effect);

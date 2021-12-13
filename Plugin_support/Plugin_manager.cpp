@@ -208,7 +208,7 @@ void app_create_surface(const PPluginInterface *self, size_t width, size_t heigh
 {
 	// запомнить, какому плагину принадлежит это диалоговое окно
 	Plugin *plugin = Application::get_app()->get_plugins()->get_plugin(self);
-	plugin->set_surface(create_dialog_window(2 * width, 2 * height));
+	plugin->set_surface(create_dialog_window(3 * width, 3 * height, self->general.get_info()->name));
 }
 
 void app_destroy_surface(const PPluginInterface *self)
@@ -226,17 +226,17 @@ void *app_add(const PPluginInterface *self, PSettingType type, const char *name)
 
 	if (!strcmp(type, PST_SLIDER_1D))
 	{
-		return ((Dialog*)plugin->get_surface())->create_slider();
+		return ((Dialog*)plugin->get_surface())->create_slider(name);
 	}
 
 	if (!strcmp(type, PST_COLOR_PICKER))
 	{
-		return ((Dialog*)plugin->get_surface())->create_color_picker();
+		return ((Dialog*)plugin->get_surface())->create_color_picker(name);
 	}
 
 	if (!strcmp(type, PST_TEXT_LINE))
 	{
-		return ((Dialog*)plugin->get_surface())->create_input_string();
+		return ((Dialog*)plugin->get_surface())->create_input_string(name);
 	}
 
 	return nullptr;
