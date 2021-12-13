@@ -1,4 +1,5 @@
 #include "Slider.hpp"
+#include "../Editor/Application.hpp"
 
 const size_t COSMETIC_OFFSET = 10;
 const size_t SLIDER_SIZE = 20;
@@ -46,7 +47,7 @@ Slider::Slider(const Visual_object::Config &par_base, Button_delegate *par_deleg
 	// полосочка, по которой ездят
 	// а кто он и что он будет уметь? Светиться? Фон рисовать?
 	Magnet_control *line_delegate = new Magnet_control(slider);
-	Full_texture *texture = Resources::get_instance()->create_texture(SLIDER_LINE_HOR, line_length, height);
+	Full_texture *texture = Application::get_app()->get_rescrs()->create_texture(SLIDER_LINE_HOR, line_length, height);
 	Button *line = new Button({this, (size_t)Vidget_type::BUTTON, get_position() + Vector_ll(height, 0), texture, TRANSPARENT, line_length, height}, line_delegate, "");
 	add_visual_object(line);
 
@@ -55,7 +56,7 @@ Slider::Slider(const Visual_object::Config &par_base, Button_delegate *par_deleg
 
 Magnetic *Slider::create_sliding_button(const Vector_ll &position, const size_t width, const size_t height, const Vector_ll &left_bound, const Vector_ll &right_bound, Visual_object *parent)
 {
-	Full_texture *texture = Resources::get_instance()->create_texture(SLIDER, width, height);
+	Full_texture *texture = Application::get_app()->get_rescrs()->create_texture(SLIDER, width, height);
 	Magnetic *magnet = new Magnetic({this, (size_t)Vidget_type::BUTTON, position, texture, TRANSPARENT, width, height}, parent, left_bound, right_bound, height); // add delegate
 	
 	add_visual_object(magnet);
@@ -65,7 +66,7 @@ Magnetic *Slider::create_sliding_button(const Vector_ll &position, const size_t 
 
 Button *Slider::create_control_button(const Vector_ll &position, const size_t width, const size_t height, const char *texture_name, const char *animating_texture, const long long delta, const bool x_coord, Visual_object *to_control)
 {
-	Animating_texture *texture = Resources::get_instance()->create_texture(texture_name, width, height, animating_texture, nullptr);
+	Animating_texture *texture = Application::get_app()->get_rescrs()->create_texture(texture_name, width, height, animating_texture, nullptr);
 
 	// Change_fixedly *change = new Change_fixedly(to_control, delta, x_coord);
 	Button *control = new Button({this, (size_t)Vidget_type::BUTTON, position, texture, TRANSPARENT, width, height}, NULL, "");

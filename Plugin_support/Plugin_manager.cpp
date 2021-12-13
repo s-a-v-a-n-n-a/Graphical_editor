@@ -24,7 +24,6 @@ Blend_mode app_translate_mode(PBlendMode mode)
 PRGBA *app_get_pixels()
 {
 	Vector_ll params = Application::get_app()->get_tools()->get_active_tool()->get_params();
-	// Color *data = Application::get_app()->get_tools()->get_active_tool()->get_pixels();
 	Color *data = ((Graphical_editor_main_page*)Application::get_app()->get_default())->get_active_canvas()->get_drawing();
 
 	PRGBA *pixels = new	PRGBA[params.get_x() * params.get_y()];
@@ -420,8 +419,10 @@ void Plugin_manager::load_from_dir(const char *path)
     {
         size_t dir_name_length = strlen(to_read->d_name);
  
+        printf("%s\n", to_read->d_name);
         if (strcmp(extension, to_read->d_name + dir_name_length - extension_length) != 0) 
         	continue;
+        printf("%s\n", to_read->d_name);
 
         char *libname = new char[path_length + dir_name_length + 1];
         sprintf(libname, "%s%s", path, to_read->d_name);
@@ -446,18 +447,25 @@ void Plugin_manager::add_plugin(const char *filename, bool is_path)
 		char *path = create_path(filename);
 		handle = dlopen(path, RTLD_LAZY);
 		if (!handle)
+		{
+			fprintf(stderr, "%s\n", dlerror());			
 			return;
-		// else
-		// 	printf("[Application message]: found plugin (congratulations!)\n");
+		}
+		else
+			printf("[Application message]: found plugin (congratulations!)\n");
 		delete_path(path);
 	}
 	else
 	{
+		printf("filename %s\n", filename);
 		handle = dlopen(filename, RTLD_LAZY);
 		if (!handle)
+		{
+			fprintf(stderr, "%s\n", dlerror());			
 			return;
-		// else
-		// 	printf("[Application message]: found plugin (congratulations!)\n");
+		}
+		else
+			printf("[Application message]: found plugin (congratulations!)\n");
 	}
 	
 	get_plugin_interface = (const PPluginInterface *(*)())dlsym(handle, PGET_INTERFACE_FUNC);

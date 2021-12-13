@@ -1,4 +1,5 @@
 #include "Color_selection.hpp"
+#include "Application.hpp"
 
 Color_selection_window::Color_selection_window(const Visual_object::Config &par_base, const Color &color)
 : Visual_object(par_base), chosen_color(color)
@@ -29,7 +30,7 @@ Color_selection_window::create_color_picker(const Vector_ll &position, const siz
 Gradient_bar *
 Color_selection_window::create_gradient_bar(const Vector_ll &position, const size_t width, const size_t height, Color_picker *picker, const HSV &hsv)
 {
-	Full_texture *texture = Resources::get_instance()->create_texture(GRADIENT_BAR_TEXTURE, width, height);
+	Full_texture *texture = Application::get_app()->get_rescrs()->create_texture(GRADIENT_BAR_TEXTURE, width, height);
 	Visual_object::Config gradient_base = { this, (size_t)Vidget_type::GRADIENT_BAR, position, texture, TRANSPARENT, width, height };
 
     Gradient_bar *gradient = new Gradient_bar(gradient_base, picker, hsv);

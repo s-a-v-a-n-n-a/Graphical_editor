@@ -34,9 +34,8 @@ Palette::Palette(const Visual_object::Config &par_base, const Color &par_chosen_
 	// picker = create_color_picker(get_position() + Vector_ll(10, (offset + 30)), picker_size, picker_size, picker_color);// new Color_picker(this, (size_t)Vidget_type::COLOR_PICKER, par_position + Vector_ll(10, (offset + 30)), TRANSPARENT, MAX_COLOR_VALUE, MAX_COLOR_VALUE, par_pencil);
  //    gradient_bar = create_gradient_bar(get_position() + Vector_ll(10, offset + 10), picker_size, 20, picker, hsv);// new Gradient_bar(this, (size_t)Vidget_type::GRADIENT_BAR, par_position + Vector_ll(10, offset + 10), texture, MAX_COLOR_VALUE, 20, par_pencil, picker);
    	
-  color_picker = create_color_selection_widget(get_position() + Vector_ll(0, offset), (get_width()- 20) * 3 / 4, get_height() - DEFAULT_BUTTON_HEIGHT, picker_color);
-   	// add_visual_object(panel);
-	old_color = new Button({this, (size_t)Vidget_type::BUTTON, get_position() + Vector_ll(picker_size + 20, (offset + 30)), nullptr, par_chosen_color, button_width, buttin_height}, NULL, "");
+  	color_picker = create_color_selection_widget(get_position() + Vector_ll(0, offset), (get_width()- 20) * 3 / 4, get_height() - DEFAULT_BUTTON_HEIGHT, picker_color);
+   	old_color = new Button({this, (size_t)Vidget_type::BUTTON, get_position() + Vector_ll(picker_size + 20, (offset + 30)), nullptr, par_chosen_color, button_width, buttin_height}, NULL, "");
 	new_color = new Button({this, (size_t)Vidget_type::BUTTON, get_position() + Vector_ll(picker_size + 20, (offset + 30 + buttin_height)), nullptr, par_chosen_color, button_width, buttin_height}, NULL, "");
 
 	Popup_color_confirmation *delegate = new Popup_color_confirmation(this, &chosen_color);

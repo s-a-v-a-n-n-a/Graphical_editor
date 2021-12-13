@@ -56,6 +56,9 @@ const char UNKNOWN_TOOL_ACTIVE[] = "graphical_attributes/Textures/Question_activ
 const char CAT_TEXTURE[] = "graphical_attributes/Textures/cat.jpg";
 const char MAKARONS_TEXTURE[] = "graphical_attributes/Textures/makarons.jpg";
 const char MAXIM_TEXTURE[] = "graphical_attributes/Textures/maxim.jpg";
+const char BLURRED_TEXTURE[] = "graphical_attributes/Textures/Blurred.jpg";
+const char LANDSCAPE_TEXTURE[] = "graphical_attributes/Textures/Landscape.jpg";
+const char WOW_TEXTURE[] = "graphical_attributes/Textures/Wow.png";
 
 extern const char *COLORED_BUTTONS[];
 extern const char *TOOLS_BUTTONS[];

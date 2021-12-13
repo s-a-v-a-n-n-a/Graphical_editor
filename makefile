@@ -44,6 +44,7 @@ FILES   	= $(OBJ)main.o \
 			$(OBJ)Editor/Color_selection.o \
 			$(OBJ)Editor/Canvas_manager.o \
 			$(OBJ)Editor/Canvas_manager_manager.o \
+			$(OBJ)Editor/Window.o \
 			$(OBJ)Editor/Window_control_panel.o \
 			$(OBJ)Editor/Graphical_editor_main_page.o \
 			$(OBJ)Editor/Dialog_window.o \

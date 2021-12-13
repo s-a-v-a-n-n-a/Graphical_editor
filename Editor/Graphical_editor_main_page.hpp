@@ -12,7 +12,7 @@
 
 #include "Canvas_manager_manager.hpp"
 #include "Color_selection.hpp"
-#include "Brush_size_selection.hpp"
+// #include "Brush_size_selection.hpp"
 #include "Effects_window.hpp"
 #include "Thickness_window.hpp"
 #include "Tools_window.hpp"
@@ -57,7 +57,7 @@ public:
 	Button *create_double_click_restore_button(Button_manager *panel, Visual_object *to_restore, const char *text, const size_t width, const size_t height);
 	Button *create_canvas_creator(Button_manager *panel, Canvas_manager_manager *canvas_manager, const char *text, const size_t width, const size_t height);
 	Color_selection_window *create_color_vidget(const Vector_ll &position, const size_t width, const size_t height);
-	Brush_size_selection_window *create_size_vidget(const Vector_ll &position, const size_t width, const size_t height);
+	// Brush_size_selection_window *create_size_vidget(const Vector_ll &position, const size_t width, const size_t height);
 	Button *create_plugin_info_button(Button_manager *panel, const char *text, const size_t width, const size_t height);
 
 	Canvas *get_active_canvas();

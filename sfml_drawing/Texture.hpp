@@ -73,10 +73,10 @@ public:
 
 		set_size(Vector_ll(width, height));
 		// render_texture.draw(texture);
-		if (scale_x > 1 || scale_y > 1)
-		{
-			tmp_texture.setSmooth(true);
-		}
+		// if (scale_x > 1 || scale_y > 1)
+		// {
+		// 	tmp_texture.setSmooth(true);
+		// }
 
 		sprite.setTexture(tmp_texture);
 		sprite.setScale(scale_x, scale_y);
@@ -146,10 +146,12 @@ public:
 
 	void set_texture(Color *array, const size_t width, const size_t height) override 
 	{ 
-		tmp_texture.update((sf::Uint8*)array, width, height, 0, 0); 
+		sf::Texture tmp;
+		tmp.create(width, height);
+		tmp.update((sf::Uint8*)array, width, height, 0, 0); 
 		
 		sf::Sprite sprite;
-		sprite.setTexture(tmp_texture);
+		sprite.setTexture(tmp);
 
 		texture.clear(sf::Color(255, 255, 255, 0));
 		texture.draw(sprite);

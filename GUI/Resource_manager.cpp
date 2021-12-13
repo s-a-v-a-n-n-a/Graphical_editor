@@ -1,7 +1,7 @@
 #include "Resource_manager.hpp"
 
-Resources * Resources::resources = nullptr;
-Resources_destroyer Resources::destroyer;
+// Resources * Resources::resources = nullptr;
+// Resources_destroyer Resources::destroyer;
 
 Resources::Resources() : textures() { ; }
 Resources::~Resources()
@@ -49,23 +49,23 @@ void Resources::delete_texture(Texture *texture)
 	}
 }
 
-Resources * Resources::get_instance() 
-{
-	if (resources == nullptr)
-	{
-		resources = new Resources();
-		destroyer.initialize(resources);
-	}
+// Resources * Application::get_app()->get_rescrs() 
+// {
+// 	if (resources == nullptr)
+// 	{
+// 		resources = new Resources();
+// 		destroyer.initialize(resources);
+// 	}
 
-	return resources;
-}
+// 	return resources;
+// }
 
-Resources_destroyer::~Resources_destroyer() 
-{ 
-	delete resources; 
-}
+// Resources_destroyer::~Resources_destroyer() 
+// { 
+// 	delete resources; 
+// }
 
-void Resources_destroyer::initialize(Resources *par_resources) 
-{ 
-	resources = par_resources; 
-}
+// void Resources_destroyer::initialize(Resources *par_resources) 
+// { 
+// 	resources = par_resources; 
+// }

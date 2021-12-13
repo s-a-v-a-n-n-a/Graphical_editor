@@ -17,7 +17,7 @@ Menu::~Menu()
 
 Button *Menu::add_button(Button_delegate *par_delegate, const char *par_text)
 {
-	Animating_texture *texture = Resources::get_instance()->create_texture(SIMPLE_BUTTON, get_width(), DEFAULT_BUTTON_HEIGHT, SIMPLE_BUTTON_MOVE, nullptr);
+	Animating_texture *texture = Application::get_app()->get_rescrs()->create_texture(SIMPLE_BUTTON, get_width(), DEFAULT_BUTTON_HEIGHT, SIMPLE_BUTTON_MOVE, nullptr);
 	Button *button = buttons->add_button(par_delegate, par_text, texture, TRANSPARENT, 0, 0, false);
 
 	return button;

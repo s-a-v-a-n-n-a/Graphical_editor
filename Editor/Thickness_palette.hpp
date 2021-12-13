@@ -21,7 +21,7 @@ public:
 
 	    size_t offset = 0;
 	    Change_thickness *change_thickness_1 = new Change_thickness(1);
-    	Full_texture *texture = Resources::get_instance()->create_texture(TEXT_TEXTURE, DEFAULT_BUTTON_HEIGHT, DEFAULT_BUTTON_HEIGHT);
+    	Full_texture *texture = Application::get_app()->get_rescrs()->create_texture(TEXT_TEXTURE, DEFAULT_BUTTON_HEIGHT, DEFAULT_BUTTON_HEIGHT);
     	// offset += texture->get_width();
 
     	panel->add_button(change_thickness_1, "1", texture, TRANSPARENT, get_width()/4, get_width()/4);

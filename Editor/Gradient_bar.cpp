@@ -1,11 +1,12 @@
 #include "Gradient_bar.hpp"
+#include "Application.hpp"
 
 const size_t PICKER_SIZE = 5;
 
 Gradient_bar::Gradient_bar(const Visual_object::Config &par_base, Color_picker *par_to_control, const HSV &position_hsv)
 : Visual_object(par_base), current_position(0), to_control(par_to_control)
 {
-	Full_texture *rect = Resources::get_instance()->create_texture(PICKING_RECT_TEXTURE, PICKER_SIZE, get_height());// new Full_texture(WINDOW_BACKGROUND, DEFAULT_COLOR_VIDGET_WIDTH, DEFAULT_COLOR_VIDGET_HEIGHT);
+	Full_texture *rect = Application::get_app()->get_rescrs()->create_texture(PICKING_RECT_TEXTURE, PICKER_SIZE, get_height());// new Full_texture(WINDOW_BACKGROUND, DEFAULT_COLOR_VIDGET_WIDTH, DEFAULT_COLOR_VIDGET_HEIGHT);
 	
 	size_t width = get_width();
 	current_position = (size_t)((double)(255 - position_hsv.h) / 255.0 * (double)width);

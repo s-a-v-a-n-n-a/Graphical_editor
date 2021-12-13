@@ -5,6 +5,7 @@
 
 #include "../sfml_drawing/screen_functions.hpp"
 #include "../GUI/Visual_object_base.hpp"
+#include "../GUI/Resource_manager.hpp"
 
 #include "Graphical_editor_main_page.hpp"
 
@@ -35,6 +36,8 @@ private:
 	static Application *app;
 	static Application_destroyer destroyer;
 
+	Resources *resources;
+
 	Plugin_manager *plugins;
 	Effect_manager *effects;
 	Toolbar *tools;
@@ -61,6 +64,7 @@ public:
 	Plugin_manager *get_plugins();
 	Effect_manager *get_effects();
 	Toolbar *get_tools();
+	Resources *get_rescrs();
 
 	size_t get_time();
 	

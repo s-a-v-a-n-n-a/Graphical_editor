@@ -1,4 +1,5 @@
 #include "Color_picker.hpp"
+#include "Application.hpp"
 
 const size_t DEFAULT_POINTER_RADIUS = 5;
 
@@ -8,7 +9,7 @@ Color_picker::Color_picker(const Visual_object::Config &par_base, const Color &p
 	color_array = new Color[get_width() * get_height()];
 	set_main_color(par_main_color);
 
-	Full_texture *circle = Resources::get_instance()->create_texture(PICKING_CIRCLE_TEXTURE, 18, 18);// new Full_texture(WINDOW_BACKGROUND, DEFAULT_COLOR_VIDGET_WIDTH, DEFAULT_COLOR_VIDGET_HEIGHT);
+	Full_texture *circle = Application::get_app()->get_rescrs()->create_texture(PICKING_CIRCLE_TEXTURE, 18, 18);// new Full_texture(WINDOW_BACKGROUND, DEFAULT_COLOR_VIDGET_WIDTH, DEFAULT_COLOR_VIDGET_HEIGHT);
 	
 	size_t circle_width = circle->get_width();
 	size_t circle_height = circle->get_height();

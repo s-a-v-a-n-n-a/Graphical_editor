@@ -18,7 +18,7 @@ struct Event
 	size_t sender;
 };
 
-enum class Sfml_events
+/*enum class Sfml_events
 {
 	NOTHING,
 	WINDOW_CLOSED,
@@ -65,7 +65,7 @@ enum class Sfml_events
 	KEY_LCTRL,
 	KEY_LSHIFT,
 	BACKSPACE
-};
+};*/
 
 enum class Window_state
 {
@@ -144,7 +144,7 @@ enum class Key
     RBRACKET, 
     SEMICOLON, 
     COMMA, 
-    PERIOD,
+    PERIOD = sf::Keyboard::Period,
   	QUOTE, 
   	SLASH, 
   	BACKSLASH, 
@@ -209,6 +209,12 @@ public:
 	        {
 	        	return { Event_type::KEYBOARD, (size_t)Key_state::RELEASED, (size_t)Key::A + (size_t)event.key.code };
 	        }
+
+	  //       if (event.type == sf::Event::TextEntered)
+			// {
+			//     if (event.text.unicode < 128)
+			//         std::cout << "ASCII character typed: " << static_cast<char>(event.text.unicode) << std::endl;
+			// }
 	    }
 
         // return Sfml_events::NOTHING;

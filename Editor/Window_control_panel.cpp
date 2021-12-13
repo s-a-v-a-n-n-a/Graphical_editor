@@ -1,4 +1,5 @@
 #include "Window_control_panel.hpp"
+#include "Application.hpp"
 
 Window_control_panel::Window_control_panel(const Visual_object::Config &par_base, Visual_object *whose, const char *name)
 : Visual_object(par_base)
@@ -7,7 +8,7 @@ Window_control_panel::Window_control_panel(const Visual_object::Config &par_base
 	Button_manager *panel = new Button_manager(panel_base);
 
 	// Full_texture *roll_up_texture = new Full_texture(ROLL_UP_TEXTURE);
-	Animating_texture *close_texture = Resources::get_instance()->create_texture(CLOSE_TEXTURE, get_height(), get_height(), CLOSE_MOVE_TEXTURE, nullptr);
+	Animating_texture *close_texture = Application::get_app()->get_rescrs()->create_texture(CLOSE_TEXTURE, get_height(), get_height(), CLOSE_MOVE_TEXTURE, nullptr);
 	// close_texture->set_move_texture(CLOSE_MOVE_TEXTURE);
 
 	Drag_and_drop_delegate *drag_and_drop = new Drag_and_drop_delegate(whose);
@@ -53,7 +54,7 @@ Closing_window_control_panel::Closing_window_control_panel(const Visual_object::
 	Visual_object::Config panel_base = { this, (size_t)Vidget_type::BUTTON_MANAGER, get_position(), nullptr, TRANSPARENT, get_width(), DEFAULT_BUTTON_HEIGHT };
 	Button_manager *panel = new Button_manager(panel_base);
 
-	Animating_texture *close_texture = Resources::get_instance()->create_texture(CLOSE_TEXTURE, get_height(), get_height(), CLOSE_MOVE_TEXTURE, nullptr);
+	Animating_texture *close_texture = Application::get_app()->get_rescrs()->create_texture(CLOSE_TEXTURE, get_height(), get_height(), CLOSE_MOVE_TEXTURE, nullptr);
 	
 	Drag_and_drop_delegate *drag_and_drop = new Drag_and_drop_delegate(whose);
 

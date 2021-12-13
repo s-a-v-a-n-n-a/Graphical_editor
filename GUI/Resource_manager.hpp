@@ -5,32 +5,33 @@
 #include "../sfml_drawing/Animating_texture.hpp"
 #include "../simple_list/simple_list.hpp" 
 
-class Resources;
+// class Resources;
 
-class Resources_destroyer
-{
-private:
-	Resources *resources;
-public:
-	~Resources_destroyer();
+// class Resources_destroyer
+// {
+// private:
+// 	Resources *resources;
+// public:
+// 	~Resources_destroyer();
 
-	void initialize(Resources *par_resources);
-};
+// 	void initialize(Resources *par_resources);
+// };
 
 class Resources
 {
 private:
-	static Resources *resources;
-	static Resources_destroyer destroyer;
+	// static Resources *resources;
+	// static Resources_destroyer destroyer;
 	List<Texture*> textures;
 
-protected:
+// protected:
+public:
 	Resources();
 	~Resources();
-	friend class Resources_destroyer;
+	// friend class Resources_destroyer;
 
-public:
-	static Resources *get_instance();
+// public:
+	// static Resources *get_instance();
 
 	Full_texture *create_texture(const char *texture_name, const size_t texture_width, const size_t texture_height);
 	Animating_texture *create_texture(const char *texture_name, const size_t texture_width, const size_t texture_height, const char *move_texture_name, const char *inactive_texture_name);

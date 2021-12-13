@@ -23,7 +23,7 @@ Dialog *create_dialog_window(const size_t width, const size_t height, const char
 
 	Vector_ll position = Vector_ll(x_pos, y_pos);
 
-	Full_texture *background = Resources::get_instance()->create_texture(WINDOW_BACKGROUND, (size_t)dialog_size.get_x(), (size_t)dialog_size.get_y());// new Full_texture(WINDOW_BACKGROUND, DEFAULT_COLOR_VIDGET_WIDTH, DEFAULT_COLOR_VIDGET_HEIGHT);
+	Full_texture *background = Application::get_app()->get_rescrs()->create_texture(WINDOW_BACKGROUND, (size_t)dialog_size.get_x(), (size_t)dialog_size.get_y());// new Full_texture(WINDOW_BACKGROUND, DEFAULT_COLOR_VIDGET_WIDTH, DEFAULT_COLOR_VIDGET_HEIGHT);
 	Dialog *dialog_window = new Dialog({editor, (size_t)Vidget_type::DIALOG, position, background, TRANSPARENT, (size_t)dialog_size.get_x(), (size_t)dialog_size.get_y()}, name);
 	editor->add_visual_object(dialog_window);
 
@@ -114,7 +114,7 @@ Input_string *Dialog::create_input_string(const char *assignment)
 		height = MIN_INPUT_STRING_HEIGHT;
 	}
 
-	Animating_texture *text_field_texture = Resources::get_instance()->create_texture(TEXT_FIELD, get_width(), (size_t)height, TEXT_FIELD_ACTIVE, NULL);
+	Animating_texture *text_field_texture = Application::get_app()->get_rescrs()->create_texture(TEXT_FIELD, get_width(), (size_t)height, TEXT_FIELD_ACTIVE, NULL);
 	Input_string *input = new Input_string({this, (size_t)Vidget_type::INPUT_STRING, get_position() + Vector_ll(0, offset), text_field_texture, TRANSPARENT, get_width(), (size_t)height});
 	
 	offset += height;

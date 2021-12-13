@@ -25,6 +25,12 @@ bool Input_string::on_key_pressed(const bool pressed_state, const unsigned key_m
 
 				return true;
 			}
+			else if (key_mask == (size_t)Key::PERIOD)
+			{
+				string.add_symbol('.');
+
+				return true;
+			}
 			else if (key_mask >= (size_t)Key::NUM0 && key_mask <= (size_t)Key::NUM9)
 			{
 				string.add_symbol('0' + key_mask - (size_t)Key::NUM0);

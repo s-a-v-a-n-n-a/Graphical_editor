@@ -12,6 +12,8 @@ Application::Application()
 
     graphics_wrapper = new Screen_information(DEFAULT_SIZE, DEFAULT_SIZE);
 
+    resources = new Resources();
+
     tools = new Toolbar();
     plugins = new Plugin_manager();
     effects = new Effect_manager();
@@ -92,6 +94,11 @@ Effect_manager *Application::get_effects()
 Toolbar *Application::get_tools()
 {
     return tools;   
+}
+
+Resources *Application::get_rescrs()
+{
+    return resources;
 }
 
 void Application::add_visual_object(Visual_object *object)
