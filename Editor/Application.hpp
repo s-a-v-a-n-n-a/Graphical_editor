@@ -12,6 +12,7 @@
 // ?????????????
 #include "../Plugin_support/Plugin_manager.hpp"
 #include "../Tools/Toolbar.hpp"
+#include "../GUI/Animations.hpp"
 #include "Effects/Canvas_effects_manager.hpp"
 // #include "../Plugin_support/plugin_std.hpp"
 
@@ -38,6 +39,7 @@ private:
 
 	Resources *resources;
 
+	Animation_manager *animations;
 	Plugin_manager *plugins;
 	Effect_manager *effects;
 	Toolbar *tools;
@@ -61,6 +63,7 @@ public:
 	void add_effect(Effect<Canvas> *effect);
 	void add_tool(Tool *tool);
 	
+	Animation_manager *get_animations();
 	Plugin_manager *get_plugins();
 	Effect_manager *get_effects();
 	Toolbar *get_tools();

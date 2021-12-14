@@ -7,7 +7,7 @@
 
 #include "../sfml_drawing/Animating_texture.hpp"
 
-class Animation_manager; 
+// class Animation_manager; 
 
 class Animation
 {
@@ -37,30 +37,31 @@ public:
 	void tick(const double time);
 };
 
-class Animation_manager_destroyer
-{
-private:
-	Animation_manager *animation_manager;
-public:
-	~Animation_manager_destroyer();
+// class Animation_manager_destroyer
+// {
+// private:
+// 	Animation_manager *animation_manager;
+// public:
+// 	~Animation_manager_destroyer();
 
-	void initialize(Animation_manager *par_animation_manager);
-};
+// 	void initialize(Animation_manager *par_animation_manager);
+// };
 
 class Animation_manager
 {
 private:
-	static Animation_manager *animation_manager;
-	static Animation_manager_destroyer destroyer;
+	// static Animation_manager *animation_manager;
+	// static Animation_manager_destroyer destroyer;
 	List<Animation*> animations;
 
-protected:
+// protected:
+public:
 	Animation_manager();
 	~Animation_manager();
-	friend class Animation_manager_destroyer;
+	// friend class Animation_manager_destroyer;
 
-public:
-	static Animation_manager *get_instance();
+// public:
+	// static Animation_manager *get_instance();
 
 	long long add_animation(Animation *par_animation);
 	void slow_delete_animation(Animation *to_delete);

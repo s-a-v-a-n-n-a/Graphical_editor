@@ -51,14 +51,16 @@ void Animating::reset()
 	
 	if (move_in)
 	{
-		Animation_manager::get_instance()->slow_delete_animation(move_in);
+		// Animation_manager::get_instance()->slow_delete_animation(move_in);
+		Application::get_app()->get_animations()->slow_delete_animation(move_in);
 		move_in = nullptr;
 		move_in_index = -1;
 	}
 
 	if (move_out)
 	{
-		Animation_manager::get_instance()->slow_delete_animation(move_out);
+		// Animation_manager::get_instance()->slow_delete_animation(move_out);
+		Application::get_app()->get_animations()->slow_delete_animation(move_out);
 		move_out = nullptr;
 		move_out_index = -1;
 	}
@@ -94,13 +96,15 @@ bool Animating::on_mouse_move(const Vector_ll from, const Vector_ll to)
 		{
 			if (move_out)
 			{
-				Animation_manager::get_instance()->slow_delete_animation(move_out);
+				// Animation_manager::get_instance()->slow_delete_animation(move_out);
+				Application::get_app()->get_animations()->slow_delete_animation(move_out);
 				move_out = nullptr;
 				move_out_index = -1;
 			}
 
 			move_in = new Animation((Animating_texture*)to_animate->get_texture(), to_animate, ((Animating_texture*)(to_animate->get_texture()))->get_default_texture(), ((Animating_texture*)(to_animate->get_texture()))->get_move_texture(), 0.05);
-			move_in_index = Animation_manager::get_instance()->add_animation(move_in);
+			// move_in_index = Animation_manager::get_instance()->add_animation(move_in);
+			move_in_index = Application::get_app()->get_animations()->add_animation(move_in);
 		}
 	}
 	else if(!to_animate->point_inside(to.get_x(), to.get_y()) && to_animate->point_inside(from.get_x(), from.get_y()))
@@ -109,13 +113,15 @@ bool Animating::on_mouse_move(const Vector_ll from, const Vector_ll to)
 		{
 			if (move_in)
 			{
-				Animation_manager::get_instance()->slow_delete_animation(move_in);
+				// Animation_manager::get_instance()->slow_delete_animation(move_in);
+				Application::get_app()->get_animations()->slow_delete_animation(move_in);
 				move_in = nullptr;
 				move_in_index = -1;
 			}
 			
 			move_out = new Animation((Animating_texture*)to_animate->get_texture(), to_animate, ((Animating_texture*)(to_animate->get_texture()))->get_move_texture(), ((Animating_texture*)(to_animate->get_texture()))->get_default_texture(), 0.05);
-			move_out_index = Animation_manager::get_instance()->add_animation(move_out);
+			// move_out_index = Animation_manager::get_instance()->add_animation(move_out);
+			move_out_index = Application::get_app()->get_animations()->add_animation(move_out);
 		}
 	}
 

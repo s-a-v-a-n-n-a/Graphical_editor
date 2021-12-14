@@ -38,8 +38,8 @@ void Animation::tick(const double time)
 // Animation manager
 // ---------------------------------------------------------------------------------------------------------------
 
-Animation_manager * Animation_manager::animation_manager = nullptr;
-Animation_manager_destroyer Animation_manager::destroyer;
+// Animation_manager * Animation_manager::animation_manager = nullptr;
+// Animation_manager_destroyer Animation_manager::destroyer;
 
 Animation_manager::Animation_manager() : animations() { ; }
 Animation_manager::~Animation_manager() 
@@ -52,16 +52,16 @@ Animation_manager::~Animation_manager()
 	}
 }
 
-Animation_manager * Animation_manager::get_instance() 
-{
-	if (animation_manager == nullptr)
-	{
-		animation_manager = new Animation_manager();
-		destroyer.initialize(animation_manager);
-	}
+// Animation_manager * Animation_manager::get_instance() 
+// {
+// 	if (animation_manager == nullptr)
+// 	{
+// 		animation_manager = new Animation_manager();
+// 		destroyer.initialize(animation_manager);
+// 	}
 
-	return animation_manager;
-}
+// 	return animation_manager;
+// }
 
 long long Animation_manager::add_animation(Animation *par_animation)
 {
@@ -109,13 +109,13 @@ void Animation_manager::tick(const double time)
 	}
 }
 
-Animation_manager_destroyer::~Animation_manager_destroyer() 
-{ 
-	delete animation_manager; 
-}
+// Animation_manager_destroyer::~Animation_manager_destroyer() 
+// { 
+// 	delete animation_manager; 
+// }
 
-void Animation_manager_destroyer::initialize(Animation_manager *par_animation_manager) 
-{ 
-	animation_manager = par_animation_manager; 
-}
+// void Animation_manager_destroyer::initialize(Animation_manager *par_animation_manager) 
+// { 
+// 	animation_manager = par_animation_manager; 
+// }
 

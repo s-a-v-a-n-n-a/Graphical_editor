@@ -12,6 +12,7 @@ Application::Application()
 
     graphics_wrapper = new Screen_information(DEFAULT_SIZE, DEFAULT_SIZE);
 
+    animations = new Animation_manager();
     resources = new Resources();
 
     tools = new Toolbar();
@@ -101,6 +102,11 @@ Resources *Application::get_rescrs()
     return resources;
 }
 
+Animation_manager *Application::get_animations()
+{
+    return animations;
+}
+
 void Application::add_visual_object(Visual_object *object)
 {
     default_main->add_visual_object(object);
@@ -119,7 +125,7 @@ void Application::draw()
 
 void Application::tick()
 {
-    Animation_manager::get_instance()->tick(0.005);
+    animations->tick(0.005);
 	
 	default_main->tick(graphics_wrapper, 0.05);
 
