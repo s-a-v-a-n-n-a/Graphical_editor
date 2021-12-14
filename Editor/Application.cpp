@@ -31,6 +31,7 @@ Application::~Application()
     delete tools;
     delete effects;
     delete plugins;
+    delete animations;
 
     delete graphics_wrapper;
 	delete default_main;
