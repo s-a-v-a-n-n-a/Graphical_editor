@@ -5,13 +5,13 @@
 #include <cstring>
 #include <cstdio>
 
+#include "Renderer.hpp"
 #include "Texture_names.hpp"
 
 #include "Event_handler.hpp"
 #include "Texture.hpp"
 #include "Text.hpp"
 
-#include "colors.hpp"
 #include "../math_structures/Radius_vector.hpp"
 
 #include "../simple_list/simple_list.hpp"
@@ -26,21 +26,23 @@ typedef enum Screen_information_code_errors
     SCREEN_SEGMENT_FAULT
 } screen_code;
 
-enum class Blend_mode
-{
-	ALPHA, 
-	ADD, 
-	MULTIPLY,
-	COPY
-};
+// enum class Blend_mode
+// {
+// 	ALPHA, 
+// 	ADD, 
+// 	MULTIPLY,
+// 	COPY
+// };
 
-sf::BlendMode blending_mode(const Blend_mode mode);
+// sf::BlendMode blending_mode(const Blend_mode mode);
 
 extern const char *screen_state_text[];
 
 class Screen_information 
 {
 private:
+	Renderer renderer;
+
 	Vector_ll mouse_position;
 	bool mouse_clicked;
 
@@ -99,7 +101,7 @@ public:
 	void sfml_update_mouse_pressed_state();
 
 	void image_load(sf::Image *image, const Color *to_draw, const size_t width, const size_t height);
-	void texture_load(sf::Texture *texture, const Color *to_draw, const size_t width, const size_t height);
+	// void texture_load(sf::Texture *texture, const Color *to_draw, const size_t width, const size_t height);
 
 	friend void copy_color_from_sfml_color(Screen_information &screen, sf::Color color, size_t line, size_t column);
 	friend screen_code screen_load(Screen_information &screen, sf::Image* image);

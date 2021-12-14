@@ -79,6 +79,14 @@ public:
 		length--;
 	}
 
+	void extract_from_end()
+	{
+		if (length <= 0)
+			return;
+
+		length--;
+	}
+
 	void slow_delete(size_t index)
 	{
 		if (index >= length)

@@ -18,6 +18,7 @@ OBJ     	= obj/
 EXE     	= main
  
 FILES   	= $(OBJ)main.o \
+			$(OBJ)sfml_drawing/Renderer.o \
 			$(OBJ)sfml_drawing/screen_functions.o \
 			$(OBJ)sfml_drawing/colors.o \
 			$(OBJ)sfml_drawing/Texture_names.o \
