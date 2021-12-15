@@ -10,6 +10,7 @@ Application::Application()
 {
     app = this;
 
+    renderer = new Renderer();
     graphics_wrapper = new Screen_information(DEFAULT_SIZE, DEFAULT_SIZE);
 
     animations = new Animation_manager();
@@ -34,6 +35,8 @@ Application::~Application()
     delete animations;
 
     delete graphics_wrapper;
+    delete renderer;
+
 	delete default_main;
 }
 
@@ -81,6 +84,11 @@ void Application::add_plugin(const char *plugin_name)
 void Application::add_effect(Effect<Canvas> *effect)
 {
     effects->add_effect(effect);
+}
+
+Renderer *Application::get_renderer()
+{
+    return renderer;
 }
 
 Plugin_manager *Application::get_plugins()

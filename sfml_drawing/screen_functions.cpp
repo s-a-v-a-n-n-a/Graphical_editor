@@ -1,4 +1,5 @@
 #include "screen_functions.hpp"
+#include "../Editor/Application.hpp"
 
 const char *screen_state_text[]
 {
@@ -9,7 +10,7 @@ const char *screen_state_text[]
 };
 
 Screen_information::Screen_information(size_t par_width, size_t par_height) 
-: window(sf::VideoMode(par_width, par_height), "It works"), event(), mouse_position(0.0, 0.0), renderer()//, textures()
+: window(sf::VideoMode(par_width, par_height), "It works"), event(), mouse_position(0.0, 0.0)//, textures()
 {
 	width  = par_width;
 	height = par_height;
@@ -113,9 +114,9 @@ void Screen_information::draw_circle(const Vector_ll &par_position, const double
 	// sf::BlendMode blend = blending_mode(mode);
 	// window.draw(circle, blend);
 	Renderer::Object obj = { &window, par_position, mode};
-	renderer.push_back(&obj);
-	renderer.draw_circle({0, 0}, par_radius, par_color, par_fill_color);
-	renderer.pop_back();
+	Application::get_app()->get_renderer()->push_back(&obj);
+	Application::get_app()->get_renderer()->draw_circle({0, 0}, par_radius, par_color, par_fill_color);
+	Application::get_app()->get_renderer()->pop_back();
 }
 
 void Screen_information::draw_rectangle(const Vector_ll &par_position, const double par_width, const double par_height, const Color &par_color, const Color &par_fill_color, const Blend_mode mode)//, Color *pixels, const Vector_ll params)
@@ -133,9 +134,9 @@ void Screen_information::draw_rectangle(const Vector_ll &par_position, const dou
 	// sf::BlendMode blend = blending_mode(mode);
 	// window.draw(rectangle, blend);
 	Renderer::Object obj = { &window, par_position, mode};
-	renderer.push_back(&obj);
-	renderer.draw_rectangle({0, 0}, par_width, par_height, par_color, par_fill_color);
-	renderer.pop_back();
+	Application::get_app()->get_renderer()->push_back(&obj);
+	Application::get_app()->get_renderer()->draw_rectangle({0, 0}, par_width, par_height, par_color, par_fill_color);
+	Application::get_app()->get_renderer()->pop_back();
 }
 
 void Screen_information::draw_triangle(const Vector_ll &point1, const Vector_ll &point2, const Vector_ll &point3, const Color &par_color, const Color &par_fill_color, const Blend_mode mode)//, Color *pixels, const Vector_ll params)
@@ -157,9 +158,9 @@ void Screen_information::draw_triangle(const Vector_ll &point1, const Vector_ll 
 	// sf::BlendMode blend = blending_mode(mode);
 	// window.draw(convex, blend);
 	Renderer::Object obj = { &window, {0, 0}, mode};
-	renderer.push_back(&obj);
-	renderer.draw_triangle(point1, point2, point3, par_color, par_fill_color);
-	renderer.pop_back();
+	Application::get_app()->get_renderer()->push_back(&obj);
+	Application::get_app()->get_renderer()->draw_triangle(point1, point2, point3, par_color, par_fill_color);
+	Application::get_app()->get_renderer()->pop_back();
 }
 
 
@@ -171,9 +172,9 @@ void Screen_information::draw_point(const Vector_ll &par_point, const Color &par
 	// sf::BlendMode blend = blending_mode(mode);
 	// window.draw(&sfml_point, 1, sf::Points, blend);
 	Renderer::Object obj = { &window, {0, 0}, mode};
-	renderer.push_back(&obj);
-	renderer.draw_point(par_point, par_color);
-	renderer.pop_back();
+	Application::get_app()->get_renderer()->push_back(&obj);
+	Application::get_app()->get_renderer()->draw_point(par_point, par_color);
+	Application::get_app()->get_renderer()->pop_back();
 }
 
 void Screen_information::draw_line(const Vector_ll &left, const Vector_ll &right, const Color &par_color, const Blend_mode mode)//, Color *pixels, const Vector_ll params)
@@ -185,9 +186,9 @@ void Screen_information::draw_line(const Vector_ll &left, const Vector_ll &right
 	// sf::BlendMode blend = blending_mode(mode);
 	// window.draw(sfml_line, 2, sf::Lines, blend);
 	Renderer::Object obj = { &window, {0, 0}, mode};
-	renderer.push_back(&obj);
-	renderer.draw_line(left, right, par_color);
-	renderer.pop_back();
+	Application::get_app()->get_renderer()->push_back(&obj);
+	Application::get_app()->get_renderer()->draw_line(left, right, par_color);
+	Application::get_app()->get_renderer()->pop_back();
 }
 
 
@@ -232,9 +233,9 @@ void Screen_information::draw_image(const Color *array, const Vector_ll &positio
 
 	// draw_texture(position, &texture, width, height, 1, mode);
 	Renderer::Object obj = { &window, {0, 0}, mode};
-	renderer.push_back(&obj);
-	renderer.draw_image(array, position, width, height);
-	renderer.pop_back();
+	Application::get_app()->get_renderer()->push_back(&obj);
+	Application::get_app()->get_renderer()->draw_image(array, position, width, height);
+	Application::get_app()->get_renderer()->pop_back();
 }
 
 void Screen_information::draw_texture(const Vector_ll &position, const char *texture_name, const Blend_mode mode)
@@ -250,9 +251,9 @@ void Screen_information::draw_texture(const Vector_ll &position, const char *tex
 	// sf::BlendMode blend = blending_mode(mode);
 	// window.draw(sprite, blend);
 	Renderer::Object obj = { &window, {0, 0}, mode};
-	renderer.push_back(&obj);
-	renderer.draw_texture(position, texture_name);
-	renderer.pop_back();
+	Application::get_app()->get_renderer()->push_back(&obj);
+	Application::get_app()->get_renderer()->draw_texture(position, texture_name);
+	Application::get_app()->get_renderer()->pop_back();
 }
 
 void Screen_information::draw_texture(const Vector_ll &position, const sf::Texture *texture, const size_t width, const size_t height, const double transperancy, const Blend_mode mode)
@@ -288,9 +289,9 @@ void Screen_information::draw_texture(const Vector_ll &position, const sf::Textu
 	// sf::BlendMode blend = blending_mode(mode);
 	// window.draw(sprite, blend);
 	Renderer::Object obj = { &window, {0, 0}, mode};
-	renderer.push_back(&obj);
-	renderer.draw_texture(position, texture, width, height, transperancy);
-	renderer.pop_back();
+	Application::get_app()->get_renderer()->push_back(&obj);
+	Application::get_app()->get_renderer()->draw_texture(position, texture, width, height, transperancy);
+	Application::get_app()->get_renderer()->pop_back();
 }
 
 void Screen_information::reset()

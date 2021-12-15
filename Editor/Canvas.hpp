@@ -22,7 +22,8 @@ protected:
 	Color *original_drawing;
 	Color *drawing;
 
-	// RGBA_effect effect[MAX_COLOR_VALUE + 1];
+	// Target_texture *texture;
+	// Target_texture *result_texture;
 
 	bool drawing_state;
 	bool ready;

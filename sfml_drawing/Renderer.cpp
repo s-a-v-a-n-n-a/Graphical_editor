@@ -171,6 +171,12 @@ void Renderer::draw_texture(const Vector_ll &position, const char *texture_name)
 	obj->render->draw(sprite, blend);
 }
 
+void Renderer::draw_texture(const Vector_ll &position, const sf::RenderTexture *texture, const size_t width, const size_t height, const double transperancy)
+{
+	const sf::Texture smpl_texture = texture->getTexture();
+	draw_texture(position, &smpl_texture, width, height, transperancy);
+}
+
 void Renderer::draw_texture(const Vector_ll &position, const sf::Texture *texture, const size_t width, const size_t height, const double transperancy)
 {
 	Renderer::Object *obj = get_last();
@@ -191,4 +197,41 @@ void Renderer::draw_texture(const Vector_ll &position, const sf::Texture *textur
 
 	sf::BlendMode blend = blending_mode(obj->mode);
 	obj->render->draw(sprite, blend);
+}
+
+void Renderer::clear_texture(sf::RenderTexture *texture, const Color &color)
+{
+	texture->clear(sf::Color(color.r, color.g, color.b, color.a));
+}
+
+Color *Renderer::texture2data(sf::RenderTexture *texture, const size_t width, const size_t height)
+{
+	sf::Image image = (texture->getTexture()).copyToImage();
+
+	Color *array = new Color[width * height];
+
+	for (size_t i = 0; i < height; ++i)
+	{
+		for (int j = 0; j < width; ++j)
+		{
+			sf::Color pixel = image.getPixel(j, i);
+			array[i * width + j] = *((Color*)&pixel);
+		}
+	}
+
+	return array;
+}
+
+void Renderer::data2texture(sf::RenderTexture *texture, Color *data, const size_t width, const size_t height)
+{
+	sf::Texture tmp;
+	tmp.create(width, height);
+	tmp.update((sf::Uint8*)data, width, height, 0, 0); 
+	
+	sf::Sprite sprite;
+	sprite.setTexture(tmp);
+
+	texture->clear(sf::Color(255, 255, 255, 0));
+	texture->draw(sprite);
+	texture->display();
 }

@@ -4,6 +4,7 @@
 #include "../Utilities/Timer.hpp"
 
 #include "../sfml_drawing/screen_functions.hpp"
+#include "../sfml_drawing/Renderer.hpp"
 #include "../GUI/Visual_object_base.hpp"
 #include "../GUI/Resource_manager.hpp"
 
@@ -37,6 +38,7 @@ private:
 	static Application *app;
 	static Application_destroyer destroyer;
 
+	Renderer *renderer;
 	Resources *resources;
 
 	Animation_manager *animations;
@@ -63,6 +65,7 @@ public:
 	void add_effect(Effect<Canvas> *effect);
 	void add_tool(Tool *tool);
 	
+	Renderer *get_renderer();
 	Animation_manager *get_animations();
 	Plugin_manager *get_plugins();
 	Effect_manager *get_effects();

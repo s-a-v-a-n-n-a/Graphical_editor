@@ -96,15 +96,6 @@ void Canvas::draw(Screen_information *screen)
 	}
 
 	Visual_object::draw(screen);
-
-	// size_t width = get_width();
-	// size_t height = get_height();
-
-	// Color current_color = get_color();
-
-	// Vector_ll position(get_position());
-
-	// screen->draw_image(drawing, get_position(), width, height);
 }
 
 bool Canvas::point_inside (const size_t par_x, const size_t par_y)
@@ -118,56 +109,6 @@ bool Canvas::point_inside (const size_t par_x, const size_t par_y)
 	return false;
 }
 
-// void Canvas::set_red (const unsigned char from, const unsigned char to)
-// {
-// 	size_t width  = get_width();
-// 	size_t height = get_height();
-
-// 	effect[from].r = to;
-// 	for (size_t i = 0; i < width * height; ++i)
-// 	{
-// 		if (original_drawing[i].get_r() == from)
-// 		{
-// 			drawing[i].set_r(to);
-// 		}
-// 	}
-
-// 	get_texture()->set_texture(drawing, get_width(), get_height());
-// }
-
-// void Canvas::set_green (const unsigned char from, const unsigned char to)
-// {
-// 	size_t width  = get_width();
-// 	size_t height = get_height();
-
-// 	effect[from].g = to;
-// 	for (size_t i = 0; i < width * height; ++i)
-// 	{
-// 		if (original_drawing[i].get_g() == from)
-// 		{
-// 			drawing[i].set_g(to);
-// 		}
-// 	}
-
-// 	get_texture()->set_texture(drawing, get_width(), get_height());
-// }
-
-// void Canvas::set_blue (const unsigned char from, const unsigned char to)
-// {
-// 	size_t width = get_width();
-// 	size_t height = get_height();
-
-// 	effect[from].b = to;
-// 	for (size_t i = 0; i < width * height; ++i)
-// 	{
-// 		if (original_drawing[i].get_b() == from)
-// 		{
-// 			drawing[i].set_b(to);
-// 		}
-// 	}
-
-// 	get_texture()->set_texture(drawing, get_width(), get_height());
-// }
 Color *Canvas::get_drawing() 
 { 
 	ready = false; 

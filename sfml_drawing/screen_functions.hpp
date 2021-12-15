@@ -41,7 +41,7 @@ extern const char *screen_state_text[];
 class Screen_information 
 {
 private:
-	Renderer renderer;
+	// Renderer renderer;
 
 	Vector_ll mouse_position;
 	bool mouse_clicked;

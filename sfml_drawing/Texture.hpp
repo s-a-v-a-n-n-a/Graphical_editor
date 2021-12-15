@@ -12,6 +12,7 @@
 #include "colors.hpp"
 
 #define Shelled_texture sf::Texture // sf::RenderTexture
+#define Target_texture sf::RenderTexture // sf::RenderTexture
 
 class Texture
 {
@@ -38,7 +39,7 @@ public:
 class Full_texture : public Texture
 {
 private:
-	sf::RenderTexture texture;
+	Target_texture texture;
 	Shelled_texture tmp_texture; 
 
 public:
@@ -54,13 +55,13 @@ public:
 
 	const Shelled_texture *get_texture() override;
 
-	sf::RenderTexture *get_current_texture();
+	Target_texture *get_current_texture();
 
 	// Shelled_texture *getTexture()
 	// {
 
 	// }
-	void set_texture(const sf::Texture *par_texture);
+	void set_texture(const Shelled_texture *par_texture);
 
 	void set_texture(Color *array, const size_t width, const size_t height) override;
 
