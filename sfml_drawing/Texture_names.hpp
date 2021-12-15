@@ -33,6 +33,7 @@ const char CANVAS_TEXTURE[] = "graphical_attributes/Textures/Canvas.png";
 const char CANVAS_BCKGRND[] = "graphical_attributes/Textures/Canvas_background.jpg";
 
 const char SLIDER_LINE_HOR[] = "graphical_attributes/Textures/Line.png";
+const char SLIDER_LINE_VER[] = "graphical_attributes/Textures/Line_ver.png";
 const char SLIDER_LEFT[] = "graphical_attributes/Textures/Arrow_left.png";
 const char SLIDER_LEFT_ACTIVE[] = "graphical_attributes/Textures/Arrow_left_active.png";
 const char SLIDER_RIGHT[] = "graphical_attributes/Textures/Arrow_right.png";
@@ -60,6 +61,7 @@ const char MAXIM_TEXTURE[] = "graphical_attributes/Textures/maxim.jpg";
 const char BLURRED_TEXTURE[] = "graphical_attributes/Textures/Blurred.jpg";
 const char LANDSCAPE_TEXTURE[] = "graphical_attributes/Textures/Landscape.jpg";
 const char WOW_TEXTURE[] = "graphical_attributes/Textures/Wow.png";
+const char WINTER_TEXTURE[] = "graphical_attributes/Textures/Beautiful.jpg";
 
 extern const char *COLORED_BUTTONS[];
 extern const char *TOOLS_BUTTONS[];

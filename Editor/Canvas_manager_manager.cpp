@@ -11,7 +11,8 @@ Canvas_manager_manager::Canvas_manager_manager(const Visual_object::Config &par_
 	
 	// создаёт начальный объект
 	// ------------------------------------------------------------------------------
-	add_canvas(WOW_TEXTURE);
+	// add_canvas(WOW_TEXTURE);
+	add_canvas(MAXIM_TEXTURE);
 }
 
 Window_control_panel *Canvas_manager_manager::create_control_panel(Visual_object *parent, const Vector_ll &position, const size_t width, const size_t height)

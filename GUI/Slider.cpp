@@ -19,12 +19,12 @@ Slider::Slider(const Visual_object::Config &par_base, Button_delegate *par_deleg
 	// ползунок
 	if (horizontal)
 	{
-		slider = create_sliding_button(get_position() + Vector_ll(height + COSMETIC_OFFSET, 0), SLIDER_SIZE, height, get_position() + Vector_ll(height + COSMETIC_OFFSET, 0), get_position() + Vector_ll(line_length + height - COSMETIC_OFFSET, 0), this);
+		slider = create_sliding_button(get_position() + Vector_ll(height + COSMETIC_OFFSET, 0), height, height, get_position() + Vector_ll(height + COSMETIC_OFFSET, 0), get_position() + Vector_ll(line_length + height - COSMETIC_OFFSET - height/2, 0), this);
 		current_relation = slider->get_x_relation();
 	}
 	else
 	{
-		slider = create_sliding_button(get_position() + Vector_ll(0, width + COSMETIC_OFFSET), width, SLIDER_SIZE, get_position() + Vector_ll(0, width + COSMETIC_OFFSET), get_position() + Vector_ll(0, line_length + width - COSMETIC_OFFSET), this);
+		slider = create_sliding_button(get_position() + Vector_ll(0, width + COSMETIC_OFFSET), width, width, get_position() + Vector_ll(0, width + COSMETIC_OFFSET), get_position() + Vector_ll(0, line_length + width - COSMETIC_OFFSET - width/2), this);
 		current_relation = slider->get_y_relation();
 	}
 
@@ -47,8 +47,17 @@ Slider::Slider(const Visual_object::Config &par_base, Button_delegate *par_deleg
 	// полосочка, по которой ездят
 	// а кто он и что он будет уметь? Светиться? Фон рисовать?
 	Magnet_control *line_delegate = new Magnet_control(slider);
-	Full_texture *texture = Application::get_app()->get_rescrs()->create_texture(SLIDER_LINE_HOR, line_length, height);
-	Button *line = new Button({this, (size_t)Vidget_type::BUTTON, get_position() + Vector_ll(height, 0), texture, TRANSPARENT, line_length, height}, line_delegate, "");
+	Button *line = nullptr;
+	if (horizontal)
+	{
+		Full_texture *texture = Application::get_app()->get_rescrs()->create_texture(SLIDER_LINE_HOR, line_length, height);
+		line = new Button({this, (size_t)Vidget_type::BUTTON, get_position() + Vector_ll(height, 0), texture, TRANSPARENT, line_length, height}, line_delegate, "");
+	}
+	else
+	{
+		Full_texture *texture = Application::get_app()->get_rescrs()->create_texture(SLIDER_LINE_VER, line_length, height);
+		line = new Button({this, (size_t)Vidget_type::BUTTON, get_position() + Vector_ll(height, 0), texture, TRANSPARENT, line_length, height}, line_delegate, "");
+	}
 	add_visual_object(line);
 
 	move_to_end(slider, 0);
