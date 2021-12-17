@@ -44,7 +44,9 @@ Vec2s Render::get_size()
 
 RGBA Render::get_pixel(size_t x, size_t y)
 {
-	return target[y * size.get_y() + x];
+	Color *texture_data = texture2data(texture, size.get_x(), size.get_y());
+
+	return texture_data[y * size.get_y() + x];
 }
 
 void Render::set_pixel(size_t x, size_t y, const RGBA &color)
