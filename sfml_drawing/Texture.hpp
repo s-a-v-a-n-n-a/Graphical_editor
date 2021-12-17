@@ -44,8 +44,8 @@ private:
 
 public:
 	Full_texture(const char *par_texture_name);
-
 	Full_texture(const char *par_texture_name, const size_t width, const size_t height);
+	Full_texture(Full_texture *other);
 
 	void set_size(const Vector_ll par_size) override;
 

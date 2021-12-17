@@ -41,6 +41,7 @@ public:
 		size_t canvas_height = to_effect->get_height();
 		size_t canvas_capacity = canvas_height * canvas_width;Color *drawing = new Color[canvas_capacity];
 		
+		Color *data = to_effect->get_drawing();
 		for (size_t i = 0; i < canvas_capacity; ++i)
 		{
 			drawing[i] = to_effect->get_drawing()[i];

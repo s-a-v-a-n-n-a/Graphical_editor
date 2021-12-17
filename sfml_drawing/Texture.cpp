@@ -81,6 +81,39 @@ Full_texture::Full_texture(const char *par_texture_name, const size_t width, con
 	texture.display();
 }
 
+Full_texture::Full_texture(Full_texture *other)
+: Texture(other->get_name())
+{
+	char *name = other->get_name();
+	size_t width = other->get_width();
+	size_t height = other->get_height();
+
+	tmp_texture.loadFromFile(name);
+	
+	sf::Sprite sprite;
+
+	double scale_x = (double)width / (double)get_width();
+	double scale_y = (double)height / (double)get_height();
+
+	set_size(Vector_ll(width, height));
+	if (scale_x > 1 || scale_y > 1)
+	{
+		tmp_texture.setSmooth(true);
+	}
+
+	sprite.setTexture(tmp_texture);
+	sprite.setScale(scale_x, scale_y);
+
+	texture.create(width, height);
+	texture.clear(sf::Color(255, 255, 255, 0));
+	texture.draw(sprite);
+	texture.display();
+
+	Color *other_data = other->get_pixels();
+	set_texture(other_data, width, height);
+	
+}
+
 Color *Full_texture::get_pixels()
 {
 	sf::Image image = (*get_texture()).copyToImage();

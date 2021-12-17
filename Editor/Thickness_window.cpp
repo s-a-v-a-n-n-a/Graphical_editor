@@ -4,7 +4,7 @@
 Thickness_window::Thickness_window(const Visual_object::Config &par_base)
 : Window(par_base)
 {
-	Change_thickness_non_fixedly *delegate = new Change_thickness_non_fixedly(DEFAULT_PENCIL_SIZE);
+	Change_thickness_non_fixedly *delegate = new Change_thickness_non_fixedly(DEFAULT_TOOL_SIZE);
 	slider = create_slider(get_position() + Vector_ll(10, DEFAULT_BUTTON_HEIGHT + 10), get_width() - 20, get_height() - DEFAULT_BUTTON_HEIGHT - 20, delegate);
 }
 

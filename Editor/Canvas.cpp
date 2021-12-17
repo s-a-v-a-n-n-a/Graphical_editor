@@ -14,14 +14,7 @@ Canvas::Canvas(const Visual_object::Config &par_base) //, Pencil *par_pencil
 	original_drawing = new Color[get_width() * get_height()];
 	
 	Color *array = ((Full_texture*)get_texture())->get_pixels();
-	// else
-	// {
-	// 	array = new Color[get_width() * get_height()];
-	// 	for (size_t i = 0; i < get_width() * get_height(); ++i)
-	// 	{
-	// 		array[i] = get_color();
-	// 	}
-	// }
+	original_texture = Application::get_app()->get_rescrs()->create_texture((Full_texture*)get_texture());
 
 	for (size_t i = 0; i < get_width() * get_height(); ++i)
 	{
@@ -34,15 +27,10 @@ Canvas::Canvas(const Visual_object::Config &par_base) //, Pencil *par_pencil
 
 	Tool *current_tool = Application::get_app()->get_tools()->get_active_tool();
 	if (!current_tool->get_pixels())
-		current_tool->set_data(get_drawing(), Vector_ll(get_width(), get_height()));
-	
-	// for (int i = 0; i <= (int)MAX_COLOR_VALUE; ++i)
-	// {
-	// 	effect[i] = { -1, -1, -1, -1 };
-	// }
+		current_tool->set_data(original_texture, Vector_ll(get_width(), get_height()));
 }
 
-void Canvas::draw_point(const size_t par_x, const size_t par_y)
+/*void Canvas::draw_point(const size_t par_x, const size_t par_y)
 {
 	// set_applied(false);
 
@@ -85,7 +73,7 @@ void Canvas::draw_point(const size_t par_x, const size_t par_y)
 	// Affected::tick();
 
 	// get_texture()->set_texture(drawing, get_width(), get_height());
-}
+}*/
 
 void Canvas::draw(Screen_information *screen)
 {
@@ -95,6 +83,7 @@ void Canvas::draw(Screen_information *screen)
 		ready = true;
 	}
 
+	// screen->draw_texture(get_position(), original_texture->get_texture(), get_width(), get_height());
 	Visual_object::draw(screen);
 }
 
@@ -112,18 +101,19 @@ bool Canvas::point_inside (const size_t par_x, const size_t par_y)
 Color *Canvas::get_drawing() 
 { 
 	ready = false; 
-	return original_drawing; 
+	return original_texture->get_pixels(); 
 }
 
 void Canvas::make_drawing()
 {
-	for (size_t i = 0; i < get_width() * get_height(); ++i)
-	{
-		drawing[i] = original_drawing[i];
-	}
+	// for (size_t i = 0; i < get_width() * get_height(); ++i)
+	// {
+	// 	drawing[i] = original_drawing[i];
+	// }
+	// Color *data = original_texture->get_pixels();
+	((Full_texture*)get_texture())->set_texture(original_texture->get_texture());
 
-	Affected::tick();
-	get_texture()->set_texture(drawing, get_width(), get_height());
+	// Affected::tick();
 }
 
 bool Canvas::on_mouse_click (const bool state, const size_t par_x, const size_t par_y)
@@ -139,7 +129,7 @@ bool Canvas::on_mouse_click (const bool state, const size_t par_x, const size_t 
 	if (state)
 	{
 		set_applied(false);
-		current_tool->on_mouse_press(get_drawing(), Vector_ll(get_width(), get_height()), Vector_ll(par_x, par_y) - get_position());
+		current_tool->on_mouse_press(original_texture, Vector_ll(get_width(), get_height()), Vector_ll(par_x, par_y) - get_position());
 		make_drawing();
 
 		set_drawing_state(true);
@@ -180,6 +170,14 @@ void Canvas::apply(Color *data, const Blend_mode &mode)
 	make_drawing();
 
 	((Full_texture*)get_texture())->add_picture(data, get_width(), get_height(), blending_mode(mode));
-	delete [] original_drawing;
-	original_drawing = ((Full_texture*)get_texture())->get_pixels();
+	// delete [] original_drawing;
+	// original_drawing = ((Full_texture*)get_texture())->get_pixels();
+	original_texture->set_texture(data, get_width(), get_height());
+}
+
+void Canvas::apply(const Shelled_texture *texture, const Blend_mode &mode)
+{
+	make_drawing();
+
+	original_texture->set_texture(texture);
 }

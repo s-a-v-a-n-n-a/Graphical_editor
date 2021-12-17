@@ -1,5 +1,6 @@
 #include "Toolbar.hpp"
-
+#include "Pencil.hpp"
+#include "Eraser.hpp"
 #include "Pipette.hpp"
 
 // Toolbar *Toolbar::toolbar = nullptr;

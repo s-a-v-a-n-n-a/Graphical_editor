@@ -11,8 +11,7 @@ extern const Color DEFAULT_BACKGROUND_COLOR;
 class Canvas : public Visual_object, public Affected<Canvas>
 {
 protected:
-	// Pencil *pencil;
-
+	Full_texture *original_texture;
 	// Color current_background_color;
 	Color current_drawing_color;
 
@@ -65,6 +64,7 @@ public:
 	}
 
 	void apply(Color *data, const Blend_mode &mode);
+	void apply(const Shelled_texture *texture, const Blend_mode &mode);
 };
 
 #endif // CANVAS_H

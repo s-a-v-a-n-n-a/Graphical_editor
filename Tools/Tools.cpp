@@ -8,7 +8,7 @@ Tool::Tool()
 }
 
 Tool::Tool(const char *par_name)
-: pressed(false), data_params(0, 0), data(nullptr), name(nullptr)
+: pressed(false), data_params(0, 0), data(nullptr), name(nullptr), texture_data(nullptr)
 {
 	if (par_name)
 	{
@@ -35,11 +35,11 @@ void Tool::on_mouse_move(const Vector_ll &from, const Vector_ll &to)
 {
 	if (pressed)
 	{
-		apply(data, data_params, to);
+		apply(texture_data, data_params, to);
 	}
 }
 
-void Tool::on_mouse_press(Color *to_apply, const Vector_ll &parameters, const Vector_ll &position)
+void Tool::on_mouse_press(Full_texture *texture, const Vector_ll &parameters, const Vector_ll &position)
 {
 	// if (position.get_x() < 0 || position.get_y() < 0 || position.get_x() >= parameters.get_x() || position.get_y() >= parameters.get_y())
 	// 	return; 
@@ -47,11 +47,11 @@ void Tool::on_mouse_press(Color *to_apply, const Vector_ll &parameters, const Ve
 	// for (size_t i = 0; i < parameters.get_x() * parameters.get_y(); ++i)
 	// 	data[i] = to_apply[i];
 
-	set_data(to_apply, parameters);
+	set_data(texture, parameters);
 
 	if (!pressed)
 	{ 
-		apply(data, data_params, position);
+		apply(texture_data, data_params, position);
 		pressed = true;
 	}
 }
@@ -69,9 +69,9 @@ void Tool::on_mouse_release(const Vector_ll &position)
 	release_data();
 }
 
-void Tool::set_data(Color *to_apply, const Vector_ll &parameters)
+void Tool::set_data(Full_texture *texture, const Vector_ll &parameters)
 {
-	data = to_apply;
+	texture_data = texture;
 	data_params = parameters;
 }
 

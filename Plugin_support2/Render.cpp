@@ -1,25 +1,25 @@
 #include "Render.hpp"
 #include "../Editor/Application.hpp"
 
-Blend_mode app_translate_mode(BlendMode mode)
+Blend_mode app_translate_mode(PUPPY::BlendMode mode)
 {
 	switch(mode)
 	{
-	case BlendMode::COPY:
-		return Blend_mode::COPY;
-	case BlendMode::ALPHA_BLEND:
+	case PUPPY::BlendMode::COPY:
+		return PUPPY::Blend_mode::COPY;
+	case PUPPY::BlendMode::ALPHA_BLEND:
 		return Blend_mode::ALPHA;
 	default:
 		return Blend_mode::ALPHA;
 	}
 }
 
-Vector_ll app_translate_vector(Vec2f vec)
+Vector_ll app_translate_vector(PUPPY::Vec2f vec)
 {
 	return Vector_ll((long long)vec.x, (long long)vec.y);
 }
 
-Color app_translate_color(RGBA color)
+Color app_translate_color(PUPPY::RGBA color)
 {
 	return { color.r, color.g, color.b, color.a };
 }
@@ -37,19 +37,19 @@ void Render::get_active_target()
 
 Render::Render *get_copy();
 
-Vec2s Render::get_size()
+PUPPY::Vec2s Render::get_size()
 {
 	return Vec2s(size.get_x(), size.get_y());
 }
 
-RGBA Render::get_pixel(size_t x, size_t y)
+PUPPY::RGBA Render::get_pixel(size_t x, size_t y)
 {
 	Color *texture_data = texture2data(texture, size.get_x(), size.get_y());
 
 	return texture_data[y * size.get_y() + x];
 }
 
-void Render::set_pixel(size_t x, size_t y, const RGBA &color)
+void Render::set_pixel(size_t x, size_t y, const PUPPY::RGBA &color)
 {
 	get_active_target();
 
@@ -63,12 +63,12 @@ void Render::set_pixel(size_t x, size_t y, const RGBA &color)
 	renderer->pop_back();
 }
 
-RGBA *Render::get_pixels() const
+PUPPY::RGBA *Render::get_pixels() const
 {
-	return (RGBA*)target;
+	return (PUPPY::RGBA*)texture->get_pixels();
 }
 
-void Render::clear(const RGBA &color)
+void Render::clear(const PUPPY::RGBA &color)
 {
 	Renderer::Object obj = { texture, {0, 0}, app_translate_mode(render_mode.blend) };
 	Renderer *renderer = Application::get_app()->get_renderer();
@@ -77,7 +77,7 @@ void Render::clear(const RGBA &color)
 }
 
 // render
-void Render::render_circle(const Vec2f &position, float radius, const RGBA &color, const RenderMode &render_mode)
+void Render::render_circle(const PUPPY::Vec2f &position, float radius, const PUPPY::RGBA &color, const PUPPY::RenderMode &render_mode)
 {
 	get_active_target();
 
@@ -91,7 +91,7 @@ void Render::render_circle(const Vec2f &position, float radius, const RGBA &colo
 	renderer->pop_back();
 }
 
-void Render::render_line(const Vec2f &start, const Vec2f &end, const RGBA &color, const RenderMode &render_mode)
+void Render::render_line(const PUPPY::Vec2f &start, const PUPPY::Vec2f &end, const PUPPY::RGBA &color, const PUPPY::RenderMode &render_mode)
 {
 	get_active_target();
 
@@ -102,7 +102,7 @@ void Render::render_line(const Vec2f &start, const Vec2f &end, const RGBA &color
 	renderer->pop_back();
 }
 
-void Render::render_triangle(const Vec2f &p1, const Vec2f &p2, const Vec2f &p3, const RGBA &color, const RenderMode &render_mode)
+void Render::render_triangle(const PUPPY::Vec2f &p1, const PUPPY::Vec2f &p2, const PUPPY::Vec2f &p3, const PUPPY::RGBA &color, const PUPPY::RenderMode &render_mode)
 {
 	get_active_target();
 
@@ -113,7 +113,7 @@ void Render::render_triangle(const Vec2f &p1, const Vec2f &p2, const Vec2f &p3, 
 	renderer->pop_back();
 }
 
-void Render::render_rectangle(const Vec2f &p1, const Vec2f &p2, const RGBA &color, const RenderMode &render_mode)
+void Render::render_rectangle(const PUPPY::Vec2f &p1, const PUPPY::Vec2f &p2, const PUPPY::RGBA &color, const PUPPY::RenderMode &render_mode)
 {
 	get_active_target();
 
@@ -133,7 +133,7 @@ void Render::render_rectangle(const Vec2f &p1, const Vec2f &p2, const RGBA &colo
 	renderer->pop_back();
 }
 
-void Render::render_texture(const Vec2f &position, const RenderTarget *texture, const RenderMode &render_mode)
+void Render::render_texture(const PUPPY::Vec2f &position, const PUPPY::RenderTarget *texture, const PUPPY::RenderMode &render_mode)
 {
 	get_active_target();
 	
@@ -150,7 +150,7 @@ void Render::render_texture(const Vec2f &position, const RenderTarget *texture, 
 	renderer->pop_back();
 }
 
-void Render::render_pixels(const Vec2f &position, const Vec2s &size, const RGBA *data, const RenderMode &render_mode)
+void Render::render_pixels(const PUPPY::Vec2f &position, const PUPPY::Vec2s &size, const PUPPY::RGBA *data, const PUPPY::RenderMode &render_mode)
 {
 	get_active_target();
 	
@@ -164,4 +164,4 @@ void Render::render_pixels(const Vec2f &position, const Vec2s &size, const RGBA 
 	renderer->pop_back();
 }
 
-void Render::apply_shader(const Shader *shader) {}
+void Render::apply_shader(const PUPPY::Shader *shader) {}

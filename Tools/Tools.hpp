@@ -15,6 +15,7 @@ class Tool
 protected:
 	bool pressed;
 
+	Full_texture *texture_data;
 	Color *data;
 	Vector_ll data_params;
 
@@ -38,12 +39,12 @@ public:
 	virtual Vector_ll get_params() { return data_params; }
 
 	// virtual void apply(Canvas *to_apply, const Vector_ll &position) = 0;
-	virtual void apply(Color *to_apply, const Vector_ll &parameters, const Vector_ll &position) = 0;
-	virtual void set_data(Color *to_apply, const Vector_ll &parameters);
+	virtual void apply(Full_texture *texture, const Vector_ll &parameters, const Vector_ll &position) = 0;
+	virtual void set_data(Full_texture *texture, const Vector_ll &parameters);
 	virtual void release_data();
 
 	virtual void on_mouse_move(const Vector_ll &from, const Vector_ll &to);
-	virtual void on_mouse_press(Color *to_apply, const Vector_ll &parameters, const Vector_ll &position);
+	virtual void on_mouse_press(Full_texture *texture, const Vector_ll &parameters, const Vector_ll &position);
 	virtual void on_mouse_release(const Vector_ll &position);
 };
 

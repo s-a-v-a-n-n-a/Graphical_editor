@@ -35,6 +35,9 @@ FILES   	= $(OBJ)main.o \
 			$(OBJ)GUI/Animations.o \
 			$(OBJ)Tools/Toolbar.o \
 			$(OBJ)Tools/Tools.o \
+			$(OBJ)Tools/Pencil.o \
+			$(OBJ)Tools/Pipette.o \
+			$(OBJ)Tools/Eraser.o \
 			$(OBJ)Editor/Application.o \
 			$(OBJ)Editor/Canvas.o \
 			$(OBJ)Editor/Tab.o \
@@ -55,9 +58,9 @@ FILES   	= $(OBJ)main.o \
 			$(OBJ)Editor/Menu.o \
 			$(OBJ)Editor/Effects/Canvas_effects_manager.o \
 			$(OBJ)Editor/Thickness_window.o \
-			$(OBJ)Plugin_support/Plugin_manager.o \
-			$(OBJ)Plugin_support/Plugin_tool.o \
-			$(OBJ)Plugin_support/Plugin_effect.o \
+# 			$(OBJ)Plugin_support/Plugin_manager.o \
+# 			$(OBJ)Plugin_support/Plugin_tool.o \
+# 			$(OBJ)Plugin_support/Plugin_effect.o \
 
           # остальные файлы по правилу a.cpp -> $(OBJ)a.o (a может содержать путь)
  
