@@ -22,6 +22,7 @@ public:
 	bool on_key_pressed(const bool pressed_state, const unsigned key_mask) override;
 	bool on_mouse_move(const Vector_ll from, const Vector_ll to) override;
 	bool on_mouse_click(const bool state, const size_t par_x, const size_t par_y) override;
+	bool on_text_entered(const char symbol) override;
 	
 	void draw(Screen_information *screen) override;
 

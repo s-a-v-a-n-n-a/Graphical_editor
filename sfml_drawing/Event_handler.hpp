@@ -2,13 +2,15 @@
 #define EVENT_HANDLER
 
 #include <SFML/Graphics.hpp>
+#include <cctype>
 
 enum class Event_type
 {
 	NO_EVENT,
 	WINDOW,
 	MOUSE,
-	KEYBOARD
+	KEYBOARD,
+	TEXT
 };
 
 struct Event
@@ -200,7 +202,17 @@ public:
 	        	return { Event_type::MOUSE, (size_t)Mouse_state::MOVED, (size_t)Mouse::LEFT };
 	        }
 
-	        if (event.type == sf::Event::KeyPressed)
+	        if (event.type == sf::Event::TextEntered)
+			{
+			    char symbol = event.text.unicode;
+			    if (isalpha(symbol) || isdigit(symbol) || ispunct(symbol) || (symbol == ' '))
+			    {
+			    	return { Event_type::TEXT, (size_t)event.text.unicode, 0 };
+			    }
+			        // std::cout << "ASCII character typed: " << static_cast<char>(event.text.unicode) << std::endl;
+			}
+			
+			if (event.type == sf::Event::KeyPressed)
 	        {
 	        	return { Event_type::KEYBOARD, (size_t)Key_state::PRESSED, (size_t)Key::A + (size_t)event.key.code };
 	        }
@@ -209,12 +221,6 @@ public:
 	        {
 	        	return { Event_type::KEYBOARD, (size_t)Key_state::RELEASED, (size_t)Key::A + (size_t)event.key.code };
 	        }
-
-	  //       if (event.type == sf::Event::TextEntered)
-			// {
-			//     if (event.text.unicode < 128)
-			//         std::cout << "ASCII character typed: " << static_cast<char>(event.text.unicode) << std::endl;
-			// }
 	    }
 
         // return Sfml_events::NOTHING;

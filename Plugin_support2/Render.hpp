@@ -16,6 +16,7 @@ private:
     void get_active_target();
 
 public:
+    Render();
     ~Render() {}
 
     Render *get_copy() const override;

@@ -24,6 +24,12 @@ Color app_translate_color(PUPPY::RGBA color)
 	return { color.r, color.g, color.b, color.a };
 }
 
+Render::Render()
+: PUPPY::RenderTarget()
+{
+	;
+}
+
 Render::~Render() {}
 
 void Render::get_active_target()

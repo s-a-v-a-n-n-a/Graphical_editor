@@ -64,6 +64,7 @@ public:
 	virtual bool on_mouse_click  (const bool state, const size_t par_x, const size_t par_y); //const Mouse_event par_event,
 	virtual bool on_mouse_move	(const Vector_ll from, const Vector_ll to);
 	virtual bool on_key_pressed(const bool pressed_state, const unsigned key_mask); 
+	virtual bool on_text_entered(const char symbol); 
 	// virtual bool on_key_press(const Key_event par_event);
 
 	virtual void tick(Screen_information *screen, const double delta_time);

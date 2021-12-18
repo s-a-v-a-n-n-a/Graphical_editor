@@ -10,51 +10,64 @@ char *Input_string::get_message()
 
 bool Input_string::on_key_pressed(const bool pressed_state, const unsigned key_mask)
 {
+	// if (pressed)
+	// 	if (pressed_state)
+	// 	{
+	// 		if (key_mask == (size_t)Key::LSHIFT)
+	// 			uppercase = true;
+
+	// 		if (key_mask <= (size_t)Key::Z)
+	// 		{
+	// 			char begin_symbol = 'a';
+	// 			if (uppercase)
+	// 				begin_symbol = 'A';
+	// 			string.add_symbol(begin_symbol + key_mask - (size_t)Key::A);
+
+	// 			return true;
+	// 		}
+	// 		else if (key_mask == (size_t)Key::PERIOD)
+	// 		{
+	// 			string.add_symbol('.');
+
+	// 			return true;
+	// 		}
+	// 		else if (key_mask >= (size_t)Key::NUM0 && key_mask <= (size_t)Key::NUM9)
+	// 		{
+	// 			string.add_symbol('0' + key_mask - (size_t)Key::NUM0);
+
+	// 			return true;
+	// 		}
+	// 		else if (key_mask == (size_t)Key::BACKSPACE)
+	// 		{
+	// 			string.delete_symbol();
+
+	// 			return true;
+	// 		}
+
+	// 		return false;
+	// 	}
+	// 	else
+	// 	{
+	// 		if (key_mask == (size_t)Key::LSHIFT)
+	// 			uppercase = false;
+
+	// 		return false;
+	// 	}
+	// else
+	// 	return false;
+	return true;
+}
+
+bool Input_string::on_text_entered(const char symbol)
+{
 	if (pressed)
-		if (pressed_state)
-		{
-			if (key_mask == (size_t)Key::LSHIFT)
-				uppercase = true;
+	{
+		string.add_symbol(symbol);
 
-			if (key_mask <= (size_t)Key::Z)
-			{
-				char begin_symbol = 'a';
-				if (uppercase)
-					begin_symbol = 'A';
-				string.add_symbol(begin_symbol + key_mask - (size_t)Key::A);
+		return true;
+	}
 
-				return true;
-			}
-			else if (key_mask == (size_t)Key::PERIOD)
-			{
-				string.add_symbol('.');
-
-				return true;
-			}
-			else if (key_mask >= (size_t)Key::NUM0 && key_mask <= (size_t)Key::NUM9)
-			{
-				string.add_symbol('0' + key_mask - (size_t)Key::NUM0);
-
-				return true;
-			}
-			else if (key_mask == (size_t)Key::BACKSPACE)
-			{
-				string.delete_symbol();
-
-				return true;
-			}
-
-			return false;
-		}
-		else
-		{
-			if (key_mask == (size_t)Key::LSHIFT)
-				uppercase = false;
-
-			return false;
-		}
-	else
-		return false;
+	return false;
 }
 
 bool Input_string::on_mouse_move(const Vector_ll from, const Vector_ll to)

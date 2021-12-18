@@ -296,27 +296,30 @@ void  (*Plugin_manager::get)(const PPluginInterface *self, void *handle, void *a
 Plugin_manager::Plugin_manager()
 : plugins()
 {
-	translate_mode = &app_translate_mode;
-	get_pixels = &app_get_pixels;
-	get_size = &app_get_size;
-	log = &app_log;
-	get_absolute_time = &app_get_absolute_time;
-	release_pixels = &app_release_pixels;
-	get_current_color = &app_get_current_color;
-	get_current_size = &app_get_current_size;
-	circle = &app_circle;
-	rectangle = &app_rectangle;
-	triangle = &app_triangle;
-	line = &app_line;
-	pixels = &app_pixels;
+	// translate_mode = &app_translate_mode;
+	// get_pixels = &app_get_pixels;
+	// get_size = &app_get_size;
+	// log = &app_log;
+	// get_absolute_time = &app_get_absolute_time;
+	// release_pixels = &app_release_pixels;
+	// get_current_color = &app_get_current_color;
+	// get_current_size = &app_get_current_size;
+	// circle = &app_circle;
+	// rectangle = &app_rectangle;
+	// triangle = &app_triangle;
+	// line = &app_line;
+	// pixels = &app_pixels;
 
 	// gAppInterface->general.feature_level & PFL_SETTINGS_SUPPORT	
-	create_surface = &app_create_surface;
-	destroy_surface = &app_destroy_surface;
-	add = &app_add;
-	get = &app_get;
+	// create_surface = &app_create_surface;
+	// destroy_surface = &app_destroy_surface;
+	// add = &app_add;
+	// get = &app_get;
 
-	app_interface = create_app_interface();
+	// render = new Render();
+	app_interface = new Interface();
+
+	// app_interface = create_app_interface();
 
 	// load_from_dir("Plugins_self/");
 }
@@ -352,45 +355,45 @@ void Plugin_manager::delete_path(char *path)
 	delete [] path;
 }
 
-PAppInterface *Plugin_manager::create_app_interface()
-{
-	PAppInterface *interface = new PAppInterface();
+// PAppInterface *Plugin_manager::create_app_interface()
+// {
+// 	PAppInterface *interface = new PAppInterface();
 
-	interface->extensions.enable = nullptr;
-	interface->extensions.get_func = nullptr;
+// 	interface->extensions.enable = nullptr;
+// 	interface->extensions.get_func = nullptr;
 
-	interface->general.feature_level = PFL_SETTINGS_SUPPORT;
+// 	interface->general.feature_level = PFL_SETTINGS_SUPPORT;
 
-	interface->general.log = log;
-	interface->general.get_absolute_time = get_absolute_time;
-	interface->general.release_pixels = release_pixels;
-	interface->general.get_color = get_current_color;
-	interface->general.get_size = get_current_size;
+// 	interface->general.log = log;
+// 	interface->general.get_absolute_time = get_absolute_time;
+// 	interface->general.release_pixels = release_pixels;
+// 	interface->general.get_color = get_current_color;
+// 	interface->general.get_size = get_current_size;
 
-	interface->target.get_pixels = get_pixels;
-	interface->target.get_size = get_size;
+// 	interface->target.get_pixels = get_pixels;
+// 	interface->target.get_size = get_size;
 
-	interface->render.circle = circle;
-	interface->render.line = line;
-	interface->render.triangle = triangle;
-	interface->render.rectangle = rectangle;
-	interface->render.pixels = pixels;
+// 	interface->render.circle = circle;
+// 	interface->render.line = line;
+// 	interface->render.triangle = triangle;
+// 	interface->render.rectangle = rectangle;
+// 	interface->render.pixels = pixels;
 
-	interface->settings.create_surface = create_surface;
-	interface->settings.destroy_surface = destroy_surface;
-	interface->settings.add = add;
-	interface->settings.get = get;
+// 	interface->settings.create_surface = create_surface;
+// 	interface->settings.destroy_surface = destroy_surface;
+// 	interface->settings.add = add;
+// 	interface->settings.get = get;
 
-	interface->shader.apply = nullptr;
-	interface->shader.compile = nullptr;
-	interface->shader.release = nullptr;
-	interface->shader.set_uniform_int = nullptr;
-	interface->shader.set_uniform_int_arr = nullptr;
-	interface->shader.set_uniform_float = nullptr;
-	interface->shader.set_uniform_float_arr = nullptr;
+// 	interface->shader.apply = nullptr;
+// 	interface->shader.compile = nullptr;
+// 	interface->shader.release = nullptr;
+// 	interface->shader.set_uniform_int = nullptr;
+// 	interface->shader.set_uniform_int_arr = nullptr;
+// 	interface->shader.set_uniform_float = nullptr;
+// 	interface->shader.set_uniform_float_arr = nullptr;
 
-	return interface;
-}
+// 	return interface;
+// }
 
 void Plugin_manager::load_from_dir(const char *path)
 {

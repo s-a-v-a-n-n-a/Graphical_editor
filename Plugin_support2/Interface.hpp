@@ -6,7 +6,12 @@
 
 struct Interface : public PUPPY::AppInterface
 {
-	ext_enable(const char *name) const override {} 
+	Render *render;
+
+	Interface();
+	~Interface();
+
+	void ext_enable(const char *name) const override {} 
 	void *ext_get_func(const char *extension, const char *func) const override {} 
 	void *ext_get_interface(const char *extension, const char *name) const override {}
 	void ext_register_as(const char *extension) const override {}

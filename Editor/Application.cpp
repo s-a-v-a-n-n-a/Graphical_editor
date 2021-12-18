@@ -203,6 +203,10 @@ void Application::launch()
                 
                 break;
             }
+            case Event_type::TEXT:
+                current_main->on_text_entered((char)result.event);
+
+                break;
             case Event_type::KEYBOARD:
                 switch (result.event)
                 {

@@ -3,7 +3,9 @@
 
 #include <stdarg.h>
 
-#include "plugin_std.hpp"
+#include "plugin_std_2.hpp"
+#include "Interface.hpp"
+#include "Render.hpp"
 
 #include "../Tools/Toolbar.hpp"
 #include "../simple_list/simple_list.hpp"
@@ -51,11 +53,9 @@ private:
 	// Visual_object *surface;
 
 	std::vector<Plugin*> plugins; // надо ли? надо
-	// List<Plugin_tool*> tools; // надо ли? надо
-	// List<Plugin_effect*> effects; // надо ли? надо
-	PAppInterface *app_interface;
-
-
+	// PUPPY::AppInterface *app_interface;
+	Interface *app_interface;
+	// Render *render;
 
 public:
 	Plugin_manager();
@@ -64,14 +64,14 @@ public:
 	char *create_path(const char *filename);
 	void delete_path(char *path);
 
-	PAppInterface *create_app_interface();
+	// PAppInterface *create_app_interface();
 
 	void load_from_dir(const char *path);
 	
 	void add_plugin(const char *filename, bool is_path = false);
 
-	void add_tool(const PPluginInterface *plugin, const PAppInterface *app_interface, void *par_handle);
-	void add_effect(const PPluginInterface *plugin, const PAppInterface *app_interface, void *par_handle);
+	void add_tool(const PUPPY::PluginInterface *plugin, const PUPPY::AppInterface *app_interface, void *par_handle);
+	void add_effect(const PUPPY::PluginInterface *plugin, const PUPPY::AppInterface *app_interface, void *par_handle);
 
 	Plugin *get_plugin(const PPluginInterface *self);
 };

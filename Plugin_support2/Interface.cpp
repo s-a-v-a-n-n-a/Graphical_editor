@@ -1,6 +1,18 @@
 #include "Interface.hpp"
 #include "../Editor/Application.hpp"
 
+Interface::Interface()
+: PUPPY::AppInterface()
+{
+	render = new Render();
+	; // ?????????????????????????
+}
+
+Interface::~Interface()
+{
+	delete render;
+}
+
 void Interface::log(const char *fmt, ...) const
 {
 	va_list arg;
@@ -41,12 +53,14 @@ void Interface::set_size(float size) const
 
 RenderTarget *Interface::get_target()  const
 {
-	return Application::get_app()->get_plugins()->get_render_target(); // no such function yet
+	// return Application::get_app()->get_plugins()->get_render_target(); // no such function yet
+	return render;
 }
 
 RenderTarget *Interface::get_preview() const
 {
-	return Application::get_app()->get_plugins()->get_render_target(); // no such function yet
+	// return Application::get_app()->get_plugins()->get_render_target(); // no such function yet
+	return render; // no such function yet
 }
 
 void Interface::flush_preview() const

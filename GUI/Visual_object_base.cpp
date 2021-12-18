@@ -187,6 +187,24 @@ bool Visual_object::on_key_pressed(const bool pressed_state, const unsigned key_
 	return false;
 }
 
+bool Visual_object::on_text_entered(const char symbol)
+{
+	size_t objects_amount = objects.get_length();
+	
+	for (long long i = (long long)objects_amount - 1; i >= 0; --i)
+	{
+		if ((get_objects()->get_array()[i])->get_reactive() && (get_objects()->get_array()[i])->on_text_entered(symbol)) // ??????
+		{
+			current_active = get_objects()->get_array()[i];
+			move_to_end(current_active, i);
+			
+			return true;
+		}
+	}
+
+	return false;
+}
+
 void Visual_object::tick(Screen_information *screen, const double delta_time)
 {
 	assert(screen);
