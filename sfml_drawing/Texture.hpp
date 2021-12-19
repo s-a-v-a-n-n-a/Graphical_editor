@@ -21,6 +21,7 @@ protected:
 	Vector_ll size;
 
 public:
+	Texture(const size_t width, const size_t height);
 	Texture(const char *par_texture_name);
 
 	~Texture();
@@ -43,6 +44,7 @@ private:
 	Shelled_texture tmp_texture; 
 
 public:
+	Full_texture(const size_t width, const size_t height);
 	Full_texture(const char *par_texture_name);
 	Full_texture(const char *par_texture_name, const size_t width, const size_t height);
 	Full_texture(Full_texture *other);
@@ -66,6 +68,7 @@ public:
 	void set_texture(Color *array, const size_t width, const size_t height) override;
 
 	void add_picture(Color *other_array, const size_t width, const size_t height, const sf::BlendMode &mode);
+	void add_texture(Full_texture *other_texture, const sf::BlendMode &mode);
 };
 
 #endif // TEXTURE_H

@@ -1,7 +1,7 @@
 #ifndef PLUGIN_STD_HPP
 #define PLUGIN_STD_HPP
 
-
+#include <filesystem>
 #include <string_view>
 
 #include "lib_std/types_std.h"
@@ -87,8 +87,8 @@ struct PluginInterface {
     virtual void *ext_get_interface(const char *extension, const char *name) const = 0;
 
     virtual const  PluginInfo *get_info()    const = 0;
-    virtual Status init(const AppInterface*) const = 0;
-    virtual Status deinit()                  const = 0;
+    virtual Status init(const AppInterface*, const std::filesystem::path& path = std::filesystem::path("./")) = 0;
+    virtual Status deinit()                        = 0;
     virtual void   dump()                    const = 0;
 
     virtual void on_tick(double dt) const = 0;

@@ -1,6 +1,12 @@
 #include "Texture.hpp"
 #include "../sfml_drawing/screen_functions.hpp"
 
+Texture::Texture(const size_t width, const size_t height)
+: texture_name(nullptr), size(width, height)
+{
+	;
+}
+
 Texture::Texture(const char *par_texture_name) : texture_name(nullptr), size(0, 0)
 {
 	unsigned texture_length = strlen(par_texture_name) + 1;
@@ -27,6 +33,14 @@ void Texture::set_size(const Vector_ll par_size)
 }
 
 
+Full_texture::Full_texture(const size_t width, const size_t height)
+: Texture(width, height)
+{
+	texture.create(width, height);
+	texture.clear(sf::Color(255, 255, 255, 0));
+	// texture.draw(sprite);
+	texture.display();
+}
 
 Full_texture::Full_texture(const char *par_texture_name) : Texture(par_texture_name)
 {
@@ -238,3 +252,16 @@ void Full_texture::add_picture(Color *other_array, const size_t width, const siz
 	texture.display();
 	// texture.getTexture().copyToImage().saveToFile("b.png");
 }
+
+void Full_texture::add_texture(Full_texture *other_texture, const sf::BlendMode &mode)
+{
+	sf::Sprite sprite;
+
+	sprite.setTexture(other_texture->get_current_texture()->getTexture());
+	sprite.setPosition(0, 0);
+	
+	texture.draw(sprite, mode);
+	texture.display();
+	// texture.getTexture().copyToImage().saveToFile("b.png");
+}
+

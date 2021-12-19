@@ -13,7 +13,7 @@ class Plugin_effect : public Plugin, public Effect<Canvas>
 private:
 
 public:
-	Plugin_effect(const PPluginInterface *par_plugin, const PAppInterface *interface, void *par_handle, Canvas *canvas, const char *name = nullptr);
+	Plugin_effect(PUPPY::PluginInterface *par_plugin, const PUPPY::AppInterface *interface, void *par_handle, Canvas *canvas, const char *name = nullptr);
 	~Plugin_effect();
 
 	void apply();

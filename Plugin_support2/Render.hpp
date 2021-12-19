@@ -1,12 +1,22 @@
+#ifndef RENDER_HPP
+#define RENDER_HPP
+
 #include "plugin_std_2.hpp"
+
+#include "../sfml_drawing/Renderer.hpp"
+#include "../sfml_drawing/Texture.hpp"
 
 Blend_mode app_translate_mode(PUPPY::BlendMode mode);
 Vector_ll app_translate_vector(PUPPY::Vec2f vec);
 Color app_translate_color(PUPPY::RGBA color);
 
+PUPPY::RGBA app_translate_color_back(Color color);
+
 class Render : public PUPPY::RenderTarget
 {
 private:
+    bool preview;
+
     Color *target;
     Vector_ll size;
     Target_texture *texture;
@@ -19,10 +29,12 @@ public:
     Render();
     ~Render() {}
 
+    void set_if_preview(const bool if_preview) { preview = if_preview; }
+    bool if_preview() const { return preview; }
     Render *get_copy() const override;
 
-    Target_texture *get_texture() { return texture; } // а нужен Full_texture
-    const Shelled_texture *get_texture() { return texture.getTexture(); } // а нужен Full_texture
+    Target_texture *get_target_texture() { return texture; } // а нужен Full_texture
+    const Shelled_texture *get_texture() { return &texture->getTexture(); } // а нужен Full_texture
 
     PUPPY::Vec2s get_size() const override;
 
@@ -44,3 +56,5 @@ public:
 
     void apply_shader(const PUPPY::Shader *shader) override;
 };
+
+#endif // RENDER_HPP

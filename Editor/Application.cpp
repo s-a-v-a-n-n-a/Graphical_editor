@@ -17,7 +17,7 @@ Application::Application()
     resources = new Resources();
 
     tools = new Toolbar();
-    // plugins = new Plugin_manager();
+    plugins = new Plugin_manager();
     effects = new Effect_manager();
 
     Graphical_editor_main_page *editor = new Graphical_editor_main_page({nullptr, (size_t)Vidget_type::EDITOR, Vector_ll(0, 0), nullptr, DARK_GREY, DEFAULT_SIZE, DEFAULT_SIZE});
@@ -31,7 +31,7 @@ Application::~Application()
 {
     delete tools;
     delete effects;
-    // delete plugins;
+    delete plugins;
     delete animations;
 
     delete graphics_wrapper;
@@ -76,10 +76,10 @@ void Application::set_main(Visual_object *object)
 	current_main = object;
 }
 
-// void Application::add_plugin(const char *plugin_name)
-// {
-//     plugins->add_plugin(plugin_name);
-// }
+void Application::add_plugin(const char *plugin_name)
+{
+    plugins->add_plugin(plugin_name);
+}
 
 void Application::add_effect(Effect<Canvas> *effect)
 {
@@ -91,10 +91,10 @@ Renderer *Application::get_renderer()
     return renderer;
 }
 
-// Plugin_manager *Application::get_plugins()
-// {
-//     return plugins;
-// }
+Plugin_manager *Application::get_plugins()
+{
+    return plugins;
+}
 
 Effect_manager *Application::get_effects()
 {

@@ -37,6 +37,15 @@ Full_texture *Resources::create_texture(Full_texture *other_texture)
 	return new_texture;
 }
 
+Full_texture *Resources::create_texture(const size_t texture_width, const size_t texture_height)
+{
+	Full_texture *new_texture = new Full_texture(texture_width, texture_height);
+
+	textures.add_to_end(new_texture);
+
+	return new_texture;
+}
+
 Animating_texture *Resources::create_texture(const char *texture_name, const size_t texture_width, const size_t texture_height, const char *move_texture_name, const char *inactive_texture_name)
 {
 	Animating_texture *new_texture = nullptr;

@@ -11,7 +11,7 @@
 #include "Graphical_editor_main_page.hpp"
 
 // ?????????????
-// #include "../Plugin_support/Plugin_manager.hpp"
+#include "../Plugin_support2/Plugin_manager.hpp"
 #include "../Tools/Toolbar.hpp"
 #include "../GUI/Animations.hpp"
 #include "Effects/Canvas_effects_manager.hpp"
@@ -42,7 +42,7 @@ private:
 	Resources *resources;
 
 	Animation_manager *animations;
-	// Plugin_manager *plugins;
+	Plugin_manager *plugins;
 	Effect_manager *effects;
 	Toolbar *tools;
 	
@@ -61,13 +61,13 @@ public:
 	~Application();
 	static Application *get_app();
 
-	// void add_plugin(const char *plugin_name);
+	void add_plugin(const char *plugin_name);
 	void add_effect(Effect<Canvas> *effect);
 	void add_tool(Tool *tool);
 	
 	Renderer *get_renderer();
 	Animation_manager *get_animations();
-	// Plugin_manager *get_plugins();
+	Plugin_manager *get_plugins();
 	Effect_manager *get_effects();
 	Toolbar *get_tools();
 	Resources *get_rescrs();

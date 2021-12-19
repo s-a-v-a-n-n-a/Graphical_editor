@@ -765,7 +765,7 @@ bool Popup_text_confirmation::on_mouse_click(const size_t par_x, const size_t pa
 bool Popup_text_confirmation::on_mouse_release()
 {
 	Roll_up_confirmation::on_mouse_release();
-	// Application::get_app()->add_plugin(*text);
+	Application::get_app()->add_plugin(*text);
 	
 	return true;
 }

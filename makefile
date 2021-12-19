@@ -7,7 +7,7 @@ else
 ASAN =
 endif
 
-COMPILATOR  = clang++# g++ -std=c++17
+COMPILATOR  = clang++ -std=c++17# g++ -std=c++17
 INC     	= 
 SFML    	= -lsfml-graphics -lsfml-window -lsfml-system
 OPT     	= -O3
@@ -58,9 +58,11 @@ FILES   	= $(OBJ)main.o \
 			$(OBJ)Editor/Menu.o \
 			$(OBJ)Editor/Effects/Canvas_effects_manager.o \
 			$(OBJ)Editor/Thickness_window.o \
-# 			$(OBJ)Plugin_support/Plugin_manager.o \
-# 			$(OBJ)Plugin_support/Plugin_tool.o \
-# 			$(OBJ)Plugin_support/Plugin_effect.o \
+			$(OBJ)Plugin_support2/Plugin_manager.o \
+			$(OBJ)Plugin_support2/Plugin_tool.o \
+			$(OBJ)Plugin_support2/Plugin_effect.o \
+			$(OBJ)Plugin_support2/Render.o \
+			$(OBJ)Plugin_support2/Interface.o \
 
           # остальные файлы по правилу a.cpp -> $(OBJ)a.o (a может содержать путь)
  

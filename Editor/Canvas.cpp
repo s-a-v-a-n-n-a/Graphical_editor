@@ -15,6 +15,7 @@ Canvas::Canvas(const Visual_object::Config &par_base) //, Pencil *par_pencil
 	
 	Color *array = ((Full_texture*)get_texture())->get_pixels();
 	original_texture = Application::get_app()->get_rescrs()->create_texture((Full_texture*)get_texture());
+	preview_texture = Application::get_app()->get_rescrs()->create_texture(get_width(), get_height());
 
 	for (size_t i = 0; i < get_width() * get_height(); ++i)
 	{
@@ -104,6 +105,16 @@ Color *Canvas::get_drawing()
 	return original_texture->get_pixels(); 
 }
 
+Full_texture *Canvas::get_drawable_texture()
+{
+	return original_texture;
+}
+
+Full_texture *Canvas::get_preview_texture()
+{
+	return preview_texture;
+}
+
 void Canvas::make_drawing()
 {
 	// for (size_t i = 0; i < get_width() * get_height(); ++i)
@@ -114,6 +125,12 @@ void Canvas::make_drawing()
 	((Full_texture*)get_texture())->set_texture(original_texture->get_texture());
 
 	// Affected::tick();
+}
+
+void Canvas::flush(const Blend_mode &mode)
+{
+	original_texture->add_texture(preview_texture, blending_mode(mode));
+	make_drawing();
 }
 
 bool Canvas::on_mouse_click (const bool state, const size_t par_x, const size_t par_y)
@@ -152,6 +169,7 @@ bool Canvas::on_mouse_move(const Vector_ll from, const Vector_ll to)
 	if (point_inside(to.get_x(), to.get_y()) && drawing_state)
 	{
 		set_applied(false);
+		printf("[Canvas]: %lld %lld\n", (to - get_position()).get_x(), (to - get_position()).get_y());
 		current_tool->on_mouse_move(from - get_position(), to - get_position());
 		make_drawing();
 
@@ -177,7 +195,8 @@ void Canvas::apply(Color *data, const Blend_mode &mode)
 
 void Canvas::apply(const Shelled_texture *texture, const Blend_mode &mode)
 {
-	make_drawing();
+	flush(mode);
+	// make_drawing();
 
 	original_texture->set_texture(texture);
 }

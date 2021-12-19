@@ -2,10 +2,13 @@
 #define PLUGIN_MANAGER_H
 
 #include <stdarg.h>
+#include <filesystem>
 
 #include "plugin_std_2.hpp"
+#include "Plugin_tool.hpp"
+#include "Plugin_effect.hpp"
 #include "Interface.hpp"
-#include "Render.hpp"
+// #include "Render.hpp"
 
 #include "../Tools/Toolbar.hpp"
 #include "../simple_list/simple_list.hpp"
@@ -15,9 +18,6 @@
 get_render_target needed
 #endif
 
-
-
-// extern const PPluginInterface *(*get_plugin_interface)();
 
 
 // PRGBA *app_get_pixels();
@@ -64,16 +64,18 @@ public:
 	char *create_path(const char *filename);
 	void delete_path(char *path);
 
-	// PAppInterface *create_app_interface();
+	PUPPY::AppInterface *create_app_interface();
 
 	void load_from_dir(const char *path);
+	char *find_plugin(const char *path);
+	char *find_folder(const char *filename);	
 	
 	void add_plugin(const char *filename, bool is_path = false);
 
-	void add_tool(const PUPPY::PluginInterface *plugin, const PUPPY::AppInterface *app_interface, void *par_handle);
-	void add_effect(const PUPPY::PluginInterface *plugin, const PUPPY::AppInterface *app_interface, void *par_handle);
+	void add_tool(PUPPY::PluginInterface *plugin, const PUPPY::AppInterface *app_interface, void *par_handle, const char *path);
+	void add_effect(PUPPY::PluginInterface *plugin, const PUPPY::AppInterface *app_interface, void *par_handle, const char *path);
 
-	Plugin *get_plugin(const PPluginInterface *self);
+	Plugin *get_plugin(const PUPPY::PluginInterface *self);
 };
 
 #endif // PLUGIN_MANAGER_H

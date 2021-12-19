@@ -4,13 +4,13 @@
 Interface::Interface()
 : PUPPY::AppInterface()
 {
-	render = new Render();
+	// render = new Render();
 	; // ?????????????????????????
 }
 
 Interface::~Interface()
 {
-	delete render;
+	// delete render;
 }
 
 void Interface::log(const char *fmt, ...) const
@@ -29,11 +29,11 @@ double Interface::get_absolute_time() const
 	return Application::get_app()->get_time();
 }
 
-RGBA Interface::get_color() const
+PUPPY::RGBA Interface::get_color() const
 {
 	Color color = Application::get_app()->get_tools()->get_color();
 
-	return *((PRGBA*)&(color));
+	return *((PUPPY::RGBA*)&(color));
 }
 
 float Interface::get_size() const
@@ -51,19 +51,34 @@ void Interface::set_size(float size) const
 	Application::get_app()->get_tools()->get_active_tool()->set_size((size_t)size);
 }
 
-RenderTarget *Interface::get_target()  const
+PUPPY::RenderTarget *Interface::get_target()  const
 {
 	// return Application::get_app()->get_plugins()->get_render_target(); // no such function yet
+	Render *render = new Render();
+	render->set_if_preview(false);
 	return render;
 }
 
-RenderTarget *Interface::get_preview() const
+PUPPY::RenderTarget *Interface::get_preview() const
 {
 	// return Application::get_app()->get_plugins()->get_render_target(); // no such function yet
+	Render *render = new Render();
+	render->set_if_preview(true);
 	return render; // no such function yet
 }
 
 void Interface::flush_preview() const
 {
-	((Graphical_editor_main_page*)Application::get_app()->get_default())->get_active_canvas()->apply((Color*)data, mode);
+	((Graphical_editor_main_page*)Application::get_app()->get_default())->get_active_canvas()->flush(Blend_mode::COPY);
+}
+
+const std::vector<PUPPY::WBody> Interface::get_windows() const
+{
+	const std::vector<PUPPY::WBody> result;
+	return result;
+}
+
+PUPPY::Widget *Interface::get_root_widget() const
+{
+	return nullptr;
 }

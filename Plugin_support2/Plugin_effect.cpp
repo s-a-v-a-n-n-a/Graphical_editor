@@ -1,6 +1,6 @@
 #include "Plugin_effect.hpp"
 
-Plugin_effect::Plugin_effect(const PPluginInterface *par_plugin, const PAppInterface *interface, void *par_handle, Canvas *canvas, const char *name)
+Plugin_effect::Plugin_effect(PUPPY::PluginInterface *par_plugin, const PUPPY::AppInterface *interface, void *par_handle, Canvas *canvas, const char *name)
 : Plugin(par_handle, par_plugin), Effect(canvas, name) 
 {
 	// PPluginStatus result = plugin->general.init(interface);
@@ -12,13 +12,13 @@ Plugin_effect::Plugin_effect(const PPluginInterface *par_plugin, const PAppInter
 
 Plugin_effect::~Plugin_effect()
 {
-	plugin->general.deinit();
+	plugin->deinit();
 	// delete plugin;
 }
 
 void Plugin_effect::apply()
 {
 	set_appliable(true);
-	plugin->effect.apply();
+	plugin->effect_apply();
 	set_appliable(false);
 }

@@ -11,8 +11,9 @@ extern const Color DEFAULT_BACKGROUND_COLOR;
 class Canvas : public Visual_object, public Affected<Canvas>
 {
 protected:
+	Full_texture *preview_texture;
 	Full_texture *original_texture;
-	// Color current_background_color;
+	
 	Color current_drawing_color;
 
 	// Finally
@@ -49,8 +50,11 @@ public:
 	// void set_blue (const unsigned char from, const unsigned char to);
 
 	Color *get_drawing();
+	Full_texture *get_drawable_texture();
+	Full_texture *get_preview_texture();
 
 	void make_drawing();
+	void flush(const Blend_mode &mode);
 
 	void set_drawing_state(const bool state) { drawing_state = state; }
 
