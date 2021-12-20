@@ -4,12 +4,14 @@
 Interface::Interface()
 : PUPPY::AppInterface()
 {
+	factory = new Vidget_factory(Application::get_app()->get_default());
 	// render = new Render();
-	; // ?????????????????????????
+	// ?????????????????????????
 }
 
 Interface::~Interface()
 {
+	delete factory;
 	// delete render;
 }
 
@@ -74,11 +76,14 @@ void Interface::flush_preview() const
 
 const std::vector<PUPPY::WBody> Interface::get_windows() const
 {
-	const std::vector<PUPPY::WBody> result;
-	return result;
+	// const std::vector<PUPPY::WBody> result;
+	// return result;
+	return factory->get_windows();
 }
 
 PUPPY::Widget *Interface::get_root_widget() const
 {
-	return nullptr;
+	return factory->get_root();
+
+	// return nullptr;
 }

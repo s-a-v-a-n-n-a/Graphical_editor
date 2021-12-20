@@ -1,4 +1,5 @@
 #include "Palette.hpp"
+#include "Application.hpp"
 
 Palette::Palette(const Visual_object::Config &par_base, const Color &par_chosen_color)
 : Closing_window(par_base)
@@ -41,9 +42,13 @@ Palette::Palette(const Visual_object::Config &par_base, const Color &par_chosen_
 	Popup_color_confirmation *delegate = new Popup_color_confirmation(this, &chosen_color);
 	ok_button = new Button({this, (size_t)Vidget_type::BUTTON, get_position() + Vector_ll(picker_size + 20, (offset + 60 + buttin_height * 2)), nullptr, GREY, button_width, get_height()/5}, delegate, "OK");
 
+	Change_transperancy_non_fixedly *slider_delegate = new Change_transperancy_non_fixedly(par_chosen_color.get_a());
+	transparency = new Slider({ this, (size_t)Vidget_type::SLIDER, get_position() + Vector_ll(0, offset + (get_width()- 20) * 3 / 4 + 20), NULL, TRANSPARENT, (get_width()- 20) * 3 / 4, 40 }, slider_delegate, 256, 0, true, par_chosen_color.get_a());
+
 	add_visual_object(old_color);
 	add_visual_object(new_color);
 	add_visual_object(ok_button);
+	add_visual_object(transparency);
 }
 
 Color_selection_window *Palette::create_color_selection_widget(const Vector_ll &position, const size_t width, const size_t height, const Color &color)
@@ -86,7 +91,12 @@ bool Palette::on_mouse_click(const bool state, const size_t par_x, const size_t 
 		}
 		if (!result)
 		{
-			result = ok_button->on_mouse_click(state, par_x, par_y);
+			result = transparency->on_mouse_click(state, par_x, par_y);
+
+			if (!result)
+				result = ok_button->on_mouse_click(state, par_x, par_y);
+			else
+				chosen_color = Application::get_app()->get_tools()->get_color();
 		}
 		return result;
 	}
@@ -108,7 +118,12 @@ bool Palette::on_mouse_move(const Vector_ll from, const Vector_ll to)
 		}
 		if (!result)
 		{
-			result = ok_button->on_mouse_move(from, to);
+			result = transparency->on_mouse_move(from, to);
+
+			if (!result)
+				result = ok_button->on_mouse_move(from, to);
+			else
+				chosen_color = Application::get_app()->get_tools()->get_color();
 		}
 		return result;
 	}

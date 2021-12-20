@@ -55,6 +55,7 @@ public:
 	virtual void add_visual_object(Visual_object *par_object);
 	virtual void slow_delete_visual_object(size_t index);
 	virtual long long very_slow_delete_visual_object(Visual_object *par_object);
+	virtual long long very_slow_extract_visual_object(Visual_object *par_object);
 
 	virtual void draw(Screen_information *screen);
 
@@ -67,7 +68,7 @@ public:
 	virtual bool on_text_entered(const char symbol); 
 	// virtual bool on_key_press(const Key_event par_event);
 
-	virtual void tick(Screen_information *screen, const double delta_time);
+	virtual void tick(const double delta);
 
 	Visual_object 		   *get_parent()                { return base.parent; }
 	List<Visual_object*>   *get_objects()        		{ return &objects; }
@@ -83,10 +84,11 @@ public:
 	size_t					get_type()			const	{ return base.type; }
 	Texture 			   *get_texture()				{ return base.texture; }
 
+	virtual void set_parent         (Visual_object *par_parent)   		{ base.parent = par_parent; }
 	virtual void set_position 		(const Vector_ll &par_position);
 	virtual void set_color    		(const Color &par_color)            { base.color = par_color; }
-	virtual void set_width    		(const size_t par_width)            { base.width = par_width; }
-	virtual void set_height   		(const size_t par_height)           { base.height = par_height; }
+	virtual void set_width    		(const size_t par_width);
+	virtual void set_height   		(const size_t par_height);
 	virtual void set_active_state   (const bool par_active)             { active = par_active; }
 	virtual void set_active  		(Visual_object *par_current_active);
 	virtual void set_visible		(const bool par_visible)			{ visible = par_visible; }

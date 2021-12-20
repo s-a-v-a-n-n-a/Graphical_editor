@@ -27,6 +27,8 @@ public:
 	double get_fraction(Slider *slider);
 	Color get_color(Color_selection_window *color_picker);
 	char *get_text(Input_string *input);
+
+	void add_visual_object(Visual_object *par_object) override;
 };
 
 Dialog *create_dialog_window(const size_t width, const size_t height, const char *name = nullptr);

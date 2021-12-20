@@ -69,6 +69,8 @@ public:
 
 	void add_picture(Color *other_array, const size_t width, const size_t height, const sf::BlendMode &mode);
 	void add_texture(Full_texture *other_texture, const sf::BlendMode &mode);
+
+	void clear();
 };
 
 #endif // TEXTURE_H

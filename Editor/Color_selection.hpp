@@ -28,6 +28,7 @@ public:
 	bool on_mouse_click(const bool state, const size_t par_x, const size_t par_y) override; //const Mouse_event par_event,
 
 	Color get_color() { return chosen_color; }
+	void set_current_color(const Color &par_color);
 };
 
 #endif // TOOLS_VIDGET_H

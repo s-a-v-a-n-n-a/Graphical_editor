@@ -38,7 +38,7 @@ void destroy_dialog_window(Dialog *dialog_window)
 }
 
 Dialog::Dialog(const Visual_object::Config &par_base, const char *name)
-: Window(par_base, name), offset(DEFAULT_BUTTON_HEIGHT)
+: Window(par_base, name), offset(0) // DEFAULT_BUTTON_HEIGHT
 {
 	;
 }
@@ -137,5 +137,11 @@ Color Dialog::get_color(Color_selection_window *color_picker)
 char *Dialog::get_text(Input_string *input)
 {
 	return input->get_message();
+}
+
+void Dialog::add_visual_object(Visual_object *par_object)
+{
+	get_objects()->add_to_end(par_object); 
+	par_object->set_position(par_object->get_position() + Vector_ll(0, DEFAULT_BUTTON_HEIGHT));
 }
 

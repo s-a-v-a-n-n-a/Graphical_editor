@@ -29,15 +29,81 @@ PUPPY::RGBA app_translate_color_back(Color color)
 	return { color.r, color.g, color.b, color.a };
 } 
 
+PUPPY::Vec2f app_translate_vector_back(Vector_ll vec)
+{
+	return { (float)vec.get_x(), (float)vec.get_y() };
+}
+
+PUPPY::Event::MousePress app_translate_mouse_press(const size_t x, const size_t y)
+{
+	return { app_translate_vector_back(Vector_ll((long long)x, (long long)y)) };
+} 
+
+PUPPY::Event::MouseRelease app_translate_mouse_release(const size_t x, const size_t y)
+{
+	return { app_translate_vector_back(Vector_ll((long long)x, (long long)y)) };
+}
+
+PUPPY::Event::MouseMove app_translate_mouse_move(const Vector_ll &from, const Vector_ll &to)
+{
+	return { app_translate_vector_back(from), app_translate_vector_back(to) };
+}
+
+PUPPY::Event::Render app_translate_draw()
+{
+	return { false };
+}
+
+PUPPY::Event::Tick app_translate_tick(const double delta)
+{
+	return { delta };
+}
+
+PUPPY::Event::Click app_translate_click() { return {}; }
+
+PUPPY::Event::Hide app_translate_hide() { return {}; }
+
+PUPPY::Event::Show app_translate_show() { return {}; }
+
+PUPPY::Event::FractionChanged app_translate_fraction(const double frac) { return { frac }; }
+
+PUPPY::Event::Scroll app_translate_scroll(const Vector_ll &delta, const Vector_ll &position) 
+{ 
+	return { app_translate_vector_back(delta), app_translate_vector_back(position) }; 
+}
+
+PUPPY::Event::TextEnter app_translate_text_enter(const unsigned char symbol)
+{
+	return { (uint32_t)symbol };
+}
+
+PUPPY::Event::Key app_translate_key(const unsigned key_mask)
+{
+	PUPPY::Keyboard::Key key = (PUPPY::Keyboard::Key)key_mask;
+	return  PUPPY::Event::Key(key);
+}
+
+PUPPY::Event::KeyDown app_translate_key_down(const unsigned key_mask)
+{	
+	PUPPY::Keyboard::Key key = (PUPPY::Keyboard::Key)key_mask;
+	return { key };
+}
+
+PUPPY::Event::KeyUp app_translate_key_up(const unsigned key_mask)
+{
+	PUPPY::Keyboard::Key key = (PUPPY::Keyboard::Key)key_mask;
+	return { key };
+}
+
+
 Render::Render()
 : PUPPY::RenderTarget()
 {
-	;
+	get_active_target();
 }
 
 void Render::get_active_target()
 {
-	target = ((Graphical_editor_main_page*)Application::get_app()->get_default())->get_active_canvas()->get_drawing();
 	if (!preview)
 		texture = ((Graphical_editor_main_page*)Application::get_app()->get_default())->get_active_canvas()->get_drawable_texture()->get_current_texture();
 	else
@@ -52,7 +118,6 @@ Render *Render::get_copy() const
 	Render *copy = new Render();
 
 	copy->preview = preview;
-	copy->target = target;
 	copy->size = size;
 	copy->texture = texture;
 
@@ -73,15 +138,14 @@ PUPPY::RGBA Render::get_pixel(size_t x, size_t y) const
 
 void Render::set_pixel(size_t x, size_t y, const PUPPY::RGBA &color)
 {
-	get_active_target();
+	// get_active_target();
 
 	Renderer::Object obj = { texture, {0, 0}, Blend_mode::ALPHA };
 	Renderer *renderer = Application::get_app()->get_renderer();
 	renderer->push_back(&obj);
 
 	renderer->draw_point(Vector_ll(x, y), app_translate_color(color));
-	target[y * size.get_y() + x] = app_translate_color(color);
-
+	
 	renderer->pop_back();
 }
 
@@ -101,7 +165,7 @@ void Render::clear(const PUPPY::RGBA &color)
 // render
 void Render::render_circle(const PUPPY::Vec2f &position, float radius, const PUPPY::RGBA &color, const PUPPY::RenderMode &render_mode)
 {
-	get_active_target();
+	// get_active_target();
 
 	Renderer::Object obj = { texture, {0, 0}, app_translate_mode(render_mode.blend) };
 	Renderer *renderer = Application::get_app()->get_renderer();
@@ -115,7 +179,7 @@ void Render::render_circle(const PUPPY::Vec2f &position, float radius, const PUP
 
 void Render::render_line(const PUPPY::Vec2f &start, const PUPPY::Vec2f &end, const PUPPY::RGBA &color, const PUPPY::RenderMode &render_mode)
 {
-	get_active_target();
+	// get_active_target();
 
 	Renderer::Object obj = { texture, {0, 0}, app_translate_mode(render_mode.blend) };
 	Renderer *renderer = Application::get_app()->get_renderer();
@@ -126,7 +190,7 @@ void Render::render_line(const PUPPY::Vec2f &start, const PUPPY::Vec2f &end, con
 
 void Render::render_triangle(const PUPPY::Vec2f &p1, const PUPPY::Vec2f &p2, const PUPPY::Vec2f &p3, const PUPPY::RGBA &color, const PUPPY::RenderMode &render_mode)
 {
-	get_active_target();
+	// get_active_target();
 
 	Renderer::Object obj = { texture, {0, 0}, app_translate_mode(render_mode.blend) };
 	Renderer *renderer = Application::get_app()->get_renderer();
@@ -145,7 +209,7 @@ void Render::render_triangle(const PUPPY::Vec2f &p1, const PUPPY::Vec2f &p2, con
 
 void Render::render_rectangle(const PUPPY::Vec2f &p1, const PUPPY::Vec2f &p2, const PUPPY::RGBA &color, const PUPPY::RenderMode &render_mode)
 {
-	get_active_target();
+	// get_active_target();
 
 	Renderer::Object obj = { texture, {0, 0}, app_translate_mode(render_mode.blend) };
 	Renderer *renderer = Application::get_app()->get_renderer();
@@ -165,7 +229,7 @@ void Render::render_rectangle(const PUPPY::Vec2f &p1, const PUPPY::Vec2f &p2, co
 
 void Render::render_texture(const PUPPY::Vec2f &position, const PUPPY::RenderTarget *texture, const PUPPY::RenderMode &render_mode)
 {
-	get_active_target();
+	// get_active_target();
 	
 	Vector_ll app_position = app_translate_vector(position);
 	Target_texture *app_texture = ((Render*)texture)->texture;
@@ -182,7 +246,7 @@ void Render::render_texture(const PUPPY::Vec2f &position, const PUPPY::RenderTar
 
 void Render::render_pixels(const PUPPY::Vec2f &position, const PUPPY::Vec2s &size, const PUPPY::RGBA *data, const PUPPY::RenderMode &render_mode)
 {
-	get_active_target();
+	// get_active_target();
 	
 	Renderer::Object obj = { texture, {0, 0}, app_translate_mode(render_mode.blend) };
 	Renderer *renderer = Application::get_app()->get_renderer();

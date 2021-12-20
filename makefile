@@ -63,6 +63,16 @@ FILES   	= $(OBJ)main.o \
 			$(OBJ)Plugin_support2/Plugin_effect.o \
 			$(OBJ)Plugin_support2/Render.o \
 			$(OBJ)Plugin_support2/Interface.o \
+			$(OBJ)Plugin_support2/Vidget.o \
+			$(OBJ)Plugin_support2/Vidget_container.o \
+			$(OBJ)Plugin_support2/Vidget_button.o \
+			$(OBJ)Plugin_support2/Vidget_button_container.o \
+			$(OBJ)Plugin_support2/Vidget_slider.o \
+			$(OBJ)Plugin_support2/Vidget_text_field.o \
+			$(OBJ)Plugin_support2/Vidget_window.o \
+			$(OBJ)Plugin_support2/Vidget_color_picker.o \
+			$(OBJ)Plugin_support2/Vidget_label.o \
+			$(OBJ)Plugin_support2/Vidget_factory.o \
 
           # остальные файлы по правилу a.cpp -> $(OBJ)a.o (a может содержать путь)
  

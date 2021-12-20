@@ -16,7 +16,7 @@ public:
 	Color_button(const Visual_object::Config &par_base, Button_delegate *par_click, const char *par_text)
 	: Button(par_base, par_click, par_text) {}
 
-	void tick(Screen_information *screen, const double delta_time) override;
+	void tick(const double delta) override;
 };
 
 class Tools_window : public Window
@@ -34,7 +34,7 @@ public:
 
 	void add_tool(Tool *tool);
 
-	void tick(Screen_information *screen, const double delta_time) override;
+	void tick(const double delta) override;
 };
 
 #endif // TOOLS_WINDOW_H

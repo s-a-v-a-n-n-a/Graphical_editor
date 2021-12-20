@@ -3,13 +3,20 @@
 
 #include "plugin_std_2.hpp"
 #include "Render.hpp"
+#include "Vidget_factory.hpp"
 
 struct Interface : public PUPPY::AppInterface
 {
+private:
+	Vidget_factory *factory;
+
+public:
 	// Render *render;
 
 	Interface();
 	~Interface();
+
+	Vidget_factory *get_factory() { return factory; } 
 
 	bool ext_enable(const char *name) const override { return false; } 
 	void *ext_get_func(const char *extension, const char *func) const override { return nullptr; } 

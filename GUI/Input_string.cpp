@@ -8,6 +8,11 @@ char *Input_string::get_message()
 	return string.get_string();
 }
 
+void Input_string::set_message(const char *message)
+{
+	string.set_string(message);
+}
+
 bool Input_string::on_key_pressed(const bool pressed_state, const unsigned key_mask)
 {
 	if (pressed)

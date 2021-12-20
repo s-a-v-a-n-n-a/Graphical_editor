@@ -45,7 +45,7 @@ public:
 	
 	bool on_mouse_click (const bool state, const size_t par_x, const size_t par_y) override;
 	bool on_mouse_move (const Vector_ll from, const Vector_ll to) override;
-	void tick(Screen_information *screen, const double delta_time) override;
+	void tick(const double delta) override;
 
 	Button_delegate *get_delegate() { return delegate; }
 	void transfer_graph();

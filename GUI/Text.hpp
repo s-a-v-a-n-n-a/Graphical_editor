@@ -47,7 +47,19 @@ public:
 
 	void set_text(const char *par_text)
 	{
-		strcpy(text, par_text);
+		size_t par_text_size = strlen(par_text);
+		if (strlen(text) < par_text_size)
+		{
+			delete text;
+			text = new char[par_text_size + 1];
+		}
+		strncpy(text, par_text, par_text_size);
+		text[par_text_size] = '\0';
+	}
+
+	char *get_text()
+	{
+		return text;
 	}
 
 	void set_font_size(const size_t par_font_size) { font_size = par_font_size; }

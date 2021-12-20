@@ -239,6 +239,20 @@ public:
 };
 
 // --------------------------------------------------------------------------------------------------------------------------
+ 
+class Change_transperancy_non_fixedly : public Button_delegate
+{
+private:
+	unsigned char current_transperancy;
+
+public:
+	Change_transperancy_non_fixedly(const unsigned char a);
+
+	bool on_mouse_click(const size_t par_x, const size_t par_y) override;
+	bool on_mouse_release() override;
+};
+
+// --------------------------------------------------------------------------------------------------------------------------
 
 class Drag_and_drop_delegate : public Button_delegate
 {

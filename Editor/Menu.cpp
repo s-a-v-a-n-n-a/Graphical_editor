@@ -43,9 +43,9 @@ bool Menu::on_mouse_move(const Vector_ll from, const Vector_ll to)
 	return true;
 }
 
-void Menu::tick(Screen_information *screen, const double delta_time)
+void Menu::tick(const double delta)
 {
-	Visual_object::tick(screen, delta_time);
+	Visual_object::tick(delta);
 
 	size_t current_effects_amount = Application::get_app()->get_effects()->get_effects_amount();
 	size_t buttons_amount = buttons->get_objects()->get_length();

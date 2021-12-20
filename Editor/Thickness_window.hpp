@@ -18,7 +18,7 @@ public:
 
 	Slider *create_slider(const Vector_ll &position, const size_t width, const size_t height, Button_delegate *par_delegate);
 
-	void tick(Screen_information *screen, const double delta_time) override;
+	void tick(const double delta) override;
 };
 
 #endif // THICKNESS_WINDOW_H

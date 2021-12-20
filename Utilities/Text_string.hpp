@@ -82,6 +82,20 @@ public:
 		return string;
 	}
 
+	void set_string(const char *message)
+	{
+		size_t message_len = strlen(message);
+
+		if (capacity <= message_len)
+		{
+			resize(message_len * 2);
+		}
+		memset(string, 0, message_len);
+
+		strncpy(string, message, message_len);
+		string[message_len] = '\0';
+	}
+
 	size_t get_position()
 	{
 		return current_position;

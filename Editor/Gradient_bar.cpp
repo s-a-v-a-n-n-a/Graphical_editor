@@ -420,7 +420,7 @@ void Gradient_bar::draw(Screen_information *screen)
 	picker->draw(screen);
 }
 
-void Gradient_bar::tick(Screen_information *screen, const double delta_time)
+void Gradient_bar::tick(const double delta)
 {
 	// Tool *current_tool = Application::get_app()->get_tools()->get_active_tool();
 	// Color tool_color = current_tool->get_color();

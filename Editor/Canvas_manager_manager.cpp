@@ -58,10 +58,8 @@ void Canvas_manager_manager::add_canvas(const char *texture_name)
 	set_active(canvas);
 }
 
-void Canvas_manager_manager::tick(Screen_information *screen, const double delta_time)
+void Canvas_manager_manager::tick(const double delta)
 {
-	assert(screen);
-
 	size_t objects_amount = get_objects()->get_length();
 
 	size_t offset_coefficient = 0;
@@ -125,7 +123,7 @@ void Canvas_manager_manager::tick(Screen_information *screen, const double delta
 			continue;
 		}
 
-		objects_array[i]->tick(screen, delta_time);
+		objects_array[i]->tick(delta);
 	}
 }
 
@@ -176,7 +174,7 @@ bool Canvas_manager_manager::on_mouse_move(const Vector_ll from, const Vector_ll
 
 void Canvas_manager_manager::draw(Screen_information *screen)
 {
-	assert(screen);
+	// assert(screen);
 
 	Visual_object::draw(screen);
 

@@ -265,3 +265,9 @@ void Full_texture::add_texture(Full_texture *other_texture, const sf::BlendMode 
 	// texture.getTexture().copyToImage().saveToFile("b.png");
 }
 
+void Full_texture::clear()
+{
+	texture.clear(sf::Color(255, 255, 255, 0));
+	texture.display();
+}
+

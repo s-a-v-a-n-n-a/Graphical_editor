@@ -46,7 +46,7 @@ public:
 
 	void draw(Screen_information *screen) override;
 	
-	void tick(Screen_information *screen, const double delta_time) override;
+	void tick(const double delta) override;
 };
 
 #endif // GRADIENT_BAR_H

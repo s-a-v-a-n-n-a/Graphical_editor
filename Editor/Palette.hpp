@@ -3,6 +3,7 @@
 
 #include "../GUI/Visual_object_base.hpp"
 #include "../GUI/Button_manager.hpp"
+#include "../GUI/Slider.hpp"
 #include "../GUI/Resource_manager.hpp"
 // #include "../GUI/Button.hpp"
 
@@ -21,6 +22,7 @@ private:
 	// Color_picker *picker;
 	// Gradient_bar *gradient_bar;
 	Color_selection_window *color_picker;
+	Slider *transparency;
 
 	Button *old_color;
 	Button *new_color;

@@ -25,7 +25,7 @@ void Plugin_tool::on_mouse_move(const Vector_ll &from, const Vector_ll &to)
 		PUPPY::Vec2f mouse_from = { (float)(from.get_x()), (float)(from.get_y()) };
 		PUPPY::Vec2f mouse_to = { (float)(to.get_x()), (float)(to.get_y()) };
 		
-		printf("moving %f %f\n", mouse_to.x, mouse_to.y);
+		// printf("moving %f %f\n", mouse_to.x, mouse_to.y);
 		plugin->tool_on_move(mouse_from, mouse_to);
 	}
 }

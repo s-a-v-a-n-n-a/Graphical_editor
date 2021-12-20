@@ -4,8 +4,7 @@
 // const size_t VIDGETS_AMOUNT = 9;
 
 Visual_object::Visual_object(const Visual_object::Config &par_base)
-: objects(), base(par_base),
-  current_active(nullptr), active(false), visible(true), reactive(true), alive(true)
+: objects(), base(par_base), current_active(nullptr), active(false), visible(true), reactive(true), alive(true)
 {
 	;
 }
@@ -40,6 +39,25 @@ long long Visual_object::very_slow_delete_visual_object(Visual_object *par_objec
 	return -1;
 }
 
+long long Visual_object::very_slow_extract_visual_object(Visual_object *par_object)
+{
+	Visual_object **objects_array = objects.get_array();
+	size_t objects_amount = objects.get_length();
+
+	for (size_t i = 0; i < objects_amount; ++i)
+	{
+		if(objects_array[i] == par_object)
+		{
+			Application::get_app()->get_rescrs()->delete_texture(par_object->get_texture());
+			objects.extract(i);
+			
+			return i;
+		}
+	}
+
+	return -1;
+}
+
 void Visual_object::set_position(const Vector_ll &par_position)
 {
 	Vector_ll offset = par_position - get_position();
@@ -54,9 +72,25 @@ void Visual_object::set_position(const Vector_ll &par_position)
 	}
 }
 
+void Visual_object::set_width (const size_t par_width)            
+{ 
+	base.width = par_width; 
+
+	if (base.texture)
+		base.texture->set_size({ (long long)par_width, base.texture->get_height() });
+}
+
+void Visual_object::set_height (const size_t par_height)           
+{ 
+	base.height = par_height;
+
+	if (base.texture)
+		base.texture->set_size({ base.texture->get_width(), (long long)par_height }); 
+}
+
 void Visual_object::draw(Screen_information *screen)
 {
-	assert(screen);
+	// assert(screen);
 
 	screen->draw_rectangle(get_position(), get_width(), get_height(), get_color(), get_color());
 	if (base.texture)
@@ -205,9 +239,9 @@ bool Visual_object::on_text_entered(const char symbol)
 	return false;
 }
 
-void Visual_object::tick(Screen_information *screen, const double delta_time)
+void Visual_object::tick(const double delta)
 {
-	assert(screen);
+	// assert(screen);
 
 	Visual_object **objects_array = objects.get_array();
 	size_t objects_amount = objects.get_length();
@@ -222,7 +256,7 @@ void Visual_object::tick(Screen_information *screen, const double delta_time)
 			continue;
 		}
 
-		objects_array[i]->tick(screen, delta_time);
+		objects_array[i]->tick(delta);
 	}
 }
 

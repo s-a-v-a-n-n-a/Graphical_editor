@@ -501,8 +501,8 @@ void Plugin_manager::add_plugin(const char *filename, bool is_path)
 	}
 	else
 	{
-		char *plugin_file = find_plugin(filename);
-		handle = dlopen(plugin_file, RTLD_LAZY);
+		char *plugin_file = find_folder(filename);
+		handle = dlopen(filename, RTLD_LAZY);
 		if (!handle)
 		{
 			fprintf(stderr, "%s\n", dlerror());			
@@ -511,10 +511,10 @@ void Plugin_manager::add_plugin(const char *filename, bool is_path)
 		else
 			printf("[Application message]: found plugin (congratulations!)\n");
 		
-		delete [] plugin_file;
+		// delete [] plugin_file;
 
-		folder_path = new char[strlen(filename)];
-		sprintf(folder_path, "%s", filename);
+		folder_path = new char[strlen(plugin_file)];
+		sprintf(folder_path, "%s", plugin_file);
 	}
 	
 	get_plugin_interface = (PUPPY::PluginInterface *(*)())dlsym(handle, PUPPY::GET_INTERFACE_FUNC);

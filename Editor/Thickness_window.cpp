@@ -16,7 +16,7 @@ Slider *Thickness_window::create_slider(const Vector_ll &position, const size_t 
 	return slider;
 }
 
-void Thickness_window::tick(Screen_information *screen, const double delta_time)
+void Thickness_window::tick(const double delta)
 {
 	Tool *current_tool = Application::get_app()->get_tools()->get_active_tool();
 	size_t tool_size = current_tool->get_size();

@@ -4,7 +4,7 @@
 const size_t COSMETIC_OFFSET = 10;
 const size_t SLIDER_SIZE = 20;
 
-Slider::Slider(const Visual_object::Config &par_base, Button_delegate *par_delegate, const long long par_high_limit, const long long par_low_limit, const bool par_horizontal)
+Slider::Slider(const Visual_object::Config &par_base, Button_delegate *par_delegate, const long long par_high_limit, const long long par_low_limit, const bool par_horizontal, const long long current_pos)
 : Visual_object(par_base), delegate(par_delegate), high_limit(par_high_limit), low_limit(par_low_limit), horizontal(par_horizontal)
 {
 	size_t width = get_width();
@@ -19,12 +19,14 @@ Slider::Slider(const Visual_object::Config &par_base, Button_delegate *par_deleg
 	// ползунок
 	if (horizontal)
 	{
-		slider = create_sliding_button(get_position() + Vector_ll(height + COSMETIC_OFFSET, 0), height, height, get_position() + Vector_ll(height + COSMETIC_OFFSET, 0), get_position() + Vector_ll(line_length + height - COSMETIC_OFFSET - height/2, 0), this);
+		long long position = height + (line_length - 2 * COSMETIC_OFFSET) - (line_length - 2 * COSMETIC_OFFSET)  * current_pos / (par_high_limit - par_low_limit)  + COSMETIC_OFFSET;
+		position = position < (line_length + height/2 - COSMETIC_OFFSET) ? position : (line_length + height/2 - COSMETIC_OFFSET); 
+		slider = create_sliding_button(get_position() + Vector_ll(position, 0), height, height, get_position() + Vector_ll(height + COSMETIC_OFFSET, 0), get_position() + Vector_ll(line_length + height/2 - COSMETIC_OFFSET, 0), this);
 		current_relation = slider->get_x_relation();
 	}
 	else
 	{
-		slider = create_sliding_button(get_position() + Vector_ll(0, width + COSMETIC_OFFSET), width, width, get_position() + Vector_ll(0, width + COSMETIC_OFFSET), get_position() + Vector_ll(0, line_length + width - COSMETIC_OFFSET - width/2), this);
+		slider = create_sliding_button(get_position() + Vector_ll(0, width + (line_length - 2 * COSMETIC_OFFSET) - (line_length - 2 * COSMETIC_OFFSET)  * current_pos / (par_high_limit - par_low_limit) + COSMETIC_OFFSET), width, width, get_position() + Vector_ll(0, width + COSMETIC_OFFSET), get_position() + Vector_ll(0, line_length + width - COSMETIC_OFFSET - width/2), this);
 		current_relation = slider->get_y_relation();
 	}
 
@@ -156,5 +158,13 @@ bool Slider::on_mouse_move(const Vector_ll from, const Vector_ll to)
 	// }
 
 	return result;
+}
+
+void Slider::set_relation(const double relation)
+{
+	if (horizontal)
+		slider->set_x_relation(relation);
+	else
+		slider->set_y_relation(relation);
 }
 

@@ -23,7 +23,7 @@ public:
 
 	Window_control_panel *create_control_panel(Visual_object *parent, const Vector_ll &position, const size_t width, const size_t height);
 
-	void tick(Screen_information *screen, const double delta_time) override;
+	void tick(const double delta) override;
 	void draw(Screen_information *screen) override;
 
 	bool on_mouse_click(const bool state, const size_t par_x, const size_t par_y) override;

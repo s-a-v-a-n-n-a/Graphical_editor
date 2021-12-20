@@ -11,13 +11,27 @@ Vector_ll app_translate_vector(PUPPY::Vec2f vec);
 Color app_translate_color(PUPPY::RGBA color);
 
 PUPPY::RGBA app_translate_color_back(Color color);
+PUPPY::Vec2f app_translate_vector_back(Vector_ll vec);
+PUPPY::Event::MousePress app_translate_mouse_press(const size_t x, const size_t y);
+PUPPY::Event::MouseRelease app_translate_mouse_release(const size_t x, const size_t y);
+PUPPY::Event::MouseMove app_translate_mouse_move(const Vector_ll &from, const Vector_ll &to);
+PUPPY::Event::Render app_translate_draw();
+PUPPY::Event::Tick app_translate_tick(const double delta);
+PUPPY::Event::Click app_translate_click();
+PUPPY::Event::Hide app_translate_hide();
+PUPPY::Event::Show app_translate_show();
+PUPPY::Event::FractionChanged app_translate_fraction(const double frac);
+PUPPY::Event::Scroll app_translate_scroll(const Vector_ll &delta, const Vector_ll &position);
+PUPPY::Event::TextEnter app_translate_text_enter(const unsigned char symbol);
+PUPPY::Event::Key app_translate_key(const unsigned key_mask);
+PUPPY::Event::KeyDown app_translate_key_down(const unsigned key_mask);
+PUPPY::Event::KeyUp app_translate_key_up(const unsigned key_mask);
 
 class Render : public PUPPY::RenderTarget
 {
 private:
     bool preview;
 
-    Color *target;
     Vector_ll size;
     Target_texture *texture;
     // Shelled_texture *inn_texture;

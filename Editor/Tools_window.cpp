@@ -3,11 +3,11 @@
 #include "Application.hpp"
 #include "../GUI/Text.hpp"
 
-void Color_button::tick(Screen_information *screen, const double delta_time)
+void Color_button::tick(const double delta)
 {
 	set_color(Application::get_app()->get_tools()->get_color());
 	
-	Button::tick(screen, delta_time);
+	Button::tick(delta);
 }
 
 Tools_window::Tools_window(const Visual_object::Config &par_base)
@@ -92,9 +92,9 @@ void Tools_window::add_tool(Tool *tool)
 	tools_amount++;
 }
 
-void Tools_window::tick(Screen_information *screen, const double delta_time)
+void Tools_window::tick(const double delta)
 {
-	Visual_object::tick(screen, delta_time);
+	Visual_object::tick(delta);
 
 	size_t current_tools_amount = Application::get_app()->get_tools()->get_tools_amount();
 	if (current_tools_amount != (tools_amount - 1))

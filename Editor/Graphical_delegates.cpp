@@ -498,6 +498,40 @@ bool Change_thickness_non_fixedly::on_mouse_release()
 }
 // ---------------------------------------------------------------------------------------------------------
 
+
+Change_transperancy_non_fixedly::Change_transperancy_non_fixedly(const unsigned char a)
+: current_transperancy(a)
+{
+	;
+}
+
+bool Change_transperancy_non_fixedly::on_mouse_click(const size_t par_x, const size_t par_y)
+{
+	// // may be a mistake in future
+	current_transperancy = (unsigned char)(par_x + par_y);
+
+	// // pencil->set_size(current_size);
+	Color current_color = Application::get_app()->get_tools()->get_color();
+	current_color.set_a(current_transperancy);
+	Application::get_app()->get_tools()->set_color(current_color);
+	// current_tool->set_size(current_size);
+
+	return true;
+}
+
+bool Change_transperancy_non_fixedly::on_mouse_release()
+{
+	// may be a mistake in future
+
+	// pencil->set_size(current_size);
+	// Tool *current_tool = Application::get_app()->get_tools()->get_active_tool();
+	// printf("current_tool %p\n", current_tool);
+	// current_tool->set_size(current_size);
+
+	return true;
+}
+
+
 // Drag_and_drop_delegate
 // ---------------------------------------------------------------------------------------------------------
 Drag_and_drop_delegate::Drag_and_drop_delegate(Visual_object *par_to_change_place) 

@@ -62,7 +62,7 @@ public:
 	bool point_inside (const size_t par_x, const size_t par_y) override;
 	bool on_mouse_click(const bool state, const size_t par_x, const size_t par_y) override; // const Mouse_event par_event, 
 	bool on_mouse_move(const Vector_ll from, const Vector_ll to) override;
-	void tick(Screen_information *screen, const double delta_time) override 
+	void tick(const double delta) override 
 	{ 
 		Affected::tick(); 
 	}

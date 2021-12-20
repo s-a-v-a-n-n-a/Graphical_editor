@@ -32,7 +32,10 @@ public:
 	void draw(Screen_information *screen) override;
 	bool on_mouse_click(const bool state, const size_t par_x, const size_t par_y) override; // const Mouse_event par_event, 
 	bool on_mouse_move(const Vector_ll from, const Vector_ll to) override;
-	void tick(Screen_information *screen, const double delta_time) override { ; }
+	void tick(const double delta) override { ; }
+
+	bool get_pressed() { return pressed; }
+	void set_pressed(const bool par_pressed) { pressed = par_pressed; }
 };
 
 class Magnetic : public Visual_object
@@ -72,6 +75,8 @@ public:
 	bool on_mouse_click(const bool state, const size_t par_x, const size_t par_y) override;
 	bool on_mouse_move(const Vector_ll from, const Vector_ll to) override;
 
+	bool get_pressed() { return pressed; }
+	void set_pressed(const bool par_pressed) { pressed = par_pressed; }
 	// void set_relative_position(const Vector_ll &par_relative_position) { relative_position = par_relative_position; }
 };
 

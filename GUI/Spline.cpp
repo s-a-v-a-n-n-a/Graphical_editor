@@ -194,9 +194,9 @@ bool Spline::on_mouse_move (const Vector_ll from, const Vector_ll to)
 	return standart_result;
 }
 
-void Spline::tick(Screen_information *screen, const double delta_time)
+void Spline::tick(const double delta)
 {
-	assert(screen);
+	// assert(screen);
 
 	Visual_object **objects_array = get_objects()->get_array();
 	size_t objects_amount = get_objects()->get_length();
@@ -218,6 +218,6 @@ void Spline::tick(Screen_information *screen, const double delta_time)
 			continue;
 		}
 
-		// obj->tick(screen, delta_time);
+		// obj->tick(delta);
 	}
 }

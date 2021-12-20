@@ -18,6 +18,7 @@ struct Event
 	Event_type type;
 	size_t event;
 	size_t sender;
+	Vector_ll position;
 };
 
 /*enum class Sfml_events
@@ -136,6 +137,7 @@ enum class Key
 	ESC,
 	LCTRL,
 	LSHIFT,
+	LALT,
 	LSYSTEM, 
 	RCTRL, 
 	RSHIFT,
@@ -159,6 +161,8 @@ enum class Key
 	TAB, 
 	PAGE_UP, 
 	PAGE_DOWN,
+	END,
+	HOME,
     INSERT, 
     DELETE,
   	ADD, 
@@ -168,7 +172,33 @@ enum class Key
   	LEFT, 
   	RIGHT, 
   	UP, 
-  	DOWN
+  	DOWN,
+  	NUMPAD0,
+  	NUMPAD1,
+  	NUMPAD2,
+  	NUMPAD3,
+  	NUMPAD4,
+  	NUMPAD5,
+  	NUMPAD6,
+  	NUMPAD7,
+  	NUMPAD8,
+  	NUMPAD9,
+  	F1,
+  	F2,
+  	F3,
+  	F4,
+  	F5,
+  	F6,
+  	F7,
+  	F8,
+  	F9,
+  	F10,
+  	F11,
+  	F12,
+  	F13,
+  	F14,
+  	F15,
+  	PAUSE
 };
 
 class Event_handler
@@ -187,19 +217,22 @@ public:
 	        if (event.type == sf::Event::MouseButtonPressed)
 	        {
 	        	// return Sfml_events::MOUSE_CLICKED;
-	        	return { Event_type::MOUSE, (size_t)Mouse_state::CLICKED, (size_t)Mouse::LEFT };
+	        	Vector_ll pos = Vector_ll((long long)event.mouseButton.x, (long long)event.mouseButton.y);
+	        	return { Event_type::MOUSE, (size_t)Mouse_state::CLICKED, (size_t)Mouse::LEFT, pos };
 	        }
 
 	        if (event.type == sf::Event::MouseButtonReleased)
 	        {
 	        	// return Sfml_events::MOUSE_RELEASED;
-	        	return { Event_type::MOUSE, (size_t)Mouse_state::RELEASED, (size_t)Mouse::LEFT };
+	        	Vector_ll pos = Vector_ll((long long)event.mouseButton.x, (long long)event.mouseButton.y);
+	        	return { Event_type::MOUSE, (size_t)Mouse_state::RELEASED, (size_t)Mouse::LEFT, pos };
 	        }
 
 	        if (event.type == sf::Event::MouseMoved)
 	        {
 	        	// return Sfml_events::MOUSE_MOVED;
-	        	return { Event_type::MOUSE, (size_t)Mouse_state::MOVED, (size_t)Mouse::LEFT };
+	        	Vector_ll pos = Vector_ll((long long)event.mouseMove.x, (long long)event.mouseMove.y);
+	        	return { Event_type::MOUSE, (size_t)Mouse_state::MOVED, (size_t)Mouse::LEFT, pos };
 	        }
 
 	        if (event.type == sf::Event::TextEntered)

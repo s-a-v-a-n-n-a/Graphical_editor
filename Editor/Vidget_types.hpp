@@ -3,6 +3,7 @@
 
 enum class Vidget_type
 {
+	UNDEFINED,
 	TEXT,
 	BUTTON,
 	PALETTE,

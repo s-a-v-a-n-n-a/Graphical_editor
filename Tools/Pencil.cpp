@@ -35,7 +35,7 @@ void Pencil::apply(Full_texture *texture, const Vector_ll &parameters, const Vec
 
 	// 		to_apply[index] = pencil_color;
 	// 	}
-	Renderer::Object obj = { texture->get_current_texture(), { 0, 0 }, Blend_mode::COPY };
+	Renderer::Object obj = { texture->get_current_texture(), { 0, 0 }, Blend_mode::ALPHA };
 	Application::get_app()->get_renderer()->push_back(&obj);
 
 	Application::get_app()->get_renderer()->draw_rectangle(Vector_ll(begin_x, begin_y), pencil_size * 2, pencil_size * 2, color, color);

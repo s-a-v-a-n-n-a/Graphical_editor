@@ -17,12 +17,13 @@ Application::Application()
     resources = new Resources();
 
     tools = new Toolbar();
-    plugins = new Plugin_manager();
     effects = new Effect_manager();
 
     Graphical_editor_main_page *editor = new Graphical_editor_main_page({nullptr, (size_t)Vidget_type::EDITOR, Vector_ll(0, 0), nullptr, DARK_GREY, DEFAULT_SIZE, DEFAULT_SIZE});
     default_main = editor;
     current_main = default_main;
+
+    plugins = new Plugin_manager();
 
     printf("[Application] : end of initialization\n");
 }
@@ -136,7 +137,7 @@ void Application::tick()
 {
     animations->tick(0.005);
 	
-	default_main->tick(graphics_wrapper, 0.05);
+	default_main->tick(0.05); // graphics_wrapper, 0.05
 
 	if (current_main != default_main)
     {
@@ -146,13 +147,13 @@ void Application::tick()
             set_default();
             return;
         }
-        current_main->tick(graphics_wrapper, 0.05);
+        current_main->tick(0.05); // graphics_wrapper, 0.05
     }
 }
 
 void Application::launch()
 {
-    // plugins->load_from_dir("Plugins/");
+    plugins->load_from_dir("Plugins/");
 
     Vector_ll click_place(0, 0);
 
@@ -180,19 +181,20 @@ void Application::launch()
                 {
                 case (size_t)Mouse_state::CLICKED:
                     click_place = graphics_wrapper->get_mouse_position();
-                    current_main->on_mouse_click(true, click_place.get_x(), click_place.get_y());
+                    // current_main->on_mouse_click(true, click_place.get_x(), click_place.get_y());
+                    current_main->on_mouse_click(true, result.position.get_x(), result.position.get_y());
 
                     break;
                 
                 case (size_t)Mouse_state::RELEASED:
                     click_place = graphics_wrapper->get_mouse_position();
-                    current_main->on_mouse_click(false, click_place.get_x(), click_place.get_y());
+                    current_main->on_mouse_click(false, result.position.get_x(), result.position.get_y());
 
                     break;
                 case (size_t)Mouse_state::MOVED:
                 {
                     Vector_ll move_place(graphics_wrapper->get_mouse_position());
-                    current_main->on_mouse_move(click_place, move_place);
+                    current_main->on_mouse_move(click_place, result.position);
                     click_place = move_place;
 
                     break;

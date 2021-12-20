@@ -44,3 +44,15 @@ bool Color_selection_window::on_mouse_click(const bool state, const size_t par_x
 	return Visual_object::on_mouse_click(state, par_x, par_y);
 }
 
+void Color_selection_window::set_current_color(const Color &par_color)
+{
+	chosen_color = par_color;
+
+	HSV hsv = get_hsv(chosen_color);
+	Color picker_color = BLACK;
+    if (hsv.h != 0)
+    	picker_color = get_rgb({hsv.h, 255, 255});
+	picker->set_main_color(picker_color);
+	gradient_bar->set_current_position(picker_color);
+}
+

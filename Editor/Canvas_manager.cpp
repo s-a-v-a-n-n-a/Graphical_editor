@@ -40,7 +40,7 @@ Canvas_manager::~Canvas_manager()
 
 void Canvas_manager::draw(Screen_information *screen)
 {
-	assert(screen);
+	// assert(screen);
 
 	if (get_reactive())
 	{
