@@ -16,6 +16,7 @@ void Input_string::set_message(const char *message)
 bool Input_string::on_key_pressed(const bool pressed_state, const unsigned key_mask)
 {
 	if (pressed)
+	{
 		if (pressed_state)
 		{
 			// if (key_mask == (size_t)Key::LSHIFT)
@@ -59,6 +60,7 @@ bool Input_string::on_key_pressed(const bool pressed_state, const unsigned key_m
 
 		// 	return false;
 		// }
+	}
 	else
 		return false;
 	// return true;

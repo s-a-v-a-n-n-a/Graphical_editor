@@ -8,7 +8,7 @@ Vidget_button::Vidget_button(PUPPY::Vec2f position, PUPPY::Vec2f size, const cha
 	Vector_ll app_position = app_translate_vector(position);
 	Vector_ll app_size = app_translate_vector(size);
 
-	Animating_texture *texture = Application::get_app()->get_rescrs()->create_texture(SIMPLE_BUTTON, app_size.get_x(), app_size.get_y(), SIMPLE_BUTTON_PRESS, nullptr);
+	Animating_texture *texture = Application::get_app()->get_rescrs()->create_texture(SIMPLE_BUTTON, app_size.get_x(), app_size.get_y(), SIMPLE_BUTTON_MOVE, nullptr);
 	
 	Vidget *par_parent = dynamic_cast<Vidget*>(parent);
 	Visual_object *visual_parent = nullptr;
@@ -39,3 +39,7 @@ PUPPY::Button::HandlerType &Vidget_button::get_handler()
 	return handler;
 }
 
+Vidget_button_container *Vidget_button::get_button()
+{
+	return button;
+}

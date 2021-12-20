@@ -55,3 +55,8 @@ const char *Vidget_window::get_name()
 	return nullptr;
 }
 
+Vidget_window_container *Vidget_window::get_dialog()
+{
+	return dialog;
+}
+

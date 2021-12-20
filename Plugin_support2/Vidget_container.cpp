@@ -10,6 +10,8 @@ Vidget_container::Vidget_container(const Visual_object::Config &par_base, PUPPY:
 
 void Vidget_container::draw(Screen_information *screen)
 {
+	// printf("\ndrawing\n\n");
+
 	Visual_object::draw(screen);
 	ward->on_render(app_translate_draw());
 }

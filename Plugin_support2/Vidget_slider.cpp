@@ -54,4 +54,9 @@ void Vidget_slider::set_fraction(float frac)
 	slider->set_relation((double)frac);
 }
 
+Vidget_slider_container *Vidget_slider::get_slider()
+{
+	return slider;
+}
+
 

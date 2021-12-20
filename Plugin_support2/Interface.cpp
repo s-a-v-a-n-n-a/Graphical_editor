@@ -4,14 +4,15 @@
 Interface::Interface()
 : PUPPY::AppInterface()
 {
-	factory = new Vidget_factory(Application::get_app()->get_default());
+	// factory = new Vidget_factory(Application::get_app()->get_default());
+	factory.widget = new Vidget_factory(Application::get_app()->get_default());
 	// render = new Render();
 	// ?????????????????????????
 }
 
 Interface::~Interface()
 {
-	delete factory;
+	delete factory.widget;
 	// delete render;
 }
 
@@ -78,12 +79,12 @@ const std::vector<PUPPY::WBody> Interface::get_windows() const
 {
 	// const std::vector<PUPPY::WBody> result;
 	// return result;
-	return factory->get_windows();
+	return ((Vidget_factory*)factory.widget)->get_windows();
 }
 
 PUPPY::Widget *Interface::get_root_widget() const
 {
-	return factory->get_root();
+	return ((Vidget_factory*)factory.widget)->get_root();
 
 	// return nullptr;
 }

@@ -23,6 +23,8 @@ Application::Application()
     default_main = editor;
     current_main = default_main;
 
+    printf("\n\n\n\n\n\n\n\n\n");
+
     plugins = new Plugin_manager();
 
     printf("[Application] : end of initialization\n");
@@ -149,6 +151,8 @@ void Application::tick()
         }
         current_main->tick(0.05); // graphics_wrapper, 0.05
     }
+
+    plugins->tick(0.5);
 }
 
 void Application::launch()

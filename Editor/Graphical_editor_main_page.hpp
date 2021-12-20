@@ -63,6 +63,9 @@ public:
 	Canvas *get_active_canvas();
 	// test
 	Test_button *create_test_button(const Vector_ll &position, const char *text, const size_t width, const size_t height);
+
+
+	void add_visual_object(Visual_object *par_object) override;
 };
 
 

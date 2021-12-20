@@ -70,6 +70,7 @@ FILES   	= $(OBJ)main.o \
 			$(OBJ)Plugin_support2/Vidget_slider.o \
 			$(OBJ)Plugin_support2/Vidget_text_field.o \
 			$(OBJ)Plugin_support2/Vidget_window.o \
+			$(OBJ)Plugin_support2/Vidget_window_container.o \
 			$(OBJ)Plugin_support2/Vidget_color_picker.o \
 			$(OBJ)Plugin_support2/Vidget_label.o \
 			$(OBJ)Plugin_support2/Vidget_factory.o \

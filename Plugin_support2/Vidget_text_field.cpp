@@ -52,4 +52,8 @@ void Vidget_text_field::set_text(std::string_view text)
 	delete [] message;
 }
 
+Vidget_text_field_container *Vidget_text_field::get_text_field()
+{
+	return text_field;
+}
 

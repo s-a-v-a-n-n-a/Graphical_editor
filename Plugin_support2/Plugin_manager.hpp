@@ -76,6 +76,8 @@ public:
 	void add_effect(PUPPY::PluginInterface *plugin, const PUPPY::AppInterface *app_interface, void *par_handle, const char *path);
 
 	Plugin *get_plugin(const PUPPY::PluginInterface *self);
+
+	void tick(const double delta);
 };
 
 #endif // PLUGIN_MANAGER_H

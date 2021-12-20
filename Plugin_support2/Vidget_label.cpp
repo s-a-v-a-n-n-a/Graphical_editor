@@ -29,3 +29,9 @@ void Vidget_label::set_text(std::string_view text)
 	label->set_text(text.cbegin());
 }
 
+Vidget_label_container *Vidget_label::get_label()
+{
+	return label;
+}
+
+

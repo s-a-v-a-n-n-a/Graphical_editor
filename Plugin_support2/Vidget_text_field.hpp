@@ -20,6 +20,8 @@ public:
 
     std::string_view get_text() const override;
     void set_text(std::string_view text) override;
+
+    Vidget_text_field_container *get_text_field();
 };
 
 #endif // VIDGET_TEXT_FIELD_HPP

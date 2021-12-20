@@ -20,6 +20,8 @@ public:
 
     PUPPY::RGBA get_color() override;
     void set_color(PUPPY::RGBA color) override;
+
+    Vidget_color_picker_container *get_color_picker();
 };
 
 #endif // VIDGET_COLOR_PICKER_HPP

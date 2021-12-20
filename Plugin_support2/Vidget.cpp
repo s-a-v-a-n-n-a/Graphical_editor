@@ -91,7 +91,10 @@ bool Vidget::add_child(PUPPY::Widget *child)
 	Visual_object *visual_child = nullptr;
 	if (par_child)
 		visual_child = par_child->get_analog();
+	else
+		printf("NO CHILD\n");
 	analog->add_visual_object(visual_child);
+
 	return true;
 }
 
@@ -109,6 +112,7 @@ bool Vidget::delete_child(PUPPY::Widget *child)
 	Visual_object *visual_child = nullptr;
 	if (par_child)
 		visual_child = par_child->get_analog();
+	
 	long long deleted = analog->very_slow_delete_visual_object(visual_child);
 
 	if (deleted == -1)

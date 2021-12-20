@@ -24,6 +24,8 @@ public:
 
     bool set_name(const char *name) override;
     const char *get_name() override;
+
+    Vidget_window_container *get_dialog();
 };
 
 #endif // VIDGET_WINDOW_HPP

@@ -167,12 +167,12 @@ void Render::render_circle(const PUPPY::Vec2f &position, float radius, const PUP
 {
 	// get_active_target();
 
-	Renderer::Object obj = { texture, {0, 0}, app_translate_mode(render_mode.blend) };
+	Renderer::Object obj = { texture, {0, 0}, Blend_mode::ALPHA }; // app_translate_mode(render_mode.blend)
 	Renderer *renderer = Application::get_app()->get_renderer();
 	renderer->push_back(&obj);
 	
 	Color app_color = app_translate_color(color);
-	renderer->draw_circle(app_translate_vector(position), radius, app_color, app_color);
+	renderer->draw_circle(app_translate_vector(position) - Vector_ll(radius, radius), radius, app_color, app_color);
 	
 	renderer->pop_back();
 }

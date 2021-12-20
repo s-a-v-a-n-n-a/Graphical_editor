@@ -42,4 +42,8 @@ void Vidget_color_picker::set_color(PUPPY::RGBA color)
 	color_picker->set_current_color(app_translate_color(color));
 }
 
+Vidget_color_picker_container *Vidget_color_picker::get_color_picker()
+{
+	return color_picker;
+}
 

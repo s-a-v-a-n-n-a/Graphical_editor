@@ -23,7 +23,7 @@ private:
 public:
 	Vidget_factory(Visual_object *par_root);
 
-	// create_root();
+	void find_windows(Visual_object *main);
 
 	Vidget *get_root() { return root; }
 	std::vector<PUPPY::WBody> get_windows() { return windows; }

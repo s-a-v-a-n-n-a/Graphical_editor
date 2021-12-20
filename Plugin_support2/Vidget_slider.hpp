@@ -23,6 +23,8 @@ public:
 
     float get_fraction() override;
     void set_fraction(float frac) override;
+
+    Vidget_slider_container *get_slider();
 };
 
 #endif // VIDGET_SLIDER_HPP

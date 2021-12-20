@@ -8,7 +8,7 @@
 struct Interface : public PUPPY::AppInterface
 {
 private:
-	Vidget_factory *factory;
+	// Vidget_factory *this_factory;
 
 public:
 	// Render *render;
@@ -16,7 +16,7 @@ public:
 	Interface();
 	~Interface();
 
-	Vidget_factory *get_factory() { return factory; } 
+	Vidget_factory *get_factory() { return dynamic_cast<Vidget_factory*>(factory.widget); } 
 
 	bool ext_enable(const char *name) const override { return false; } 
 	void *ext_get_func(const char *extension, const char *func) const override { return nullptr; } 

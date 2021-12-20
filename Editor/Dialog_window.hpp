@@ -29,6 +29,8 @@ public:
 	char *get_text(Input_string *input);
 
 	void add_visual_object(Visual_object *par_object) override;
+
+	void draw(Screen_information *screen) override;
 };
 
 Dialog *create_dialog_window(const size_t width, const size_t height, const char *name = nullptr);

@@ -577,7 +577,7 @@ bool Drag_and_drop_delegate::on_mouse_move(const Vector_ll from, const Vector_ll
 		// printf("last: x %lld, y %lld; new: x %lld, y %lld\n", to_change_place->get_position().get_x(), to_change_place->get_position().get_y(), (to_change_place->get_position() + last_position - first_position).get_x(), (to_change_place->get_position() + last_position - first_position).get_y());
 
 		// Vector_ll new_position = to_change_place->get_position() + last_position - first_position;
-		Vector_ll new_position = to_change_place->get_position() + to - from;
+		Vector_ll new_position = to_change_place->get_position() + (to - from) / 2;
 		bool bad_position = false;
 
 		if (new_position.get_x() < 0)
@@ -591,7 +591,7 @@ bool Drag_and_drop_delegate::on_mouse_move(const Vector_ll from, const Vector_ll
 			bad_position = true;
 		}
 
-		if (bad_position)
+		if (bad_position || !to_change_place->point_inside(from.get_x(), from.get_y()))
 			on_mouse_release();
 
 		to_change_place->set_position(new_position);

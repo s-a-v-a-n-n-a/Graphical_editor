@@ -326,3 +326,12 @@ void Graphical_editor_main_page::set_pencil_color(const Color &par_color)
 { 
 	// Application::get_app()->get_tools()->set_color(par_color); 
 }
+
+void Graphical_editor_main_page::add_visual_object(Visual_object *par_object) 
+{ 
+	// printf("\n\nadded\n\n");
+
+	get_objects()->add_to_end(par_object); 
+	par_object->set_visible(true);
+	par_object->set_reactive(true);
+}

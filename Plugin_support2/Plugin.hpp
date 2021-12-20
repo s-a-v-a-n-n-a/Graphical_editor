@@ -26,6 +26,11 @@ public:
 		dlclose(handle);
 	}
 
+	void tick(const double delta)
+	{
+		plugin->on_tick(delta);
+	}
+
 	const PUPPY::PluginInterface *get_plugin() { return plugin; }
 	Visual_object *get_surface() { return surface; }
 	void set_surface(Visual_object *par_surface) { surface = par_surface; }

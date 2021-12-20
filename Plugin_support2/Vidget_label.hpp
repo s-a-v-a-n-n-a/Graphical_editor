@@ -16,6 +16,8 @@ public:
 
 	std::string_view get_text() const override;
     void set_text(std::string_view text) override;
+
+    Vidget_label_container *get_label();
 };
 
 #endif // VIDGET_LABEL_HPP

@@ -410,7 +410,8 @@ void Plugin_manager::load_from_dir(const char *path)
     {
         size_t dir_name_length = strlen(to_read->d_name);
  
-        // printf("%s\n", to_read->d_name);
+        printf("%s\n", to_read->d_name);
+        
         if (strcmp(extension, to_read->d_name + dir_name_length - extension_length) != 0) 
         	continue;
         // printf("%s\n", to_read->d_name);
@@ -465,8 +466,11 @@ char *Plugin_manager::find_folder(const char *filename)
 	size_t index = path_len - 1;
 	while(index)
 	{
-		if (filename[index] == '/')
+		if (filename[index] == '.') // '/'
+		{
+			index--;
 			break;
+		}
 
 		index--;
 	}
@@ -498,6 +502,8 @@ void Plugin_manager::add_plugin(const char *filename, bool is_path)
 		delete_path(path);
 
 		folder_path = find_folder(filename);
+	
+		printf("folder_path %s\n", folder_path);
 	}
 	else
 	{
@@ -515,6 +521,8 @@ void Plugin_manager::add_plugin(const char *filename, bool is_path)
 
 		folder_path = new char[strlen(plugin_file)];
 		sprintf(folder_path, "%s", plugin_file);
+
+		printf("folder_path %s\n", folder_path);
 	}
 	
 	get_plugin_interface = (PUPPY::PluginInterface *(*)())dlsym(handle, PUPPY::GET_INTERFACE_FUNC);
@@ -528,6 +536,14 @@ void Plugin_manager::add_plugin(const char *filename, bool is_path)
 	else if (type == PUPPY::EFFECT)
 	{
 		add_effect(plugin, app_interface, handle, folder_path);
+	}
+	else
+	{
+		// Plugin *extension = new Plugin(handle, plugin);
+
+		// PUPPY::Status result = plugin->init(app_interface, folder_path); // , path
+		// plugins.push_back(extension);
+		;
 	}
 
 	delete [] folder_path;
@@ -545,7 +561,7 @@ void Plugin_manager::add_tool(PUPPY::PluginInterface *plugin, const PUPPY::AppIn
 	plugins.push_back(tool);
 
 	std::filesystem::path tool_path = path;
-	PUPPY::Status result = plugin->init(app_interface); // , path
+	PUPPY::Status result = plugin->init(app_interface, path); // , path
 
 	if (result != PUPPY::OK)
 		printf("Could not initialize plugin tool\n");
@@ -564,7 +580,7 @@ void Plugin_manager::add_effect(PUPPY::PluginInterface *plugin, const PUPPY::App
 
 	plugins.push_back(effect);
 	
-	PUPPY::Status result = plugin->init(app_interface); // , path
+	PUPPY::Status result = plugin->init(app_interface, path); // , path
 	if (result != PUPPY::OK)
 		printf("Could not initialize plugin effect\n");
 
@@ -584,4 +600,14 @@ Plugin *Plugin_manager::get_plugin(const PUPPY::PluginInterface *self)
 	}
 
 	return nullptr; 
+}
+
+void Plugin_manager::tick(const double delta)
+{
+	size_t plugins_amount = plugins.size();
+
+	for (size_t i = 0; i < plugins_amount; ++i)
+	{
+		plugins[i]->tick(delta);
+	}
 }

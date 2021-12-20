@@ -17,6 +17,8 @@ public:
 
 	void set_handler(const PUPPY::Button::HandlerType &handler_) override;
     PUPPY::Button::HandlerType &get_handler() override;
+
+    Vidget_button_container *get_button();
 };
 
 #endif // VIDGET_BUTTON_HPP

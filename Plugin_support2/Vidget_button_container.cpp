@@ -25,6 +25,8 @@ bool Vidget_button_container::on_mouse_click(const bool state, const size_t par_
 			vidget_handler();
 		}
 	}
+
+	return result;
 }
 
 bool Vidget_button_container::on_mouse_move(const Vector_ll from, const Vector_ll to)
@@ -32,10 +34,13 @@ bool Vidget_button_container::on_mouse_move(const Vector_ll from, const Vector_l
 	bool was_pressed = get_pressed();
 	bool result = Button::on_mouse_move(from, to);
 
-	auto vidget_handler = ward->get_handler();
-	if (was_pressed && vidget_handler)
-	{
-		vidget_handler();
-	}
+	// auto vidget_handler = ward->get_handler();
+	// if (was_pressed && vidget_handler)
+	// {
+	// 	printf("here\n");
+	// 	vidget_handler();
+	// }
+
+	return result;
 }
 
