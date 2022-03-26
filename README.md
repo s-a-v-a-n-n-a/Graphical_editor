@@ -6,12 +6,9 @@ This is separated repository of my graphical editor study project. The main goal
 **How to run project**
 ----------------------
 Use terminal to type this commands:
-<li>
 <pre><code>make clean</code></pre> (it just makes sense :) )
-</li>
-<li>
+
 <pre><code>make run</code></pre>
-</li>
 
 **How to use graphical editor**
 -------------------------------
