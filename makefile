@@ -7,7 +7,7 @@ else
 ASAN =
 endif
 
-COMPILATOR  = clang++ -std=c++17# g++ -std=c++17
+COMPILATOR  = clang++ -std=c++20# g++ -std=c++17
 INC     	= 
 SFML    	= -lsfml-graphics -lsfml-window -lsfml-system
 OPT     	= -O3
@@ -18,62 +18,62 @@ OBJ     	= obj/
 EXE     	= main
  
 FILES   	= $(OBJ)main.o \
-			$(OBJ)sfml_drawing/Renderer.o \
-			$(OBJ)sfml_drawing/screen_functions.o \
-			$(OBJ)sfml_drawing/colors.o \
-			$(OBJ)sfml_drawing/Texture_names.o \
-			$(OBJ)sfml_drawing/Text.o \
-			$(OBJ)sfml_drawing/Texture.o \
-			$(OBJ)math_structures/Interpolator.o \
-			$(OBJ)GUI/Visual_object_base.o \
-			$(OBJ)GUI/Button.o \
-			$(OBJ)GUI/Button_manager.o \
-			$(OBJ)GUI/Spline.o \
-			$(OBJ)GUI/Slider.o \
-			$(OBJ)GUI/Input_string.o \
-			$(OBJ)GUI/Resource_manager.o \
-			$(OBJ)GUI/Animations.o \
-			$(OBJ)Tools/Toolbar.o \
-			$(OBJ)Tools/Tools.o \
-			$(OBJ)Tools/Pencil.o \
-			$(OBJ)Tools/Pipette.o \
-			$(OBJ)Tools/Eraser.o \
-			$(OBJ)Editor/Application.o \
-			$(OBJ)Editor/Canvas.o \
-			$(OBJ)Editor/Tab.o \
-			$(OBJ)Editor/Editor_delegates.o \
-			$(OBJ)Editor/Graphical_delegates.o \
-			$(OBJ)Editor/Palette.o \
-			$(OBJ)Editor/Gradient_bar.o \
-			$(OBJ)Editor/Color_picker.o \
-			$(OBJ)Editor/Color_selection.o \
-			$(OBJ)Editor/Canvas_manager.o \
-			$(OBJ)Editor/Canvas_manager_manager.o \
-			$(OBJ)Editor/Window.o \
-			$(OBJ)Editor/Window_control_panel.o \
-			$(OBJ)Editor/Graphical_editor_main_page.o \
-			$(OBJ)Editor/Dialog_window.o \
-			$(OBJ)Editor/Tools_window.o \
-			$(OBJ)Editor/Search_box.o \
-			$(OBJ)Editor/Menu.o \
-			$(OBJ)Editor/Effects/Canvas_effects_manager.o \
-			$(OBJ)Editor/Thickness_window.o \
-			$(OBJ)Plugin_support2/Plugin_manager.o \
-			$(OBJ)Plugin_support2/Plugin_tool.o \
-			$(OBJ)Plugin_support2/Plugin_effect.o \
-			$(OBJ)Plugin_support2/Render.o \
-			$(OBJ)Plugin_support2/Interface.o \
-			$(OBJ)Plugin_support2/Vidget.o \
-			$(OBJ)Plugin_support2/Vidget_container.o \
-			$(OBJ)Plugin_support2/Vidget_button.o \
-			$(OBJ)Plugin_support2/Vidget_button_container.o \
-			$(OBJ)Plugin_support2/Vidget_slider.o \
-			$(OBJ)Plugin_support2/Vidget_text_field.o \
-			$(OBJ)Plugin_support2/Vidget_window.o \
-			$(OBJ)Plugin_support2/Vidget_window_container.o \
-			$(OBJ)Plugin_support2/Vidget_color_picker.o \
-			$(OBJ)Plugin_support2/Vidget_label.o \
-			$(OBJ)Plugin_support2/Vidget_factory.o \
+			$(OBJ)src/sfml_drawing/Renderer.o \
+			$(OBJ)src/sfml_drawing/screen_functions.o \
+			$(OBJ)src/sfml_drawing/colors.o \
+			$(OBJ)src/sfml_drawing/Texture_names.o \
+			$(OBJ)src/sfml_drawing/Text.o \
+			$(OBJ)src/sfml_drawing/Texture.o \
+			$(OBJ)src/math_structures/Interpolator.o \
+			$(OBJ)src/GUI/Visual_object_base.o \
+			$(OBJ)src/GUI/Button.o \
+			$(OBJ)src/GUI/Button_manager.o \
+			$(OBJ)src/GUI/Spline.o \
+			$(OBJ)src/GUI/Slider.o \
+			$(OBJ)src/GUI/Input_string.o \
+			$(OBJ)src/GUI/Resource_manager.o \
+			$(OBJ)src/GUI/Animations.o \
+			$(OBJ)src/Tools/Toolbar.o \
+			$(OBJ)src/Tools/Tools.o \
+			$(OBJ)src/Tools/Pencil.o \
+			$(OBJ)src/Tools/Pipette.o \
+			$(OBJ)src/Tools/Eraser.o \
+			$(OBJ)src/Editor/Application.o \
+			$(OBJ)src/Editor/Canvas.o \
+			$(OBJ)src/Editor/Tab.o \
+			$(OBJ)src/Editor/Editor_delegates.o \
+			$(OBJ)src/Editor/Graphical_delegates.o \
+			$(OBJ)src/Editor/Palette.o \
+			$(OBJ)src/Editor/Gradient_bar.o \
+			$(OBJ)src/Editor/Color_picker.o \
+			$(OBJ)src/Editor/Color_selection.o \
+			$(OBJ)src/Editor/Canvas_manager.o \
+			$(OBJ)src/Editor/Canvas_manager_manager.o \
+			$(OBJ)src/Editor/Window.o \
+			$(OBJ)src/Editor/Window_control_panel.o \
+			$(OBJ)src/Editor/Graphical_editor_main_page.o \
+			$(OBJ)src/Editor/Dialog_window.o \
+			$(OBJ)src/Editor/Tools_window.o \
+			$(OBJ)src/Editor/Search_box.o \
+			$(OBJ)src/Editor/Menu.o \
+			$(OBJ)src/Editor/Effects/Canvas_effects_manager.o \
+			$(OBJ)src/Editor/Thickness_window.o \
+			$(OBJ)src/Plugin_support2/Plugin_manager.o \
+			$(OBJ)src/Plugin_support2/Plugin_tool.o \
+			$(OBJ)src/Plugin_support2/Plugin_effect.o \
+			$(OBJ)src/Plugin_support2/Render.o \
+			$(OBJ)src/Plugin_support2/Interface.o \
+			$(OBJ)src/Plugin_support2/Vidget.o \
+			$(OBJ)src/Plugin_support2/Vidget_container.o \
+			$(OBJ)src/Plugin_support2/Vidget_button.o \
+			$(OBJ)src/Plugin_support2/Vidget_button_container.o \
+			$(OBJ)src/Plugin_support2/Vidget_slider.o \
+			$(OBJ)src/Plugin_support2/Vidget_text_field.o \
+			$(OBJ)src/Plugin_support2/Vidget_window.o \
+			$(OBJ)src/Plugin_support2/Vidget_window_container.o \
+			$(OBJ)src/Plugin_support2/Vidget_color_picker.o \
+			$(OBJ)src/Plugin_support2/Vidget_label.o \
+			$(OBJ)src/Plugin_support2/Vidget_factory.o \
 
           # остальные файлы по правилу a.cpp -> $(OBJ)a.o (a может содержать путь)
  

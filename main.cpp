@@ -1,7 +1,7 @@
 #include <cstdio>
 #include <cstdlib>
 
-#include "Editor/Application.hpp"
+#include "src/Editor/Application.hpp"
 
 int main()
 {
