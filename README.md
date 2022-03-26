@@ -7,10 +7,10 @@ This is separated repository of my graphical editor study project. The main goal
 ----------------------
 Use terminal to type this commands:
 <li>
-make clean (it just makes sense :) )
+`make clean` (it just makes sense :) )
 </li>
 <li>
-make run
+`make run`
 </li>
 
 **How to use graphical editor**
